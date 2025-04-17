@@ -1,5 +1,8 @@
-body{
- margin: 0;
- padding: 0;
- background-color: red;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
+

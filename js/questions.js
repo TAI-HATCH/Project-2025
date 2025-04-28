@@ -1,9 +1,15 @@
 const questions = [
   {
     question_id: 1,
-    question: "Write a correct syntax for assigning a value to a variable:\n",
-    snippet: ["myNumber", "9"],
-    answer: ["="],
+    question: `Write a correct syntax for assigning a value to a variable:<br>myNumber <input name="input"> 9`,
+  },
+  {
+    question_id: 1,
+    question: `Write a correct syntax for assigning a value to a variable of type number and value 9:<br>myNumber <input correct="=" incorrect="???"> <input value="9">`,
+    to_be_stored_in_session: {
+        question: `Write a correct syntax for assigning a value to a variable of type number and value 9:<br>myNumber <input> <input>`,
+        answers: ["=", "9"]
+    },
   },
   {
     question_id: 2,

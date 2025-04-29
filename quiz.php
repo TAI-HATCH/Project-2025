@@ -33,14 +33,15 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     $go = $_GET['go'];
     if ($go == "next") {
         $_SESSION["current_question"] += 1;
-        if ($_SESSION["current_question"] == count($_SESSION["questions"])){ // "When you get to the last question, hop on to the beginning of the question array."
+        if ($_SESSION["current_question"] == count($_SESSION["questions"])) { // "When you get to the last question, hop on to the beginning of the question array."
             $_SESSION["current_question"] = 0;
         }
     } else if ($go == "previous") {
         $_SESSION["current_question"] -= 1;
-        if ($_SESSION["current_question"] == 0){ // "When you get to the first question, hop on to the end of the question array."
-            $_SESSION["current_question"] = count($_SESSION["questions"]);
+        if ($_SESSION["current_question"] < 0) { // "When you get to the first question, hop on to the end of the question array."
+            $_SESSION["current_question"] = count($_SESSION["questions"])-1;
         }
+}
 }
 
 ?>
@@ -58,11 +59,9 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
     echo var_dump($question); // Output the question onto the web page
-    ?>
-    
-    <a href="?go=next">Next</a> <!--Link to the next question-->
-
+    ?><br>
     <a href="?go=previous">Back</a>
+    <a href="?go=next">Next</a> <!--Link to the next question-->
 
 </body>
 </html>

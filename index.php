@@ -16,7 +16,7 @@
     <h1 hidden>HATCH</h1>
     <header class="root-header">
       <div class="logo">
-        <a href="index.html">HATCH</a>
+        <a href="./">HATCH</a>
       </div>
       <nav>
         <ul class="nav-list">

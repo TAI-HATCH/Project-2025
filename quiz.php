@@ -1,24 +1,24 @@
 <?php
 
-session_start();
+session_start(); // Open a php session on the server, is never shut down
 
 
 include "connection.php";
 //http://localhost/project-2025/quiz.php?language-topic=1
 
-if (!isset($_SESSION['topic_id'])) {
+if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, run
 
 
     //https://www.w3schools.com/php/php_superglobals_get.asp
-    $topic_id = $_GET['language-topic'];
-    $table_name = "questions";
+    $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
+    $table_name = "questions"; // Create a variable with the table name
 
     //https://www.w3schools.com/php/php_mysql_prepared_statements.asp
-    $stmt = $conn->prepare("SELECT question_id, question, form_content FROM $table_name WHERE languages_topic_id = :topic_id;");
-    $stmt->bindParam(':topic_id', $topic_id);
-    $stmt->execute();
+    $stmt = $conn->prepare("SELECT question_id, question, form_content FROM $table_name WHERE languages_topic_id = :topic_id;"); // Go into db, take hold of questions for the specific language-topic
+    $stmt->bindParam(':topic_id', $topic_id); // Binding together (reflecting) :topic_id and $topic_id
+    $stmt->execute(); // Run the thing
 
-    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the data the we just fetched and put in into an array
 
     //https://www.w3schools.com/php/php_sessions.asp
     // Set session variables
@@ -26,7 +26,7 @@ if (!isset($_SESSION['topic_id'])) {
     $_SESSION["current_question"] = 0;
     $_SESSION["questions"] = $questions;
 
-} else if (isset($_GET['go']))  {
+} else if (isset($_GET['go']))  { // If URL-get-parameter with name "go" is set, go to the next question
 
     echo $_SESSION["topic_id"];
 
@@ -51,12 +51,12 @@ if (!isset($_SESSION['topic_id'])) {
 <body>
     
     <?php
-    $question = $_SESSION["questions"][$_SESSION["current_question"]];
+    $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
-    echo var_dump($question);
+    echo var_dump($question); // Output the question onto the web page
     ?>
     
-    <a href="?go=next">Next</a>
+    <a href="?go=next">Next</a> <!--Link to the next question-->
 
 </body>
 </html>

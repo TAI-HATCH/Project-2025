@@ -33,10 +33,14 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     $go = $_GET['go'];
     if ($go == "next") {
         $_SESSION["current_question"] += 1;
-        if ($_SESSION["current_question"] == count($_SESSION["questions"])){
+        if ($_SESSION["current_question"] == count($_SESSION["questions"])){ // "When you get to the last question, hop on to the beginning of the question array."
             $_SESSION["current_question"] = 0;
         }
-    } 
+    } else if ($go == "previous") {
+        $_SESSION["current_question"] -= 1;
+        if ($_SESSION["current_question"] == 0){ // "When you get to the first question, hop on to the end of the question array."
+            $_SESSION["current_question"] = count($_SESSION["questions"]);
+        }
 }
 
 ?>
@@ -57,6 +61,8 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     ?>
     
     <a href="?go=next">Next</a> <!--Link to the next question-->
+
+    <a href="?go=previous">Back</a>
 
 </body>
 </html>

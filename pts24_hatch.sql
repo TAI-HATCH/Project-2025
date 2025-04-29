@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2025 at 09:54 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Apr 29, 2025 at 08:45 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `answers` (
   `question_id` int(11) NOT NULL,
   `input_name` varchar(20) NOT NULL,
   `value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,15 @@ CREATE TABLE `answers` (
 CREATE TABLE `languages` (
   `language_id` int(11) NOT NULL,
   `language_name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`language_id`, `language_name`) VALUES
+(1, 'JavaScript'),
+(2, 'JavaScript');
 
 -- --------------------------------------------------------
 
@@ -55,7 +63,14 @@ CREATE TABLE `languages_topic` (
   `id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `languages_topic`
+--
+
+INSERT INTO `languages_topic` (`id`, `language_id`, `topic_id`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -67,8 +82,19 @@ CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `languages_topic_id` int(11) NOT NULL,
   `question` varchar(500) DEFAULT NULL,
-  `answer` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `form_content` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_content`) VALUES
+(2, 1, 'Write a correct syntax for assigning a value to a variable:', '<div>\r\n        <span>myNumber</span>\r\n        <input type=\"text\" name=\"answer\">\r\n        <span>9</span>\r\n    </div>'),
+(3, 1, 'How would you assign a value to a variable, if it’s supposed to be the word number?', ' <div>\r\n        <span>myString = </span>\r\n        <input type=\"text\" name=\"answer\">\r\n    </div>'),
+(4, 1, 'If you want to count the number of characters in a text, you would use the built-in property:', ' <div>\r\n        <p>let myText = \"Ihana!\"</p>\r\n<span>let amountOfCharacters = myText.</span>\r\n        <input type=\"text\" name=\"answer\">\r\n    </div>'),
+(5, 1, 'If you don`t want to change the value of the variable price in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer\">  <span> \r\n price = 100 </span>\r\n    </div>'),
+(6, 1, 'If you want to increase your counter index by 1, you can write:', '<div>\r\n        <p>let i = 1</p>\r\n        <p>i = i + 1</p>\r\n        <p>or</p>\r\n        <span>i</span>\r\n        <input type=\"text\" name=\"answer\">\r\n        <span>1</span>\r\n    </div>');
 
 -- --------------------------------------------------------
 
@@ -79,7 +105,14 @@ CREATE TABLE `questions` (
 CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `topics`
+--
+
+INSERT INTO `topics` (`topic_id`, `topic_name`) VALUES
+(1, 'Basics and syntax');
 
 --
 -- Indexes for dumped tables
@@ -130,22 +163,28 @@ ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `languages_topic`
 --
 ALTER TABLE `languages_topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

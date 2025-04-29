@@ -1,8 +1,30 @@
 body {
-  margin: 0;
+  margin: 3rem;
   padding: 0;
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+
+}
+li, a, ul {
+ list-style: none;
+ text-decoration: none;
+ padding: 0;
+ margin: 0;
 }
 
+.root-header{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.nav-list{
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.code-snippet {
+  padding: 1rem;
+  border: 0.15rem solid red;
+}

@@ -44,6 +44,7 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
 }
 }
 
+$question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 ?>
 
 <!DOCTYPE html>
@@ -52,14 +53,46 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script> // script for printing the connection status in console:
+        console.log("<?php echo $connection_status;?>")
+    </script>
 </head>
 <body>
-    
-    <?php
-    $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
+    <br>
+    <header class="root-header">
+    <div class="logo">
+        <a href="index.html">HATCH</a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-list-item">
+            <a href="quiz.php?language-topic=1" class="nav-link">Training</a>
+          </li>
+          <li class="nav-list-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-list-item">
+            <a href="#" class="nav-link">Sign up</a>
+          </li>
+          <li class="nav-list-item">
+            <a href="#" class="nav-link">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!--?php
 
-    echo var_dump($question); // Output the question onto the web page
-    ?><br>
+    //echo var_dump($question); // Output the question onto the web page
+
+    ?-->
+    <p><?php echo $question["question"];?></p>
+
+    <form action="" method="POST" class="code-snippet">
+        <?php echo $question["form_content"];?>
+    </form>
+
+    <!-- <br> -->
     <a href="?go=previous">Back</a>
     <a href="?go=next">Next</a> <!--Link to the next question-->
 

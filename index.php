@@ -21,7 +21,8 @@
       <nav>
         <ul class="nav-list">
           <li class="nav-list-item">
-            <a href="quiz.php?language-topic=1" class="nav-link">Training</a>
+            <a href="selecting_language.php" class="nav-link">Training</a>
+            <!-- <a href="quiz.php?language-topic=1" class="nav-link">Training</a> -->
           </li>
           <li class="nav-list-item">
             <a href="#" class="nav-link">About</a>
@@ -40,10 +41,11 @@
       <p class="content-text">You decide the subject.</p>
       <p class="content-text">You decide when to move on.</p>
       <div class="icon-wrapper">
-        <img src="./images/js-icon.svg" alt="">
+        <img src="./images/javascript-icon.svg" alt="">
         <img src="./images/python-icon.svg" alt="">
       </div>
-      <button type="button">Start</button>
+      <a href="quiz.php?language-topic=1" class="button">Start</a>
+      <!-- <button type="button">Start</button> -->
     </section>
   </body>
 </html>

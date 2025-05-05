@@ -13,7 +13,7 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     //https://www.w3schools.com/php/php_superglobals_get.asp
     $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
-    $questions = get_questions($topic_id);
+    $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
 
     //https://www.w3schools.com/php/php_sessions.asp
     // Set session variables
@@ -38,7 +38,7 @@ if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, r
     } else if ($action == "show") { // If user selected button Show answer
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
-        $answers = get_answers($question["question_id"]);
+        $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
     } else if ($action == "clear") { // If user selected button Clear session
         // remove all session variables
         session_unset();
@@ -55,6 +55,12 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css">
     <script>
         // script for printing the connection status in console:

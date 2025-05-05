@@ -31,5 +31,26 @@ function get_answers($question_id)
 
     $answers = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the answers that we just fetched and put it into an array
     return $answers;
+
+    global $conn; //give access to the variable $conn defining in the connection.php
+
+
+}
+
+function get_languages()
+{
+    global $conn;
+
+    //$table_name = "languages"; //assign the value 'languages'(the table's name in our DB) to the variable $table_name
+
+    //Send request to the DB to the table Languages without any parameters
+    // because we need to get all the records from the tabel:
+
+    $stmt = $conn->prepare("SELECT language_id, language_name FROM languages;");
+    $stmt->execute(); // Run the thing
+
+    $languages = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the languages that we just fetched and put it into an array
+
+    return $languages;
 }
 ?>

@@ -54,7 +54,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HATCH - Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
     <script>
         // script for printing the connection status in console:

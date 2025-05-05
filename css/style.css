@@ -32,7 +32,7 @@ li, a, ul {
 
 .root-header{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .nav-list{
@@ -64,4 +64,23 @@ li, a, ul {
 
 .quiz {
   text-align: center;
+}
+
+.root-content {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.icon-wrapper img {
+  width: 4rem;
+  padding: 2rem;
+}
+
+.logo-image {
+  width: 5rem;
+}
+
+.hatch-logo {
+  display: flex;
+  justify-content: center;
 }

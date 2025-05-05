@@ -1,10 +1,27 @@
+* {
+
+}
+
+a {
+  color: white;
+  transition: 0.5s;
+}
+
+a:hover {
+  transition: 0.5s;
+  color: rgb(57, 57, 57);
+}
+
 body {
   margin: 3rem;
   padding: 0;
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-
+  background-image: url('../images/hatch-sky.png');
+  background-size: cover;        /* Skaalaa kuva kattamaan koko alue */
+  background-repeat: no-repeat;  /* Estää kuvan toistumisen */
+  background-position: center;   /* Asettaa kuvan keskelle */
 }
 li, a, ul {
  list-style: none;
@@ -26,5 +43,25 @@ li, a, ul {
 
 .code-snippet {
   padding: 1rem;
-  border: 0.15rem solid red;
+  border: 0.15rem solid rgba(122, 122, 122, 0.668);
+  border-radius: 1rem;
+}
+
+.button {
+  color: rgb(0, 0, 0);
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  border-color: black;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.quiz {
+  text-align: center;
 }

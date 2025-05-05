@@ -93,17 +93,19 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     //echo var_dump($question); // Output the question onto the web page
 
     ?-->
-    <p><?php echo $question["question"]; ?></p>
+    <p class="quiz"><?php echo $question["question"]; ?></p>
 
-    <form action="" method="POST" class="code-snippet">
+    <form action="" method="POST" class="code-snippet quiz">
         <?php echo $question["form_content"]; ?>
     </form>
 
     <!-- <br> -->
-    <a href="?action=show">Show answer</a>
-    <a href="?action=previous">Back</a> <!--Link to the previous question-->
-    <a href="?action=next">Next</a> <!--Link to the next question-->
-    <a href="?action=clear">Clear session</a> <!--Clear the session`s variables-->
+    <div class="buttons">
+    <a class="button" href="?action=show">Show answer</a>
+    <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
+    <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
+    <a class="button" href="?action=clear">Clear session</a> <!--Clear the session`s variables-->
+    </div>
 
     <script>
         <?php

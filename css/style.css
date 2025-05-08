@@ -66,6 +66,32 @@ li, a, ul {
   text-align: center;
 }
 
+.icon-lang-list{
+  display: flex;
+  gap: 13.625rem;
+  justify-content: center;
+}
+
+.root-section h2{
+  font-size: 4rem;
+  text-align: center;
+}
+
+.root-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon-wrapper{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.root-content .button{
+  display: inline-block;
+}
+
 .root-content {
   text-align: center;
   padding-top: 1rem;
@@ -84,3 +110,4 @@ li, a, ul {
   display: flex;
   justify-content: center;
 }
+

@@ -32,7 +32,7 @@ li, a, ul {
 
 .root-header{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .nav-list{
@@ -66,7 +66,6 @@ li, a, ul {
   text-align: center;
 }
 
-
 .icon-lang-list{
   display: flex;
   gap: 13.625rem;
@@ -92,3 +91,23 @@ li, a, ul {
 .root-content .button{
   display: inline-block;
 }
+
+.root-content {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.icon-wrapper img {
+  width: 4rem;
+  padding: 2rem;
+}
+
+.logo-image {
+  width: 5rem;
+}
+
+.hatch-logo {
+  display: flex;
+  justify-content: center;
+}
+

@@ -18,6 +18,8 @@ body {
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  font-size: normal;
+  font-weight: 100;
   background-image: url('../images/hatch-sky.png');
   background-size: cover;        /* Skaalaa kuva kattamaan koko alue */
   background-repeat: no-repeat;  /* Estää kuvan toistumisen */
@@ -49,8 +51,7 @@ li, a, ul {
 }
 
 .start-button:hover {
-width: 9rem;
-transition: 0.5s;
+  transform: scale(0.95); /* Subtle 5% shrink */
 }
 
 .start-button {
@@ -63,6 +64,7 @@ transition: 0.5s;
   width: 10rem;
   font-family: "Nunito Sans", sans-serif;
   font-size: x-large;
+  font-weight: 100;
   box-shadow: 0 0 1rem rgba(255, 255, 255, 0.8);
 
   border: 0.2rem solid transparent;
@@ -96,10 +98,17 @@ transition: 0.5s;
   text-align: center;
 }
 
+.button:hover {
+  transform: scale(0.95); /* Subtle 5% shrink */
+}
+
 .buttons {
   display: flex;
   justify-content: center;
+  
 }
+
+
 
 .quiz {
   text-align: center;
@@ -114,6 +123,7 @@ transition: 0.5s;
 .root-section h2{
   font-size: 4rem;
   text-align: center;
+  font-weight: 100;
 }
 
 .root-section{
@@ -134,6 +144,8 @@ transition: 0.5s;
 .root-content {
   text-align: center;
   padding-top: 1rem;
+  font-weight: 100;
+  font-size: xx-large;
 }
 
 .icon-wrapper img {
@@ -158,6 +170,14 @@ transition: 0.5s;
 .hatch-logo {
   display: flex;
   justify-content: center;
+}
+
+.language-icon {
+  transition: 0.5s;
+}
+
+.language-icon:hover {
+  transform: scale(0.95); /* Subtle 5% shrink */
 }
 
 

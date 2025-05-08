@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 08:45 AM
+-- Generation Time: Apr 29, 2025 at 01:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,8 +31,20 @@ CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `input_name` varchar(20) NOT NULL,
-  `value` varchar(50) NOT NULL
+  `answer_value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
+(1, 2, 'answer_one', '='),
+(2, 3, 'answer_one', '\"number\"'),
+(3, 3, 'answer_one', '\'number\''),
+(4, 4, 'answer_one', 'length'),
+(5, 6, 'answer_one', '+='),
+(6, 5, 'answer_one', 'const');
 
 -- --------------------------------------------------------
 
@@ -90,11 +102,11 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_content`) VALUES
-(2, 1, 'Write a correct syntax for assigning a value to a variable:', '<div>\r\n        <span>myNumber</span>\r\n        <input type=\"text\" name=\"answer\">\r\n        <span>9</span>\r\n    </div>'),
-(3, 1, 'How would you assign a value to a variable, if it’s supposed to be the word number?', ' <div>\r\n        <span>myString = </span>\r\n        <input type=\"text\" name=\"answer\">\r\n    </div>'),
-(4, 1, 'If you want to count the number of characters in a text, you would use the built-in property:', ' <div>\r\n        <p>let myText = \"Ihana!\"</p>\r\n<span>let amountOfCharacters = myText.</span>\r\n        <input type=\"text\" name=\"answer\">\r\n    </div>'),
-(5, 1, 'If you don`t want to change the value of the variable price in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer\">  <span> \r\n price = 100 </span>\r\n    </div>'),
-(6, 1, 'If you want to increase your counter index by 1, you can write:', '<div>\r\n        <p>let i = 1</p>\r\n        <p>i = i + 1</p>\r\n        <p>or</p>\r\n        <span>i</span>\r\n        <input type=\"text\" name=\"answer\">\r\n        <span>1</span>\r\n    </div>');
+(2, 1, 'Write a correct syntax for assigning a value to a variable:', '<div>\r\n        <span>myNumber</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>9</span>\r\n    </div>'),
+(3, 1, 'How would you assign a value to a variable, if it’s supposed to be the word <i>number</i>?', ' <div>\r\n        <span>myString = </span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
+(4, 1, 'If you want to count the number of characters in a text, you would use the built-in property:', ' <div>\r\n        <p>let myText = \"Ihana!\"</p>\r\n<span>let amountOfCharacters = myText.</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
+(5, 1, 'If you don`t want to change the value of the variable price in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer_one\">  <span> \r\n price = 100 </span>\r\n    </div>'),
+(6, 1, 'If you want to increase your counter index by 1, you can write:', '<div>\r\n        <p>let i = 1</p>\r\n        <p>i = i + 1</p>\r\n        <p>or</p>\r\n        <span>i</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>1</span>\r\n    </div>');
 
 -- --------------------------------------------------------
 
@@ -160,7 +172,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `languages`

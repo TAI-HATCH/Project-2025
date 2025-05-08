@@ -9,7 +9,7 @@ a {
 
 a:hover {
   transition: 0.5s;
-  color: rgb(57, 57, 57);
+  color:#2f3d3e;
 }
 
 body {
@@ -37,7 +37,8 @@ li, a, ul {
 }
 .nav-list{
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
+  margin-right: 5rem;
   justify-content: space-around;
 }
 
@@ -45,6 +46,44 @@ li, a, ul {
   padding: 1rem;
   border: 0.15rem solid rgba(122, 122, 122, 0.668);
   border-radius: 1rem;
+}
+
+.start-button:hover {
+width: 9rem;
+transition: 0.5s;
+}
+
+.start-button {
+  transition: 0.5s;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 10rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: x-large;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.8);
+
+  border: 0.2rem solid transparent;
+  background-image:
+    linear-gradient(#e1e8e9, #e1e8e9),
+    linear-gradient(90deg, white, #85ccf4, white); /* animated border */
+    
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 200%;
+
+  animation: snakeBorder 3s linear infinite;
+}
+
+@keyframes snakeBorder {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 200% 0;
+  }
 }
 
 .button {
@@ -78,9 +117,21 @@ li, a, ul {
 
 .logo-image {
   width: 5rem;
+  
+}
+
+.logo-image path {
+  fill:#e1e8e9;
+  transition: 0.5s;
+}
+
+.logo-image:hover path {
+  fill: #2f3d3e;
 }
 
 .hatch-logo {
   display: flex;
   justify-content: center;
 }
+
+

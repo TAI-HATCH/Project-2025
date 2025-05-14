@@ -3,7 +3,7 @@
 
 include_once "connection.php";
 
-echo $connection_status;
+// echo $connection_status; // Prints out "Connection successful" if successful
 
 function get_questions($topic_id)
 {

@@ -76,9 +76,13 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 <body>
     <br>
     <header class="root-header">
-        <div class="logo">
-            <a href="./">HATCH</a> <!-- Go to the index page-->
-        </div>
+    <div class="logo">
+        <a href="./">
+          <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0"/></svg>
+          </a>
+        <div class="hatch-logo"><a href="./">HATCH</a></div>
+      </div>
         <nav>
             <ul class="nav-list">
                 <li class="nav-list-item">
@@ -87,12 +91,12 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                 <li class="nav-list-item">
                     <a href="#" class="nav-link">About</a>
                 </li>
-                <li class="nav-list-item">
+                <!--<li class="nav-list-item">
                     <a href="#" class="nav-link">Sign up</a>
                 </li>
                 <li class="nav-list-item">
                     <a href="#" class="nav-link">Login</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </header>

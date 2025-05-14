@@ -16,7 +16,10 @@
     <h1 hidden>HATCH</h1>
     <header class="root-header">
       <div class="logo">
-        <a href="./"><img class="logo-image" src="images\HatchLogo.svg" alt="Hatch logo"></a>
+        <a href="./">
+          <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0"/></svg>
+          </a>
         <div class="hatch-logo"><a href="./">HATCH</a></div>
       </div>
       <nav>
@@ -45,8 +48,7 @@
         <img src="./images/javascript-icon.svg" alt="">
         <img src="./images/python-icon.svg" alt="">
       </div>
-      <a href="quiz.php?language-topic=1" class="button">Start</a>
-      <!-- <button type="button">Start</button> -->
+      <a href="quiz.php?language-topic=1"><button type="button" class="start-button">Start</button></a>
     </section>
   </body>
 </html>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 01:46 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: May 14, 2025 at 01:23 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `answers` (
   `question_id` int(11) NOT NULL,
   `input_name` varchar(20) NOT NULL,
   `answer_value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `answers`
@@ -55,7 +55,7 @@ INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
 CREATE TABLE `languages` (
   `language_id` int(11) NOT NULL,
   `language_name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `languages`
@@ -63,7 +63,7 @@ CREATE TABLE `languages` (
 
 INSERT INTO `languages` (`language_id`, `language_name`) VALUES
 (1, 'JavaScript'),
-(2, 'JavaScript');
+(2, 'Python');
 
 -- --------------------------------------------------------
 
@@ -75,14 +75,22 @@ CREATE TABLE `languages_topic` (
   `id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `languages_topic`
 --
 
 INSERT INTO `languages_topic` (`id`, `language_id`, `topic_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 5),
+(5, 1, 4),
+(6, 2, 1),
+(7, 2, 4),
+(8, 2, 2),
+(9, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -95,7 +103,7 @@ CREATE TABLE `questions` (
   `languages_topic_id` int(11) NOT NULL,
   `question` varchar(500) DEFAULT NULL,
   `form_content` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `questions`
@@ -105,8 +113,8 @@ INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_
 (2, 1, 'Write a correct syntax for assigning a value to a variable:', '<div>\r\n        <span>myNumber</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>9</span>\r\n    </div>'),
 (3, 1, 'How would you assign a value to a variable, if it’s supposed to be the word <i>number</i>?', ' <div>\r\n        <span>myString = </span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
 (4, 1, 'If you want to count the number of characters in a text, you would use the built-in property:', ' <div>\r\n        <p>let myText = \"Ihana!\"</p>\r\n<span>let amountOfCharacters = myText.</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
-(5, 1, 'If you don`t want to change the value of the variable price in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer_one\">  <span> \r\n price = 100 </span>\r\n    </div>'),
-(6, 1, 'If you want to increase your counter index by 1, you can write:', '<div>\r\n        <p>let i = 1</p>\r\n        <p>i = i + 1</p>\r\n        <p>or</p>\r\n        <span>i</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>1</span>\r\n    </div>');
+(5, 1, 'If you don`t want to change the value of the variable <i>price</i> in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer_one\">  <span> \r\n price = 100 </span>\r\n    </div>'),
+(6, 1, 'If you want to increase your counter <i>index</i> by 1, you can write:', '<div>\r\n        <p>let index = 1</p>\r\n        <p>index = index + 1</p>\r\n        <p>or</p>\r\n        <span>index</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>1</span>\r\n    </div>');
 
 -- --------------------------------------------------------
 
@@ -117,14 +125,19 @@ INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_
 CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `topics`
 --
 
 INSERT INTO `topics` (`topic_id`, `topic_name`) VALUES
-(1, 'Basics and syntax');
+(1, 'Basics and syntax'),
+(2, 'Objects and arrays'),
+(3, 'DOM manipulation'),
+(4, 'Functions'),
+(5, 'Events and event handling'),
+(6, 'Exception Handling');
 
 --
 -- Indexes for dumped tables
@@ -184,7 +197,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `languages_topic`
 --
 ALTER TABLE `languages_topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -196,7 +209,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

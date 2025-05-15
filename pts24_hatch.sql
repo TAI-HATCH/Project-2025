@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 01:46 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Хост: 127.0.0.1
+-- Час створення: Трв 14 2025 р., 12:50
+-- Версія сервера: 10.4.32-MariaDB
+-- Версія PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pts24_hatch`
+-- База даних: `pts24_hatch`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Структура таблиці `answers`
 --
 
 CREATE TABLE `answers` (
@@ -35,7 +35,7 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `answers`
+-- Дамп даних таблиці `answers`
 --
 
 INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Структура таблиці `languages`
 --
 
 CREATE TABLE `languages` (
@@ -58,17 +58,17 @@ CREATE TABLE `languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `languages`
+-- Дамп даних таблиці `languages`
 --
 
 INSERT INTO `languages` (`language_id`, `language_name`) VALUES
 (1, 'JavaScript'),
-(2, 'JavaScript');
+(2, 'Python');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages_topic`
+-- Структура таблиці `languages_topic`
 --
 
 CREATE TABLE `languages_topic` (
@@ -78,16 +78,24 @@ CREATE TABLE `languages_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `languages_topic`
+-- Дамп даних таблиці `languages_topic`
 --
 
 INSERT INTO `languages_topic` (`id`, `language_id`, `topic_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 5),
+(5, 1, 4),
+(6, 2, 1),
+(7, 2, 4),
+(8, 2, 2),
+(9, 2, 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Структура таблиці `questions`
 --
 
 CREATE TABLE `questions` (
@@ -98,20 +106,20 @@ CREATE TABLE `questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `questions`
+-- Дамп даних таблиці `questions`
 --
 
 INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_content`) VALUES
 (2, 1, 'Write a correct syntax for assigning a value to a variable:', '<div>\r\n        <span>myNumber</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>9</span>\r\n    </div>'),
 (3, 1, 'How would you assign a value to a variable, if it’s supposed to be the word <i>number</i>?', ' <div>\r\n        <span>myString = </span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
 (4, 1, 'If you want to count the number of characters in a text, you would use the built-in property:', ' <div>\r\n        <p>let myText = \"Ihana!\"</p>\r\n<span>let amountOfCharacters = myText.</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n    </div>'),
-(5, 1, 'If you don`t want to change the value of the variable price in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer_one\">  <span> \r\n price = 100 </span>\r\n    </div>'),
-(6, 1, 'If you want to increase your counter index by 1, you can write:', '<div>\r\n        <p>let i = 1</p>\r\n        <p>i = i + 1</p>\r\n        <p>or</p>\r\n        <span>i</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>1</span>\r\n    </div>');
+(5, 1, 'If you don`t want to change the value of the variable <i>price</i> in your code, what keyword would you use to declare it?', ' <div>\r\n      <input type=\"text\" name=\"answer_one\">  <span> \r\n price = 100 </span>\r\n    </div>'),
+(6, 1, 'If you want to increase your counter <i>index</i> by 1, you can write:', '<div>\r\n        <p>let index = 1</p>\r\n        <p>index = index + 1</p>\r\n        <p>or</p>\r\n        <span>index</span>\r\n        <input type=\"text\" name=\"answer_one\">\r\n        <span>1</span>\r\n    </div>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `topics`
+-- Структура таблиці `topics`
 --
 
 CREATE TABLE `topics` (
@@ -120,31 +128,36 @@ CREATE TABLE `topics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `topics`
+-- Дамп даних таблиці `topics`
 --
 
 INSERT INTO `topics` (`topic_id`, `topic_name`) VALUES
-(1, 'Basics and syntax');
+(1, 'Basics and syntax'),
+(2, 'Objects and arrays'),
+(3, 'DOM manipulation'),
+(4, 'Functions'),
+(5, 'Events and event handling'),
+(6, 'Exception Handling');
 
 --
--- Indexes for dumped tables
+-- Індекси збережених таблиць
 --
 
 --
--- Indexes for table `answers`
+-- Індекси таблиці `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `question` (`question_id`);
 
 --
--- Indexes for table `languages`
+-- Індекси таблиці `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`language_id`);
 
 --
--- Indexes for table `languages_topic`
+-- Індекси таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
   ADD PRIMARY KEY (`id`),
@@ -152,71 +165,71 @@ ALTER TABLE `languages_topic`
   ADD KEY `topic_id` (`topic_id`);
 
 --
--- Indexes for table `questions`
+-- Індекси таблиці `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`question_id`),
   ADD KEY `languages_topic_id` (`languages_topic_id`);
 
 --
--- Indexes for table `topics`
+-- Індекси таблиці `topics`
 --
 ALTER TABLE `topics`
   ADD PRIMARY KEY (`topic_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для збережених таблиць
 --
 
 --
--- AUTO_INCREMENT for table `answers`
+-- AUTO_INCREMENT для таблиці `answers`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `languages`
+-- AUTO_INCREMENT для таблиці `languages`
 --
 ALTER TABLE `languages`
   MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `languages_topic`
+-- AUTO_INCREMENT для таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `questions`
+-- AUTO_INCREMENT для таблиці `questions`
 --
 ALTER TABLE `questions`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `topics`
+-- AUTO_INCREMENT для таблиці `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Constraints for dumped tables
+-- Обмеження зовнішнього ключа збережених таблиць
 --
 
 --
--- Constraints for table `answers`
+-- Обмеження зовнішнього ключа таблиці `answers`
 --
 ALTER TABLE `answers`
   ADD CONSTRAINT `question` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
 
 --
--- Constraints for table `languages_topic`
+-- Обмеження зовнішнього ключа таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
   ADD CONSTRAINT `languages_topic_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`),
   ADD CONSTRAINT `languages_topic_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`);
 
 --
--- Constraints for table `questions`
+-- Обмеження зовнішнього ключа таблиці `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`languages_topic_id`) REFERENCES `languages_topic` (`id`);

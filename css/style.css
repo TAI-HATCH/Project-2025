@@ -1,5 +1,6 @@
 * {
-
+padding: 0;
+margin: 0;
 }
 
 a {
@@ -13,8 +14,7 @@ a:hover {
 }
 
 body {
-  margin: 3rem;
-  padding: 0;
+  padding: 3rem calc(100% * 0.07); /* set the right and left paddings as 7% of the screen width  */
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -22,9 +22,10 @@ body {
   font-weight: 100;
   background-image: url('../images/hatch-sky.png');
   background-size: cover;        /* Skaalaa kuva kattamaan koko alue */
-  background-repeat: no-repeat;  /* Estää kuvan toistumisen */
+  /* background-repeat: no-repeat;  Estää kuvan toistumisen */
   background-position: center;   /* Asettaa kuvan keskelle */
 }
+
 li, a, ul {
  list-style: none;
  text-decoration: none;
@@ -32,22 +33,39 @@ li, a, ul {
  margin: 0;
 }
 
+/* INDEX PAGE */
+.root-content {
+  text-align: center;
+  padding-top: 1rem;
+  font-weight: 100;
+  font-size: xx-large;
+}
+
+.root-content .button{
+  display: inline-block;
+}
+
 .root-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
 }
+
+/* NAVIGATION BAR */
 .nav-list{
   display: flex;
   gap: 5rem;
-  margin-right: 5rem;
   justify-content: space-around;
 }
 
-.code-snippet {
-  padding: 1rem;
-  border: 0.15rem solid rgba(122, 122, 122, 0.668);
-  border-radius: 1rem;
+.nav-link{
+font-size: 2rem;
+}
+
+.content-text{
+margin-top: 2rem;
+margin-bottom: 2rem;
 }
 
 .start-button:hover {
@@ -108,22 +126,15 @@ li, a, ul {
   
 }
 
-
-
 .quiz {
   text-align: center;
 }
 
+/* PAGE SELECT PROGRAMMING LANGUAGE */
 .icon-lang-list{
   display: flex;
   gap: 13.625rem;
   justify-content: center;
-}
-
-.root-section h2{
-  font-size: 4rem;
-  text-align: center;
-  font-weight: 100;
 }
 
 .root-section{
@@ -132,21 +143,19 @@ li, a, ul {
   justify-content: center;
 }
 
+.root-section h2{
+  font-size: 4rem;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 6rem;
+}
+
+/* PAGE for SELECTING TOPIC */
 .icon-wrapper{
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.root-content .button{
-  display: inline-block;
-}
-
-.root-content {
-  text-align: center;
-  padding-top: 1rem;
-  font-weight: 100;
-  font-size: xx-large;
-}
 
 .icon-wrapper img {
   width: 4rem;
@@ -180,4 +189,77 @@ li, a, ul {
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
+.topic-link{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: fit-content;
+  margin-bottom: 4rem;
+}
 
+.topic-link h3{
+  transition: 0.5s;
+}
+.topic-link:hover h3{
+  transform: scale(0.95); /* Subtle 5% shrink */
+}
+
+.topic-link img{
+  transition: 0.5s;
+}
+.topic-link:hover img{
+  transform: scale(0.95); /* Subtle 5% shrink */
+  fill: rgb(255, 255, 255);
+}
+
+.language-section{
+  display: inline-block;
+  text-align: right;
+  padding: 2rem;
+}
+
+.language-section h2{
+  font-size: 3rem;
+  font-weight: 100;
+}
+
+.topic-list{
+  text-align: center;
+}
+
+.topic-list-item{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.topic-name{
+  font-size: 3.62rem;
+  font-weight: 100;
+  color: #2f3d3e;
+  width: fit-content;
+  align-self: center;
+}
+
+.down-arrow-icon{
+  margin-bottom: 4rem;
+}
+
+/* QUIZ PAGE */
+
+.code-snippet {
+  padding: 1rem;
+  border: 0.15rem solid rgba(122, 122, 122, 0.668);
+  border-radius: 1rem;
+}
+
+
+@media screen and (max-width: 60rem) {
+ .nav-link{
+  font-size: 1.2rem;
+ }
+
+ .root-section h2{
+  font-size: 2rem;
+ }
+}

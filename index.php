@@ -15,34 +15,9 @@
 
 <body>
   <h1 hidden>HATCH</h1>
-  <header class="root-header">
-    <div class="logo">
-      <a href="./" class="logo-link">
-        <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0" />
-        </svg>
-        <p class="hatch-logo">HATCH</p>
-      </a>
-      <!-- <div class="hatch-logo"><a href="./">HATCH</a></div> -->
-    </div>
-    <nav>
-      <ul class="nav-list">
-        <li class="nav-list-item">
-          <a href="selecting-language.php" class="nav-link">Training</a>
-          <!-- <a href="quiz.php?language-topic=1" class="nav-link">Training</a> -->
-        </li>
-        <li class="nav-list-item">
-          <a href="#" class="nav-link">About</a>
-        </li>
-        <!--<li class="nav-list-item">
-            <a href="#" class="nav-link">Sign up</a> Not for MVP -->
-        </li>
-        <!-- <li class="nav-list-item">
-            <a href="#" class="nav-link">Login</a> Not for MVP -->
-        </li>
-      </ul>
-    </nav>
-  </header>
+
+  <?php include 'header.php'?>
+
   <section class="root-content">
     <p class="content-text">Learn coding for free.</p>
     <p class="content-text">You decide the subject.</p>
@@ -51,7 +26,7 @@
       <img src="./images/javascript-icon.svg" alt="Icon of JavaScript">
       <img src="./images/python-icon.svg" alt="Icon of Python">
     </div>
-    <a href="quiz.php?language-topic=1"><button type="button" class="start-button">Start</button></a>
+    <a href="selecting-language.php"><button type="button" class="start-button">Start</button></a>
   </section>
 </body>
 

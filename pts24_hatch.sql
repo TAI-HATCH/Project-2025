@@ -2,10 +2,12 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
+
 -- Host: 127.0.0.1
 -- Generation Time: May 14, 2025 at 01:23 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.3.33
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +20,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pts24_hatch`
+-- База даних: `pts24_hatch`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Структура таблиці `answers`
 --
 
 CREATE TABLE `answers` (
@@ -35,7 +37,7 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `answers`
+-- Дамп даних таблиці `answers`
 --
 
 INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
@@ -49,7 +51,7 @@ INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Структура таблиці `languages`
 --
 
 CREATE TABLE `languages` (
@@ -58,7 +60,7 @@ CREATE TABLE `languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `languages`
+-- Дамп даних таблиці `languages`
 --
 
 INSERT INTO `languages` (`language_id`, `language_name`) VALUES
@@ -68,7 +70,7 @@ INSERT INTO `languages` (`language_id`, `language_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages_topic`
+-- Структура таблиці `languages_topic`
 --
 
 CREATE TABLE `languages_topic` (
@@ -78,7 +80,7 @@ CREATE TABLE `languages_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `languages_topic`
+-- Дамп даних таблиці `languages_topic`
 --
 
 INSERT INTO `languages_topic` (`id`, `language_id`, `topic_id`) VALUES
@@ -95,7 +97,7 @@ INSERT INTO `languages_topic` (`id`, `language_id`, `topic_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Структура таблиці `questions`
 --
 
 CREATE TABLE `questions` (
@@ -106,7 +108,7 @@ CREATE TABLE `questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `questions`
+-- Дамп даних таблиці `questions`
 --
 
 INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_content`) VALUES
@@ -119,7 +121,7 @@ INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `topics`
+-- Структура таблиці `topics`
 --
 
 CREATE TABLE `topics` (
@@ -128,7 +130,7 @@ CREATE TABLE `topics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `topics`
+-- Дамп даних таблиці `topics`
 --
 
 INSERT INTO `topics` (`topic_id`, `topic_name`) VALUES
@@ -140,24 +142,24 @@ INSERT INTO `topics` (`topic_id`, `topic_name`) VALUES
 (6, 'Exception Handling');
 
 --
--- Indexes for dumped tables
+-- Індекси збережених таблиць
 --
 
 --
--- Indexes for table `answers`
+-- Індекси таблиці `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `question` (`question_id`);
 
 --
--- Indexes for table `languages`
+-- Індекси таблиці `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`language_id`);
 
 --
--- Indexes for table `languages_topic`
+-- Індекси таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
   ADD PRIMARY KEY (`id`),
@@ -165,71 +167,71 @@ ALTER TABLE `languages_topic`
   ADD KEY `topic_id` (`topic_id`);
 
 --
--- Indexes for table `questions`
+-- Індекси таблиці `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`question_id`),
   ADD KEY `languages_topic_id` (`languages_topic_id`);
 
 --
--- Indexes for table `topics`
+-- Індекси таблиці `topics`
 --
 ALTER TABLE `topics`
   ADD PRIMARY KEY (`topic_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для збережених таблиць
 --
 
 --
--- AUTO_INCREMENT for table `answers`
+-- AUTO_INCREMENT для таблиці `answers`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `languages`
+-- AUTO_INCREMENT для таблиці `languages`
 --
 ALTER TABLE `languages`
   MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `languages_topic`
+-- AUTO_INCREMENT для таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `questions`
+-- AUTO_INCREMENT для таблиці `questions`
 --
 ALTER TABLE `questions`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `topics`
+-- AUTO_INCREMENT для таблиці `topics`
 --
 ALTER TABLE `topics`
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Constraints for dumped tables
+-- Обмеження зовнішнього ключа збережених таблиць
 --
 
 --
--- Constraints for table `answers`
+-- Обмеження зовнішнього ключа таблиці `answers`
 --
 ALTER TABLE `answers`
   ADD CONSTRAINT `question` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
 
 --
--- Constraints for table `languages_topic`
+-- Обмеження зовнішнього ключа таблиці `languages_topic`
 --
 ALTER TABLE `languages_topic`
   ADD CONSTRAINT `languages_topic_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`),
   ADD CONSTRAINT `languages_topic_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`);
 
 --
--- Constraints for table `questions`
+-- Обмеження зовнішнього ключа таблиці `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`languages_topic_id`) REFERENCES `languages_topic` (`id`);

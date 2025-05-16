@@ -25,7 +25,7 @@
       <nav>
         <ul class="nav-list">
           <li class="nav-list-item">
-            <a href="selecting_language.php" class="nav-link">Training</a>
+            <a href="selecting-language.php" class="nav-link">Training</a>
             <!-- <a href="quiz.php?language-topic=1" class="nav-link">Training</a> -->
           </li>
           <li class="nav-list-item">

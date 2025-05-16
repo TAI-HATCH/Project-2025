@@ -1,54 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to HATCH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./css/style.css">
-  </head>
-  <body>
-    <h1 hidden>HATCH</h1>
-    <header class="root-header">
-      <div class="logo">
-        <a href="./">
-          <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0"/></svg>
-          </a>
-        <div class="hatch-logo"><a href="./">HATCH</a></div>
-      </div>
-      <nav>
-        <ul class="nav-list">
-          <li class="nav-list-item">
-            <a href="selecting-language.php" class="nav-link">Training</a>
-            <!-- <a href="quiz.php?language-topic=1" class="nav-link">Training</a> -->
-          </li>
-          <li class="nav-list-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <!--<li class="nav-list-item">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to HATCH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <h1 hidden>HATCH</h1>
+  <header class="root-header">
+    <div class="logo">
+      <a href="./" class="logo-link">
+        <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0" />
+        </svg>
+        <p class="hatch-logo">HATCH</p>
+      </a>
+      <!-- <div class="hatch-logo"><a href="./">HATCH</a></div> -->
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <a href="selecting-language.php" class="nav-link">Training</a>
+          <!-- <a href="quiz.php?language-topic=1" class="nav-link">Training</a> -->
+        </li>
+        <li class="nav-list-item">
+          <a href="#" class="nav-link">About</a>
+        </li>
+        <!--<li class="nav-list-item">
             <a href="#" class="nav-link">Sign up</a> Not for MVP -->
-          </li>
-          <!-- <li class="nav-list-item">
+        </li>
+        <!-- <li class="nav-list-item">
             <a href="#" class="nav-link">Login</a> Not for MVP -->
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <section class="root-content">
-      <p class="content-text">Learn coding for free.</p>
-      <p class="content-text">You decide the subject.</p>
-      <p class="content-text">You decide when to move on.</p>
-      <div class="icon-wrapper">
-        <img src="./images/javascript-icon.svg" alt="">
-        <img src="./images/python-icon.svg" alt="">
-      </div>
-      <a href="quiz.php?language-topic=1"><button type="button" class="start-button">Start</button></a>
-    </section>
-  </body>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section class="root-content">
+    <p class="content-text">Learn coding for free.</p>
+    <p class="content-text">You decide the subject.</p>
+    <p class="content-text">You decide when to move on.</p>
+    <div class="icon-wrapper">
+      <img src="./images/javascript-icon.svg" alt="Icon of JavaScript">
+      <img src="./images/python-icon.svg" alt="Icon of Python">
+    </div>
+    <a href="quiz.php?language-topic=1"><button type="button" class="start-button">Start</button></a>
+  </section>
+</body>
+
 </html>

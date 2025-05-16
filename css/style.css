@@ -57,6 +57,7 @@ li, a, ul {
   display: flex;
   gap: 5rem;
   justify-content: space-around;
+
 }
 
 .nav-link{
@@ -68,11 +69,11 @@ margin-top: 2rem;
 margin-bottom: 2rem;
 }
 
-.start-button:hover {
+.start-button:hover, .upload-to-database-button:hover {
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
-.start-button {
+.start-button, .upload-to-database-button {
   transition: 0.5s;
   text-align: center;
   color: rgb(0, 0, 0);
@@ -164,7 +165,6 @@ margin-bottom: 2rem;
 
 .logo-image {
   width: 5rem;
-  
 }
 
 .logo-image path {
@@ -261,5 +261,62 @@ align-items: center;
 
  .root-section h2{
   font-size: 2rem;
- }
+  }
+  
+.admin-question-upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.admin-choice, .admin-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #e1e8e9;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 85rem;
+}
+
+.admin-input-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #e1e8e9;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 75rem;
+}
+
+
+.admin-dropdown-menu {
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.admin-input-field {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 70rem;
+  height: 2rem
+}
+
+.admin-question-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #c5dbe0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.admin-question-content label {
+  margin-bottom: 1rem;
 }

@@ -1,11 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Час створення: Трв 14 2025 р., 12:50
--- Версія сервера: 10.4.32-MariaDB
--- Версія PHP: 8.0.30
+
+-- Host: 127.0.0.1
+-- Generation Time: May 14, 2025 at 01:23 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.3.33
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +34,7 @@ CREATE TABLE `answers` (
   `question_id` int(11) NOT NULL,
   `input_name` varchar(20) NOT NULL,
   `answer_value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп даних таблиці `answers`
@@ -55,7 +57,7 @@ INSERT INTO `answers` (`id`, `question_id`, `input_name`, `answer_value`) VALUES
 CREATE TABLE `languages` (
   `language_id` int(11) NOT NULL,
   `language_name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп даних таблиці `languages`
@@ -75,7 +77,7 @@ CREATE TABLE `languages_topic` (
   `id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп даних таблиці `languages_topic`
@@ -103,7 +105,7 @@ CREATE TABLE `questions` (
   `languages_topic_id` int(11) NOT NULL,
   `question` varchar(500) DEFAULT NULL,
   `form_content` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп даних таблиці `questions`
@@ -125,7 +127,7 @@ INSERT INTO `questions` (`question_id`, `languages_topic_id`, `question`, `form_
 CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп даних таблиці `topics`

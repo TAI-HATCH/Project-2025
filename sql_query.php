@@ -29,7 +29,20 @@ function get_topics($language_id) //Function to get an array of topics from the 
     //Select all records from the table "languages_topic" with language_id = $language_id;
     //Store the name of the programming language selected on the previous page ("selecting_language.php") in order to find its corresponding icon;
     //Store the id of topic in order to send it on the next page ("quiz.php")
-    $stmt = $conn->prepare("SELECT L.language_name, T.topic_name, $table_name.id FROM $table_name, `languages` AS L, `topics` AS T WHERE L.language_id = $table_name.language_id AND T.topic_id = $table_name.topic_id AND $table_name.language_id = :language_id;"); // Go into db, take hold of topics for the specific language-id
+    $stmt = $conn->prepare("SELECT 
+                                L.language_name, T.topic_name, $table_name.id 
+                            FROM 
+                                $table_name, `languages` 
+                            AS 
+                                L, `topics` 
+                            AS 
+                                T 
+                            WHERE 
+                                L.language_id = $table_name.language_id 
+                            AND 
+                                T.topic_id = $table_name.topic_id 
+                            AND 
+                                $table_name.language_id = :language_id;"); // Go into db, take hold of topics for the specific language-id
     $stmt->bindParam(':language_id', $language_id); // Binding together (reflecting) :language_id and $language_id
     $stmt->execute(); // Run the thing
 

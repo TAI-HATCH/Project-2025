@@ -45,10 +45,10 @@
     <section class="root-content">
     <div class="admin-question-upload">
         
-        <form action="">
+        <form action="upload-to-database.php" method="POST">
             <div class="admin-choice">
                 <label for="admin-programming-language-choice">Choose programming language</label>
-                <select class="admin-dropdown-menu" name="admin-programming-language-dropdown-menu" id="admin-programming-language-dropdown-menu">
+                <select class="admin-dropdown-menu" name="language_id" id="language_id">
                        <?php
                         include_once "connection.php";
 
@@ -74,7 +74,7 @@
             </div>
             <div class="admin-choice">
                 <label for="topic-choice">Choose topic</label>
-                <select class="admin-dropdown-menu" name="topic-dropdown-menu" id="topic-dropdown-menu">
+                <select class="admin-dropdown-menu" name="topic_id" id="topic_id">
                   <?php
                         include_once "connection.php";
 
@@ -102,21 +102,26 @@
             </div>
         <div class="admin-input">
             <label for="question-text">Question text</label>
-            <input class="admin-input-field" type="text" id="question-text-input" name="question-text-input" placeholder="Type your question text here.">
+            <input class="admin-input-field" type="text" id="question_id" name="question" placeholder="Type your question text here.">
         </div>
-            <div class="admin-question-content">
+            <div class="admin-question-content">    
                 <label for="question-content">Question content</label>
                 <div class="admin-input-content">
-                    <label for="text-before-user-input">Text before user input field:</label>
-                    <input class="admin-input-field" type="text" id="text-before-input-field" name="text-before-input-field" placeholder="Type the question text before the user input field.">
+                    <label for="text-before">Text before user input field:</label>
+                    <input class="admin-input-field" type="text" id="text_before" name="text_before" placeholder="Type the question text before the user input field.">
+                </div>
+                <div class="admin-input-content">
+                    <label for="answer">Answer for the user to type:</label>
+                    <input class="admin-input-field" type="text" id="answer_value" name="answer" placeholder="Type the answer for the user to type.">
                 </div>
                 <div class="admin-input-content"> 
-                    <label for="text-after-user-input">Text after user input field:</label>
-                    <input class="admin-input-field" type="text" id="text-after-input-field" name="text-after-input-field" placeholder="Type the question text after the user input field.">
+                    <label for="text-after">Text after user input field:</label>
+                    <input class="admin-input-field" type="text" id="text_after" name="text_after" placeholder="Type the question text after the user input field.">
                 </div>
             </div>
+        
+        <button type="submit" class="upload-to-database-button">Upload to database</button>
         </form> 
-        <a href="upload-to-database"><button type="button" class="upload-to-database-button">Upload to database</button></a>
       </div>
     </section>
   </body>

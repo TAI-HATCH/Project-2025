@@ -162,7 +162,19 @@ ul {
   }
 }
 
-/* PAGE SELECT PROGRAMMING LANGUAGE */
+.button {
+  color: rgb(0, 0, 0);
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  border-color: black;
+  text-align: center;
+}
+
+.button:hover {
+  transform: scale(0.95); /* Subtle 5% shrink */
+}
 
 .root-section {
   display: flex;
@@ -281,6 +293,11 @@ ul {
 }
 
 /* ADMIN PAGEs */
+ .root-section h2{
+  font-size: 2rem;
+  }
+
+}
 
 .admin-question-upload {
   display: flex;
@@ -334,6 +351,7 @@ ul {
   background-color: var(--brand-secondary-color);
   padding: 1rem;
   border-radius: 1rem;
+  margin-bottom: 1rem;  
 }
 
 .admin-question-content label {

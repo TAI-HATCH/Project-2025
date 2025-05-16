@@ -1,83 +1,129 @@
+/* GLOBAL VARIABLES */
+:root {
+  --bcg-main-color: #85ccf4; /* Background color*/
+  --brand-color: #e1e8e9; /* Logo, buttons, inputs color */
+  --brand-secondary-color: #c5dbe0;
+  --btn-color: #f0f8ff;
+  --hover-color: #2f3d3e;
+  --dark-color: #000000;
+  --highlight-color: #ffffff;
+}
+
 * {
-padding: 0;
-margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 a {
-  color: white;
+  color: var(--highlight-color);
   transition: 0.5s;
 }
 
 a:hover {
   transition: 0.5s;
-  color:#2f3d3e;
+  color: var(--hover-color);
 }
 
 body {
+  min-height: 100vh; /* Set the height of the body on all viewport */
   padding: 3rem calc(100% * 0.07); /* set the right and left paddings as 7% of the screen width  */
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: normal;
   font-weight: 100;
-  background-image: url('../images/hatch-sky.png');
-  background-size: cover;        /* Skaalaa kuva kattamaan koko alue */
-  /* background-repeat: no-repeat;  Estää kuvan toistumisen */
-  background-position: center;   /* Asettaa kuvan keskelle */
+  background-color: var(--bcg-main-color); /* Set the background color for all page*/
+  background-image: url("../images/whiteblur-stain.png"),
+    url("../images/whiteblur-stain.png"); /*Add TWO stains to the bcg as images*/
+  background-size: 800px, 800px; /* Set the size of the stain */
+  background-repeat: no-repeat, no-repeat; /* Images should appear only once */
+  background-position: -15rem -15rem, calc(100% + 15rem) calc(100% + 15rem); /*Set the position for each stain*/
 }
 
-li, a, ul {
- list-style: none;
- text-decoration: none;
- padding: 0;
- margin: 0;
+li,
+a,
+ul {
+  list-style: none;
+  text-decoration: none;
 }
 
 /* INDEX PAGE */
-.root-content {
-  text-align: center;
-  padding-top: 1rem;
-  font-weight: 100;
-  font-size: xx-large;
-}
 
-.root-content .button{
-  display: inline-block;
-}
-
-.root-header{
+.root-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
 }
 
+.logo-link {
+  color: var(--brand-color);
+}
+
+.logo-link:hover {
+  color: var(--hover-color);
+}
+
+.logo-image {
+  width: 5rem;
+}
+
+.logo-image path {
+  fill: var(--brand-color);
+  transition: 0.5s;
+}
+
+.logo-link:hover .logo-image path {
+  fill: var(--hover-color);
+}
+
+.hatch-logo {
+  display: flex;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
 /* NAVIGATION BAR */
-.nav-list{
+.nav-list {
   display: flex;
   gap: 5rem;
   justify-content: space-around;
-
 }
 
-.nav-link{
-font-size: 2rem;
+.nav-link {
+  font-size: 2rem;
 }
 
-.content-text{
-margin-top: 2rem;
-margin-bottom: 2rem;
+.root-content {
+  text-align: center;
+  padding-top: 2rem;
+  font-weight: 100;
+  font-size: 4rem;
 }
 
-.start-button:hover, .upload-to-database-button:hover {
-  transform: scale(0.95); /* Subtle 5% shrink */
+.root-content .button {
+  display: inline-block;
 }
 
-.start-button, .upload-to-database-button {
+.content-text {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.icon-wrapper img {
+  width: 4rem;
+  padding: 2rem;
+}
+.start-button,
+.upload-to-database-button {
   transition: 0.5s;
   text-align: center;
-  color: rgb(0, 0, 0);
-  background-color: aliceblue;
+  color: var(--dark-color);
+  background-color: var(--btn-color);
   padding: 1rem;
   border-radius: 1rem;
   width: 10rem;
@@ -87,15 +133,24 @@ margin-bottom: 2rem;
   box-shadow: 0 0 1rem rgba(255, 255, 255, 0.8);
 
   border: 0.2rem solid transparent;
-  background-image:
-    linear-gradient(#e1e8e9, #e1e8e9),
-    linear-gradient(90deg, white, #85ccf4, white); /* animated border */
-    
+  background-image: linear-gradient(var(--brand-color), var(--brand-color)),
+    linear-gradient(
+      90deg,
+      var(--highlight-color),
+      var(--bcg-main-color),
+      var(--highlight-color)
+    ); /* animated border */
+
   background-origin: border-box;
   background-clip: padding-box, border-box;
   background-size: 200%;
 
   animation: snakeBorder 3s linear infinite;
+}
+
+.start-button:hover,
+.upload-to-database-button:hover {
+  transform: scale(0.95); /* Subtle 5% shrink */
 }
 
 @keyframes snakeBorder {
@@ -106,7 +161,6 @@ margin-bottom: 2rem;
     background-position: 0 0, 200% 0;
   }
 }
-
 
 .button {
   color: rgb(0, 0, 0);
@@ -122,63 +176,22 @@ margin-bottom: 2rem;
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  
-}
-
-.quiz {
-  text-align: center;
-}
-
-/* PAGE SELECT PROGRAMMING LANGUAGE */
-.icon-lang-list{
-  display: flex;
-  gap: 13.625rem;
-  justify-content: center;
-}
-
-.root-section{
+.root-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.root-section h2{
+.root-section h2 {
   font-size: 4rem;
   text-align: center;
   font-weight: 100;
   margin-bottom: 6rem;
 }
 
-/* PAGE for SELECTING TOPIC */
-.icon-wrapper{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-
-.icon-wrapper img {
-  width: 4rem;
-  padding: 2rem;
-}
-
-.logo-image {
-  width: 5rem;
-}
-
-.logo-image path {
-  fill:#e1e8e9;
-  transition: 0.5s;
-}
-
-.logo-image:hover path {
-  fill: #2f3d3e;
-}
-
-.hatch-logo {
+.icon-lang-list {
   display: flex;
+  gap: 13.625rem;
   justify-content: center;
 }
 
@@ -190,7 +203,30 @@ margin-bottom: 2rem;
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
-.topic-link{
+/* PAGE for SELECTING TOPIC */
+
+.language-section {
+  display: inline-block;
+  text-align: right;
+  padding: 2rem;
+}
+
+.language-section h2 {
+  font-size: 3rem;
+  font-weight: 100;
+}
+
+.topic-list {
+  text-align: center;
+}
+
+.topic-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topic-link {
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -198,55 +234,38 @@ margin-bottom: 2rem;
   margin-bottom: 4rem;
 }
 
-.topic-link h3{
+.topic-link h3 {
   transition: 0.5s;
 }
-.topic-link:hover h3{
+.topic-link:hover h3 {
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
-.topic-link img{
+.topic-link img {
   transition: 0.5s;
 }
-.topic-link:hover img{
+.topic-link:hover img {
   transform: scale(0.95); /* Subtle 5% shrink */
-  fill: rgb(255, 255, 255);
+  fill: var(--highlight-color);
 }
 
-.language-section{
-  display: inline-block;
-  text-align: right;
-  padding: 2rem;
-}
-
-.language-section h2{
-  font-size: 3rem;
-  font-weight: 100;
-}
-
-.topic-list{
-  text-align: center;
-}
-
-.topic-list-item{
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-.topic-name{
+.topic-name {
   font-size: 3.62rem;
   font-weight: 100;
-  color: #2f3d3e;
+  color: var(--hover-color);
   width: fit-content;
   align-self: center;
 }
 
-.down-arrow-icon{
+.down-arrow-icon {
   margin-bottom: 4rem;
 }
 
 /* QUIZ PAGE */
+
+.quiz {
+  text-align: center;
+}
 
 .code-snippet {
   padding: 1rem;
@@ -254,18 +273,32 @@ align-items: center;
   border-radius: 1rem;
 }
 
+.buttons {
+  display: flex;
+  justify-content: center;
+}
 
-@media screen and (max-width: 60rem) {
- .nav-link{
-  font-size: 1.2rem;
- }
+.button {
+  color: var(--dark-color);
+  background-color: var(--btn-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  border-color: var(--dark-color);
+  text-align: center;
+}
 
+.button:hover {
+  transform: scale(0.95); /* Subtle 5% shrink */
+}
+
+/* ADMIN PAGEs */
  .root-section h2{
   font-size: 2rem;
   }
 
 }
-  
+
 .admin-question-upload {
   display: flex;
   flex-direction: column;
@@ -274,13 +307,14 @@ align-items: center;
   gap: 1rem;
 }
 
-.admin-choice, .admin-input {
+.admin-choice,
+.admin-input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
-  background-color: #e1e8e9;
+  background-color: var(--brand-color);
   padding: 1rem;
   border-radius: 1rem;
   width: 85rem;
@@ -292,12 +326,11 @@ align-items: center;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
-  background-color: #e1e8e9;
+  background-color: var(--brand-color);
   padding: 1rem;
   border-radius: 1rem;
   width: 75rem;
 }
-
 
 .admin-dropdown-menu {
   border-radius: 1rem;
@@ -308,14 +341,14 @@ align-items: center;
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 70rem;
-  height: 2rem
+  height: 2rem;
 }
 
 .admin-question-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #c5dbe0;
+  background-color: var(--brand-secondary-color);
   padding: 1rem;
   border-radius: 1rem;
   margin-bottom: 1rem;  
@@ -323,4 +356,26 @@ align-items: center;
 
 .admin-question-content label {
   margin-bottom: 1rem;
+}
+
+/* RESPONSIVE STYLE */
+
+@media screen and (max-width: 60rem) {
+  body {
+    background-size: 400px, 400px;
+    background-position: -10rem -10rem, calc(100% + 5rem) calc(100% + 5rem);
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+  }
+
+  .root-section h2 {
+    font-size: 2rem;
+  }
+
+  .root-content {
+    padding-top: 1rem;
+    font-size: 2rem;
+  }
 }

@@ -25,16 +25,18 @@ a:hover {
 }
 
 body {
+  min-height: 100vh; /* Set the height of the body on all viewport */
   padding: 3rem calc(100% * 0.07); /* set the right and left paddings as 7% of the screen width  */
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: normal;
   font-weight: 100;
-  background-image: url("../images/hatch-sky.png");
-  background-size: cover; /* Skaalaa kuva kattamaan koko alue */
-  /* background-repeat: no-repeat;  Estää kuvan toistumisen */
-  background-position: center; /* Asettaa kuvan keskelle */
+  background-color: var(--bcg-main-color); /* Set the background color for all page*/
+  background-image: url("../images/whiteblur-stain.png"),
+    url("../images/whiteblur-stain.png"); /*Add TWO stains to the bcg as images*/
+  background-size: 800px, 800px; /* Set the size of the stain */
+  background-repeat: no-repeat, no-repeat; /* Images should appear only once */
+  background-position: -15rem -15rem, calc(100% + 15rem) calc(100% + 15rem); /*Set the position for each stain*/
 }
 
 li,
@@ -53,7 +55,7 @@ ul {
   margin-bottom: 2rem;
 }
 
-.logo-link{
+.logo-link {
   color: var(--brand-color);
 }
 
@@ -79,7 +81,6 @@ ul {
   justify-content: center;
   font-size: 1.35rem;
 }
-
 
 /* NAVIGATION BAR */
 .nav-list {
@@ -133,7 +134,12 @@ ul {
 
   border: 0.2rem solid transparent;
   background-image: linear-gradient(var(--brand-color), var(--brand-color)),
-    linear-gradient(90deg, var(--highlight-color), var(--bcg-main-color), var(--highlight-color)); /* animated border */
+    linear-gradient(
+      90deg,
+      var(--highlight-color),
+      var(--bcg-main-color),
+      var(--highlight-color)
+    ); /* animated border */
 
   background-origin: border-box;
   background-clip: padding-box, border-box;
@@ -337,6 +343,11 @@ ul {
 /* RESPONSIVE STYLE */
 
 @media screen and (max-width: 60rem) {
+  body {
+    background-size: 400px, 400px;
+    background-position: -10rem -10rem, calc(100% + 5rem) calc(100% + 5rem);
+  }
+
   .nav-link {
     font-size: 1.2rem;
   }

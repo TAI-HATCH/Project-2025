@@ -107,6 +107,7 @@ margin-bottom: 2rem;
   }
 }
 
+
 .button {
   color: rgb(0, 0, 0);
   background-color: aliceblue;
@@ -262,6 +263,8 @@ align-items: center;
  .root-section h2{
   font-size: 2rem;
   }
+
+}
   
 .admin-question-upload {
   display: flex;
@@ -315,6 +318,7 @@ align-items: center;
   background-color: #c5dbe0;
   padding: 1rem;
   border-radius: 1rem;
+  margin-bottom: 1rem;  
 }
 
 .admin-question-content label {

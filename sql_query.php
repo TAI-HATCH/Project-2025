@@ -52,6 +52,7 @@ function get_topics($language_id) //Function to get an array of topics from the 
 
 function get_questions($topic_id)
 {
+
     $table_name = "questions"; // Create a variable with the table name
 
     global $conn; //give access to the variable $conn defining in the connection.php

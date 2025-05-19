@@ -56,7 +56,7 @@ $_SESSION["languages"] = $languages;
                 langIconLink = document.createElement("a");
                 langIconLink.classList.add("icon-lang-link");
                 langIconLink.setAttribute("title", "<?php echo $language_name ?>");
-                langIconLink.setAttribute("href", "selecting-topic.php?language_id=<?php echo $lang_id ?>");
+                langIconLink.setAttribute("href", "selecting-topic.php?language-id=<?php echo $lang_id ?>");
                 langIconImg = document.createElement("img");
                 langIconImg.classList.add("language-icon");
                 langIconImg.setAttribute("src", "./images/<?php echo $icon_name ?>-icon.svg");

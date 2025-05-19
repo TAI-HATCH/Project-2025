@@ -1,5 +1,5 @@
 <?php
-
+    
 session_start(); // Open a php session on the server, is never shut down
 
 
@@ -7,22 +7,20 @@ session_start(); // Open a php session on the server, is never shut down
 include_once "sql_query.php";
 //http://localhost/project-2025/quiz.php?language-topic=1
 
-if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, run
+if (isset($_GET['language-topic'])) {
+     //https://www.w3schools.com/php/php_superglobals_get.asp
+     $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
-
-    //https://www.w3schools.com/php/php_superglobals_get.asp
-    $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
-
-    $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
-
-    //https://www.w3schools.com/php/php_sessions.asp
-    // Set session variables
-    $_SESSION["topic_id"] = $topic_id;
-    $_SESSION["current_question"] = 0;
-    $_SESSION["questions"] = $questions;
+     $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
+ 
+     //https://www.w3schools.com/php/php_sessions.asp
+     // Set session variables
+     $_SESSION["topic_id"] = $topic_id;
+     $_SESSION["current_question"] = 0;
+     $_SESSION["questions"] = $questions;
 } else if (isset($_GET['action'])) { // If URL-get-parameter with name "action" is set, go to the next question
 
-    echo $_SESSION["topic_id"];
+    // echo $_SESSION["topic_id"]; Print the id of selected topic on the page
 
     $action = $_GET['action'];
     if ($action == "next") {
@@ -66,13 +64,14 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     <script>
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
-        console.log(`<?php if (isset($answers)) {
-                            echo var_dump($answers);
-                        } ?>`)
+        console.log(`<?php if (isset($answers)) { echo var_dump($answers); } ?>`)
+        console.log(`<?php if (isset($questions)) { echo var_dump($questions); } ?>`)
     </script>
 </head>
 
 <body>
+
+    <!-- Insert the header from the file header.php -->
     <?php include 'header.php' ?>
     <!--?php
 
@@ -101,6 +100,15 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <?php
             }
         }
+        ?>
+
+        // Output the selected languages_topic_id in console:
+        <?php
+        if (isset($topic_id)) {
+            ?>
+                    console.log("Selected topic is <?php echo $topic_id; ?>");
+            <?php
+                }                 
         ?>
     </script>
 </body>

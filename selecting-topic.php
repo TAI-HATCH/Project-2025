@@ -4,7 +4,7 @@ session_start(); // Open a php session on the server, is never shut down
 
 include_once "sql_query.php";
 
-$language_id = $_GET['language_id']; // Read the URL-parameter named 'language_id'
+$language_id = $_GET['language-id']; // Read the URL-parameter named 'language_id'
 
 $topics = get_topics($language_id); // Call the function get_topics from sql_query.php
 
@@ -79,7 +79,8 @@ $_SESSION["topics"] = $topics;
                 topicLink = document.createElement("a");
                 topicLink.classList.add("topic-link");
                 topicLink.setAttribute("title", "<?php echo $topic_name ?>"); // Create title for link
-                topicLink.setAttribute("href", "quiz.php?language_topic=<?php echo $topic_id ?>"); //!!!Create the path for link with the id of selecting topic
+                //!!!Create the path for link with the id of selecting topic:
+                topicLink.setAttribute("href", "quiz.php?language-topic=<?php echo $topic_id ?>"); 
 
                 topicIconImg = document.createElement("img"); // Create element for icon
                 topicIconImg.classList.add("topic-icon");
@@ -109,6 +110,13 @@ $_SESSION["topics"] = $topics;
                     arrowIcon.setAttribute("height", "100");
                     topicListItem.appendChild(arrowIcon);
         <?php
+                }
+
+                // Output the languages_topic_id in console:
+                if (isset($topic_id)) {
+                    ?>
+                    console.log("For selected language the topic <?php echo $topic_id; ?> is available");
+                    <?php
                 }
             }
         }

@@ -32,32 +32,8 @@ $_SESSION["languages"] = $languages;
 </head>
 
 <body>
-    <header class="root-header">
-    <div class="logo">
-        <a href="./">
-          <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0"/></svg>
-          </a>
-        <div class="hatch-logo"><a href="./">HATCH</a></div>
-      </div>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-list-item">
-                    <a href="quiz.php?language-topic=1" class="nav-link">Training</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">About</a>
-                </li>
-                <!--<li class="nav-list-item">
-                    <a href="#" class="nav-link">Sign up</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">Login</a>-->
-                </li>
-            </ul>
-        </nav>
-    </header>
 
+    <?php include 'header.php' ?>
     <section class="root-section">
         <h2>Select programming language:</h2>
         <ul class="icon-lang-list" id="lang-list"> <!--Create an unordered list of icons, each of which corresponds to its own programming language -->
@@ -65,7 +41,8 @@ $_SESSION["languages"] = $languages;
         </ul>
     </section>
 
-    <script> // Script for filling the list class="icon-lang-list" with elements:
+    <script>
+        // Script for filling the list class="icon-lang-list" with elements:
         <?php
         if (isset($languages)) {
             foreach ($languages as $language) { // Make a loop for every element in array of languages
@@ -74,21 +51,21 @@ $_SESSION["languages"] = $languages;
                 $lang_id = $language["language_id"];
         ?>
 
-        langIconItem = document.createElement("li");
-        langIconItem.classList.add("icon-lang-item");
-        langIconLink = document.createElement("a");
-        langIconLink.classList.add("icon-lang-link");
-        langIconLink.setAttribute("title", "<?php echo $language_name?>");
-        langIconLink.setAttribute("href", "selecting-topic.php?language_id=<?php echo $lang_id?>");
-        langIconImg = document.createElement("img");
-        langIconImg.classList.add("language-icon");
-        langIconImg.setAttribute("src", "./images/<?php echo $icon_name?>-icon.svg");
-        langIconImg.setAttribute("alt", "Icon for <?php echo $language_name?>");
-        langIconImg.setAttribute("height", "100");
-        langIconLink.appendChild(langIconImg);
-        langIconItem.appendChild(langIconLink);
-        document.getElementById("lang-list").appendChild(langIconItem);
-        <?php        
+                langIconItem = document.createElement("li");
+                langIconItem.classList.add("icon-lang-item");
+                langIconLink = document.createElement("a");
+                langIconLink.classList.add("icon-lang-link");
+                langIconLink.setAttribute("title", "<?php echo $language_name ?>");
+                langIconLink.setAttribute("href", "selecting-topic.php?language_id=<?php echo $lang_id ?>");
+                langIconImg = document.createElement("img");
+                langIconImg.classList.add("language-icon");
+                langIconImg.setAttribute("src", "./images/<?php echo $icon_name ?>-icon.svg");
+                langIconImg.setAttribute("alt", "Icon for <?php echo $language_name ?>");
+                langIconImg.setAttribute("height", "100");
+                langIconLink.appendChild(langIconImg);
+                langIconItem.appendChild(langIconLink);
+                document.getElementById("lang-list").appendChild(langIconItem);
+        <?php
             }
         }
         ?>

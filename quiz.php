@@ -87,8 +87,6 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
     <form action="" method="POST" class="code-snippet quiz">
         <?php echo $question["form_content"]; ?>
-
-        <button type="submit" name="action" value="check" class="check-answer-button">Check answer</button> <!--Checks if answer is correct or wrong-->
     </form>
 
     <div class="buttons">

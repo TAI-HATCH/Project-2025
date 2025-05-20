@@ -12,6 +12,11 @@ if (isset($_GET['language-topic'])) {
      $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
      $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
+
+        if (empty($questions)) { // Checks if there are no questions in the array and throws an error page
+            include "error-no-questions-in-topic.php";
+            exit();
+        }
  
      //https://www.w3schools.com/php/php_sessions.asp
      // Set session variables

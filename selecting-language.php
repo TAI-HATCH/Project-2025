@@ -61,7 +61,7 @@ $_SESSION["languages"] = $languages;
                 langIconImg.classList.add("language-icon");
                 langIconImg.setAttribute("src", "./images/<?php echo $icon_name ?>-icon.svg");
                 langIconImg.setAttribute("alt", "Icon for <?php echo $language_name ?>");
-                langIconImg.setAttribute("height", "100");
+                langIconImg.setAttribute("height", "70");
                 langIconLink.appendChild(langIconImg);
                 langIconItem.appendChild(langIconLink);
                 document.getElementById("lang-list").appendChild(langIconItem);

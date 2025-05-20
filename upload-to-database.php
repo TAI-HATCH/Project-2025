@@ -3,7 +3,7 @@ include_once "connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the form if form's request method is is "post"
     $language_id = $_POST['language_id'] ?? null; // The "$_POST"-variable has the inputted data of [*id*]
-    $topic_id = $_POST['topic_id'] ?? null; // ?? 
+    $topic_id = $_POST['topic_id'] ?? null;
     $question_text = $_POST['question'] ?? '';
     $text_before = $_POST['text_before'] ?? '';
     $text_after = $_POST['text_after'] ?? '';
@@ -12,16 +12,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the 
     if ($language_id && $topic_id && $question_text && $answer_value) {
         try {
             // Step 1: Get languages_topic_id
-            $stmt = $conn->prepare("SELECT 
+
+             $stmt = $conn->prepare("SELECT 
                                         id 
                                     FROM 
                                         languages_topic 
                                     WHERE 
-                                        language_id = ? 
+                                        language_id = :language_id
                                     AND 
-                                        topic_id = ?");
-            $stmt->execute([$language_id, $topic_id]);
+                                        topic_id = :topic_id");
+             
+            
+            $stmt->bindParam(':language_id', $language_id);
+            $stmt->bindParam(':topic_id', $topic_id);
+            $stmt->execute();
+
             $languages_topic_id = $stmt->fetchColumn();
+
+            
 
             if (!$languages_topic_id) {
                 echo "Error: No matching language-topic combination found.";

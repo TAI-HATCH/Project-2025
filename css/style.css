@@ -207,12 +207,17 @@ ul {
 
 .language-section {
   display: inline-block;
-  text-align: right;
   padding: 2rem;
 }
 
+#lang-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .language-section h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 100;
 }
 
@@ -385,5 +390,29 @@ margin-bottom: 9rem;
   .root-content {
     padding-top: 1rem;
     font-size: 2rem;
+  }
+
+  .language-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0rem;
+  margin: 1rem;
+  }
+
+  .language-section h2 {
+    padding-bottom: 1rem;
+  }
+
+  #lang-icon-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .icon-lang-list {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
   }
 }

@@ -41,14 +41,13 @@ if (isset($_GET['language-topic'])) {
         // check answer
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
         $answers = get_answers($question["question_id"]); // Call the function get_answer from sql_query.php
-        $user_answer = ($_POST["answer_one"]); // Retrievers the users' answer and puts it in a variable
+        $user_answer = $_POST["answer_one"]; // Retrieves the users' answer and puts it in a variable
 
-        if ($user_answer == $correct_answer) {
-            $result = "Correct! \u{1F973}";
-        } else {
-            $result = "Incorrect!";
-        }
-
+            if (in_array($user_answer, $answers)) {
+                $result = "Correct! \u{1F973}";
+            } else {
+                $result = "Incorrect!";
+            }
     } else if ($action == "clear") { // If user selected button Clear session
         // remove all session variables
         session_unset();
@@ -94,6 +93,8 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
     <form action="" method="POST" class="code-snippet quiz">
         <?php echo $question["form_content"]; ?>
+
+        <button type="submit" name="action" value="check" class="check-answer-button">Check answer</button> <!--Checks if answer is correct or wrong-->
     </form>
 
     <div class="buttons">

@@ -292,6 +292,12 @@ ul {
   text-align: center;
 }
 
+.check-answer-button {
+  display: flex;
+  justify-content: end;
+  color: var(--dark-color)
+}
+
 .button:hover {
   transform: scale(0.95); /* Subtle 5% shrink */
 }
@@ -301,7 +307,6 @@ ul {
   font-size: 2rem;
   }
 
-}
 
 .admin-question-upload {
   display: flex;

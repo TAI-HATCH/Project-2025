@@ -79,4 +79,34 @@ function get_answers($question_id)
     return $answers;
 }
 
+function get_selected_topic_info($language_topic_id)
+{
+    global $conn;
+    // Create a variable with the table name:
+    $table_name = "languages_topic";
+
+    $stmt = $conn->prepare("SELECT 
+                                L.language_name, T.topic_name, $table_name.id, $table_name.language_id 
+                            FROM 
+                                $table_name, 
+                                `languages` AS L, 
+                                `topics` AS T 
+                            WHERE 
+                                L.language_id = $table_name.language_id 
+                            AND 
+                                T.topic_id = $table_name.topic_id 
+                            AND 
+                                $table_name.id = :language_topic_id;
+                            AND
+                                $table_name.language_id = :language_id"); 
+    // Binding together (reflecting) :language_topic_id and $language_topic_id:
+    $stmt->bindParam(':language_topic_id', $language_topic_id); 
+    $stmt->bindParam(':language_id', $language_id); 
+    // Run the thing:s
+    $stmt->execute(); 
+
+    $selected_topic_info = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the data that we just fetched and put it into an array
+    return $selected_topic_info;
+}
+
 ?>

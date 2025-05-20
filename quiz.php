@@ -78,6 +78,10 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     //echo var_dump($question); // Output the question onto the web page
 
     ?-->
+
+    <!-- Insert the breadcrumb from the file breadcrumb.php -->
+    <?php include 'breadcrumb.php'?>
+
     <p class="quiz"><?php echo $question["question"]; ?></p>
 
     <form action="" method="POST" class="code-snippet quiz">

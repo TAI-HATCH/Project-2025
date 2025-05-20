@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the 
 
             $languages_topic_id = $stmt->fetchColumn();
 
-            
 
             if (!$languages_topic_id) {
                 echo "Error: No matching language-topic combination found.";

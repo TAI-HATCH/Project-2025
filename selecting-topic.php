@@ -4,7 +4,7 @@ session_start(); // Open a php session on the server, is never shut down
 
 include_once "sql_query.php";
 
-$language_id = $_GET['language_id']; // Read the URL-parameter named 'language_id'
+$language_id = $_GET['language-id']; // Read the URL-parameter named 'language_id'
 
 $topics = get_topics($language_id); // Call the function get_topics from sql_query.php
 
@@ -36,33 +36,7 @@ $_SESSION["topics"] = $topics;
 </head>
 
 <body>
-    <!-- <br> -->
-    <header class="root-header">
-        <div class="logo">
-            <a href="./">
-                <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0" />
-                </svg>
-            </a>
-            <div class="hatch-logo"><a href="./">HATCH</a></div>
-        </div>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-list-item">
-                    <a href="quiz.php?language-topic=1" class="nav-link">Training</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">About</a>
-                </li>
-                <!--<li class="nav-list-item">
-                    <a href="#" class="nav-link">Sign up</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">Login</a>-->
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include 'header.php' ?>
 
     <section class="language-section">
         <div id="lang-icon-wrapper"></div>
@@ -105,8 +79,9 @@ $_SESSION["topics"] = $topics;
                 topicLink = document.createElement("a");
                 topicLink.classList.add("topic-link");
                 topicLink.setAttribute("title", "<?php echo $topic_name ?>"); // Create title for link
-                topicLink.setAttribute("href", "quiz.php?language_topic=<?php echo $topic_id ?>"); //!!!Create the path for link with the id of selecting topic
-                
+                //!!!Create the path for link with the id of selecting topic:
+                topicLink.setAttribute("href", "quiz.php?language-topic=<?php echo $topic_id ?>"); 
+
                 topicIconImg = document.createElement("img"); // Create element for icon
                 topicIconImg.classList.add("topic-icon");
                 topicIconImg.setAttribute("src", "./images/<?php echo $icon_name ?>-icon.svg"); // Create path to icon
@@ -127,14 +102,21 @@ $_SESSION["topics"] = $topics;
 
                 <?php
                 if ($i < count($topics)) {
-                    ?>
+                ?>
                     arrowIcon = document.createElement("img");
                     arrowIcon.classList.add("down-arrow-icon");
-                    arrowIcon.setAttribute("src","./images/down-arrow-icon.svg");
+                    arrowIcon.setAttribute("src", "./images/down-arrow-icon.svg");
                     arrowIcon.setAttribute("alt", "Icon for down arrow");
                     arrowIcon.setAttribute("height", "100");
                     topicListItem.appendChild(arrowIcon);
         <?php
+                }
+
+                // Output the languages_topic_id in console:
+                if (isset($topic_id)) {
+                    ?>
+                    console.log("For selected language the topic <?php echo $topic_id; ?> is available");
+                    <?php
                 }
             }
         }

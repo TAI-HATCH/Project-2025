@@ -1,5 +1,5 @@
 <?php
-
+    
 session_start(); // Open a php session on the server, is never shut down
 
 
@@ -7,22 +7,20 @@ session_start(); // Open a php session on the server, is never shut down
 include_once "sql_query.php";
 //http://localhost/project-2025/quiz.php?language-topic=1
 
-if (!isset($_SESSION['topic_id'])) { // If topic_id is not set in the session, run
+if (isset($_GET['language-topic'])) {
+     //https://www.w3schools.com/php/php_superglobals_get.asp
+     $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
-
-    //https://www.w3schools.com/php/php_superglobals_get.asp
-    $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
-
-    $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
-
-    //https://www.w3schools.com/php/php_sessions.asp
-    // Set session variables
-    $_SESSION["topic_id"] = $topic_id;
-    $_SESSION["current_question"] = 0;
-    $_SESSION["questions"] = $questions;
+     $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
+ 
+     //https://www.w3schools.com/php/php_sessions.asp
+     // Set session variables
+     $_SESSION["topic_id"] = $topic_id;
+     $_SESSION["current_question"] = 0;
+     $_SESSION["questions"] = $questions;
 } else if (isset($_GET['action'])) { // If URL-get-parameter with name "action" is set, go to the next question
 
-    echo $_SESSION["topic_id"];
+    // echo $_SESSION["topic_id"]; Print the id of selected topic on the page
 
     $action = $_GET['action'];
     if ($action == "next") {
@@ -58,48 +56,23 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      rel="stylesheet"
-    />
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet" />
 
 
     <link rel="stylesheet" href="./css/style.css">
     <script>
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
-        console.log(`<?php if (isset($answers)) {
-                            echo var_dump($answers);
-                        } ?>`)
+        console.log(`<?php if (isset($answers)) { echo var_dump($answers); } ?>`)
+        console.log(`<?php if (isset($questions)) { echo var_dump($questions); } ?>`)
     </script>
 </head>
 
 <body>
-    <br>
-    <header class="root-header">
-    <div class="logo">
-        <a href="./">
-          <svg class="logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0527344 540.001L135.053 0H584.948L719.948 540.001H0.0527344Z" fill="#C5DBE0"/></svg>
-          </a>
-        <div class="hatch-logo"><a href="./">HATCH</a></div>
-      </div>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-list-item">
-                    <a href="quiz.php?language-topic=1" class="nav-link">Training</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">About</a>
-                </li>
-                <!--<li class="nav-list-item">
-                    <a href="#" class="nav-link">Sign up</a>
-                </li>
-                <li class="nav-list-item">
-                    <a href="#" class="nav-link">Login</a>
-                </li> -->
-            </ul>
-        </nav>
-    </header>
+
+    <!-- Insert the header from the file header.php -->
+    <?php include 'header.php' ?>
     <!--?php
 
     //echo var_dump($question); // Output the question onto the web page
@@ -111,12 +84,11 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <?php echo $question["form_content"]; ?>
     </form>
 
-    <!-- <br> -->
     <div class="buttons">
-    <a class="button" href="?action=show">Show answer</a>
-    <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
-    <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
-    <a class="button" href="?action=clear">Clear session</a> <!--Clear the session`s variables-->
+        <a class="button" href="?action=show">Show answer</a>
+        <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
+        <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
+        <a class="button" href="?action=clear">Clear session</a> <!--Clear the session`s variables-->
     </div>
 
     <script>
@@ -128,6 +100,15 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <?php
             }
         }
+        ?>
+
+        // Output the selected languages_topic_id in console:
+        <?php
+        if (isset($topic_id)) {
+            ?>
+                    console.log("Selected topic is <?php echo $topic_id; ?>");
+            <?php
+                }                 
         ?>
     </script>
 </body>

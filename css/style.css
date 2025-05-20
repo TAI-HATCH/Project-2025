@@ -31,7 +31,9 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 100;
-  background-color: var(--bcg-main-color); /* Set the background color for all page*/
+  background-color: var(
+    --bcg-main-color
+  ); /* Set the background color for all page*/
   background-image: url("../images/whiteblur-stain.png"),
     url("../images/whiteblur-stain.png"); /*Add TWO stains to the bcg as images*/
   background-size: 800px, 800px; /* Set the size of the stain */
@@ -272,10 +274,27 @@ ul {
   text-align: center;
 }
 
-.breadcrumb{
-display: flex;
-flex-direction: row;
-margin-bottom: 9rem;
+.breadcrumb {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-bottom: 5rem;
+  align-items: flex-start;
+}
+
+#language-section {
+  padding: 0 1rem 0 3rem;
+}
+.breadcrumb-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.topic-section-name {
+  font-size: 1rem;
+  font-weight: 100;
 }
 
 .code-snippet {
@@ -308,9 +327,9 @@ margin-bottom: 9rem;
 }
 
 /* ADMIN PAGEs */
- .root-section h2{
+.root-section h2 {
   font-size: 2rem;
-  }
+}
 
 .admin-question-upload {
   display: flex;
@@ -364,7 +383,7 @@ margin-bottom: 9rem;
   background-color: var(--brand-secondary-color);
   padding: 1rem;
   border-radius: 1rem;
-  margin-bottom: 1rem;  
+  margin-bottom: 1rem;
 }
 
 .admin-question-content label {
@@ -393,12 +412,12 @@ margin-bottom: 9rem;
   }
 
   .language-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 0rem;
-  margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0rem;
+    margin: 1rem;
   }
 
   .language-section h2 {
@@ -411,8 +430,23 @@ margin-bottom: 9rem;
   }
 
   .icon-lang-list {
-  display: flex;
-  gap: 5rem;
-  justify-content: center;
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+  }
+
+  .breadcrumb {
+    padding: 1rem;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  #language-section {
+    padding: 0 1rem 0 3rem;
+  }
+  .breadcrumb-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
   }
 }

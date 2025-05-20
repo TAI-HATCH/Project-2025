@@ -28,17 +28,17 @@ if (isset($_GET['language-topic'])) {
     <!-- There is an item for selected language icon: -->
     <li class="breadcrumb-item" id="language-section">
         <a href="http://" id="language-section-link">
-            <img id="language-section-icon" height="70">
+            <img id="language-section-icon" height="50">
         </a>
     </li>
     <!-- There is an item for arrow: -->
     <li>
-        <img src="./images/right-arrow-icon.svg" alt="Right arrow">
+        <img src="./images/right-arrow-icon.svg" alt="Right arrow" height="40">
     </li>
     <!-- There is an item for selected topic icon and name: -->
     <li class="breadcrumb-item" id="topic-section">
-            <img src="" alt="" id="topic-section-icon" height="70">
-            <h3 id="topic-section-name"></h3>
+        <img src="" alt="" id="topic-section-icon" height="40">
+        <h3 id="topic-section-name" class="topic-section-name"></h3>
     </li>
 </ul>
 
@@ -64,8 +64,8 @@ if (isset($_GET['language-topic'])) {
         // Java script code:
 
         //Add attributes to the element "a" with link to the page with selecting topic for selected language:
-            topicLink = document.getElementById("language-section-link");
-            topicLink.setAttribute("href","selecting-topic.php?language-id=<?php echo $lang_id?>");
+        topicLink = document.getElementById("language-section-link");
+        topicLink.setAttribute("href", "selecting-topic.php?language-id=<?php echo $lang_id ?>");
         //Add attributes to the element img with icon for language:
         langIcon = document.getElementById("language-section-icon");
         langIcon.setAttribute("src", "./images/<?php echo $language_icon_name ?>-icon.svg");

@@ -12,6 +12,11 @@ if (isset($_GET['language-topic'])) {
      $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
      $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
+
+        if (empty($questions)) { // Checks if there are no questions in the array and throws an error page
+            include "error-no-questions-in-topic.php";
+            exit();
+        }
  
      //https://www.w3schools.com/php/php_sessions.asp
      // Set session variables
@@ -36,19 +41,8 @@ if (isset($_GET['language-topic'])) {
     } else if ($action == "show") { // If user selected button Show answer
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
-        $answers = get_answers($question["question_id"]); // Call the function get_answer from sql_query.php
-    } else if ($action == "check") { // If user selected button "Check answer"
-        // check answer
-        $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
-        $answers = get_answers($question["question_id"]); // Call the function get_answer from sql_query.php
-        $user_answer = $_POST["answer_one"]; // Retrieves the users' answer and puts it in a variable
-
-            if (in_array($user_answer, $answers)) {
-                $result = "Correct! \u{1F973}";
-            } else {
-                $result = "Incorrect!";
-            }
-    } else if ($action == "clear") { // If user selected button Clear session
+        $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
+    // } else if ($action == "clear") { // If user selected button Clear session
         // remove all session variables
         session_unset();
     }
@@ -102,7 +96,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <a class="button" href="?action=check">Check answer</a> <!--Checks if answer is correct or wrong-->
         <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
         <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
-        <a class="button" href="?action=clear">Clear session</a> <!--Clear the session`s variables-->
+        <!-- <a class="button" href="?action=clear">Clear session</a> Clear the session`s variables-->
     </div>
 
     <script>

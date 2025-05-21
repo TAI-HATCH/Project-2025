@@ -1,5 +1,5 @@
 <?php
-    
+
 session_start(); // Open a php session on the server, is never shut down
 
 
@@ -8,21 +8,21 @@ include_once "sql_query.php";
 //http://localhost/project-2025/quiz.php?language-topic=1
 
 if (isset($_GET['language-topic'])) {
-     //https://www.w3schools.com/php/php_superglobals_get.asp
-     $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
+    //https://www.w3schools.com/php/php_superglobals_get.asp
+    $topic_id = $_GET['language-topic']; // Read the URL-get-parameter named language-topic
 
-     $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
+    $questions = get_questions($topic_id); //Call the function get_questions from sql_query.php
 
-        if (empty($questions)) { // Checks if there are no questions in the array and throws an error page
-            include "error-no-questions-in-topic.php";
-            exit();
-        }
- 
-     //https://www.w3schools.com/php/php_sessions.asp
-     // Set session variables
-     $_SESSION["topic_id"] = $topic_id;
-     $_SESSION["current_question"] = 0;
-     $_SESSION["questions"] = $questions;
+    if (empty($questions)) { // Checks if there are no questions in the array and throws an error page
+        include "error-no-questions-in-topic.php";
+        exit();
+    }
+
+    //https://www.w3schools.com/php/php_sessions.asp
+    // Set session variables
+    $_SESSION["topic_id"] = $topic_id;
+    $_SESSION["current_question"] = 0;
+    $_SESSION["questions"] = $questions;
 } else if (isset($_GET['action'])) { // If URL-get-parameter with name "action" is set, go to the next question
 
     // echo $_SESSION["topic_id"]; Print the id of selected topic on the page
@@ -42,7 +42,7 @@ if (isset($_GET['language-topic'])) {
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
         $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
-    // } else if ($action == "clear") { // If user selected button Clear session
+        // } else if ($action == "clear") { // If user selected button Clear session
         // remove all session variables
         session_unset();
     }
@@ -69,8 +69,12 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     <script>
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
-        console.log(`<?php if (isset($answers)) { echo var_dump($answers); } ?>`)
-        console.log(`<?php if (isset($questions)) { echo var_dump($questions); } ?>`)
+        console.log(`<?php if (isset($answers)) {
+                            echo var_dump($answers);
+                        } ?>`)
+        console.log(`<?php if (isset($questions)) {
+                            echo var_dump($questions);
+                        } ?>`)
     </script>
 </head>
 
@@ -83,6 +87,10 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     //echo var_dump($question); // Output the question onto the web page
 
     ?-->
+
+    <!-- Insert the breadcrumb from the file breadcrumb.php -->
+    <?php include 'breadcrumb.php' ?>
+
     <p class="quiz"><?php echo $question["question"]; ?></p>
 
     <form action="" method="POST" class="code-snippet quiz">
@@ -111,10 +119,10 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         // Output the selected languages_topic_id in console:
         <?php
         if (isset($topic_id)) {
-            ?>
-                    console.log("Selected topic is <?php echo $topic_id; ?>");
-            <?php
-                }                 
+        ?>
+            console.log("Selected topic is <?php echo $topic_id; ?>");
+        <?php
+        }
         ?>
     </script>
 </body>

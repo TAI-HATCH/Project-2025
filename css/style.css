@@ -121,7 +121,7 @@ ul {
   padding: 2rem;
 }
 .start-button,
-.upload-to-database-button {
+.upload-to-database-button, .login-button {
   transition: 0.5s;
   text-align: center;
   color: var(--dark-color);
@@ -151,7 +151,7 @@ ul {
 }
 
 .start-button:hover,
-.upload-to-database-button:hover {
+.upload-to-database-button:hover, .login-button:hover{
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
@@ -172,6 +172,9 @@ ul {
   margin: 0.5rem;
   border-color: black;
   text-align: center;
+  font-family: "Nunito Sans", sans-serif;
+
+  transition: 0.5s;
 }
 
 .button:hover {
@@ -390,6 +393,82 @@ ul {
   margin-bottom: 1rem;
 }
 
+.logout-button {
+position: fixed; top: 37rem; right: 2rem; z-index: 0;
+}
+
+.logout-button {
+  transition: 0.5s;
+  text-align: center;
+  color: var(--dark-color);
+  background-color: var(--btn-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 10rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: x-large;
+  font-weight: 100;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.8);
+
+  border: 0.2rem solid transparent;
+  background-image: linear-gradient(var(--brand-color), var(--brand-color)),
+    linear-gradient(
+      90deg,
+      var(--highlight-color),
+      var(--bcg-main-color),
+      var(--highlight-color)
+    ); /* animated border */
+
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 200%;
+
+  animation: snakeBorder 3s linear infinite;
+}
+
+.logout-button:hover{
+  transform: scale(0.95); /* Subtle 5% shrink */
+}
+
+/* ADMIN LOGIN */
+
+.admin-login, .admin-login div {
+  display: flex;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 3rem;
+  font-weight: 100;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login p {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.admin-password {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+
+}
+
+.pwerror {
+  font-size: 1.5rem;
+  font-weight: 100;
+  margin-bottom: 1rem;
+  color:var(--highlight-color)
+}
+
+.admin-banner {
+position:fixed; top:1rem; right:1rem; 
+background-color:#e6f7e6; 
+padding:1rem; 
+border:1px solid #99cc99; 
+border-radius:0.5rem;
+}
+
 /* RESPONSIVE STYLE */
 
 @media screen and (max-width: 60rem) {
@@ -449,4 +528,43 @@ ul {
     flex-direction: column;
     gap: 0.3rem;
   }
+  .admin-choice,
+  .admin-input {
+    width: 20rem;
+  }
+
+  .admin-input-content {
+    width: 18rem;
+  }
+
+  .admin-input-field {
+    width: 18rem;
+  }
+
+  .admin-question-content {
+    padding: 0.5rem;
+  }
+
+  .admin-login p {
+    font-size: 2rem;
+  }
+
+  .admin-login h5 {
+    font-size: 1rem;
+    font-weight: 100;
+  }
+
+  .admin-question-upload {
+    font-size: 1rem;
+}
+
+  .logout-button {
+    top:auto;
+    position: fixed; bottom: 3rem; right: 1rem; z-index: 0;
+    font-size: 1rem;
+    width: 5rem;
+    height: 5rem;
+    padding: 0.2rem;
+  }
+
 }

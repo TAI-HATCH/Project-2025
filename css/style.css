@@ -148,6 +148,7 @@ ul {
   background-size: 200%;
 
   animation: snakeBorder 3s linear infinite;
+  cursor: pointer;
 }
 
 .start-button:hover,
@@ -325,7 +326,7 @@ ul {
 .check-answer-button {
   display: flex;
   justify-content: end;
-  color: var(--dark-color)
+  color: var(--dark-color);
 }
 
 .button:hover {
@@ -335,9 +336,7 @@ ul {
 /* ADMIN PAGEs */
 .root-section h2 {
   font-size: 2rem;
-
-  }
-
+}
 
 .admin-question-upload {
   display: flex;

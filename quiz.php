@@ -2,6 +2,11 @@
 
 session_start(); // Open a php session on the server, is never shut down
 
+// If we need to check which data is now in the Session:
+// echo "<pre>"; 
+// print_r($_SESSION);
+// echo "</pre>";
+
 
 // include "connection.php";
 include_once "sql_query.php";
@@ -42,10 +47,21 @@ if (isset($_GET['language-topic'])) {
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
         $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
-        // } else if ($action == "clear") { // If user selected button Clear session
-        // remove all session variables
-        session_unset();
+    } else if ($action == "check") {
+              
+        $question = $_SESSION["questions"][$_SESSION["current_question"]];
+        $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
+        $correct_answers = array();
+        foreach ($answers as $answer) {
+            array_push($correct_answers, $answer["answer_value"]);
+        }
+        $_SESSION["correct_answers"] = $correct_answers;
     }
+
+    //else if ($action == "clear") { // If user selected button Clear session
+    // remove all session variables
+    // session_unset();
+    //}
 }
 
 $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
@@ -75,6 +91,11 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         console.log(`<?php if (isset($questions)) {
                             echo var_dump($questions);
                         } ?>`)
+        
+        console.log(`<?php if (isset($correct_answers)) {
+                            echo var_dump($correct_answers);
+                        } ?>`)
+
     </script>
 </head>
 
@@ -82,12 +103,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
     <!-- Insert the header from the file header.php -->
     <?php include 'header.php' ?>
-    <!--?php
-
-    //echo var_dump($question); // Output the question onto the web page
-
-    ?-->
-
+                        
     <!-- Insert the breadcrumb from the file breadcrumb.php -->
     <?php include 'breadcrumb.php' ?>
 
@@ -99,7 +115,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
     <div class="buttons">
         <a class="button" href="?action=show">Show answer</a>
-        <a class="button" href="?action=check">Check answer</a> <!--Checks if answer is correct or wrong-->
+        <a class="button" href="?action=check" id="check">Check answer</a> <!--Checks if answer is correct or wrong-->
         <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
         <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
         <!-- <a class="button" href="?action=clear">Clear session</a> Clear the session`s variables-->
@@ -124,6 +140,18 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <?php
         }
         ?>
+
+        // 
+        // Processing the Check answer button:
+        document.getElementById("check").addEventListener("click", function(event){
+            //event.preventDefault(); Prevent the reloading of the page when user clicks on Check answer button
+
+            //Store the value of user's answer in variable user_answersss:
+            const user_answer = document.getElementsByName("answer_one")[0].value; 
+            console.log("The user's answer is ", user_answer);
+
+        })
+    
     </script>
 </body>
 

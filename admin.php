@@ -1,4 +1,6 @@
 
+
+
 <?php
 session_start();
 
@@ -7,6 +9,10 @@ if (!isset($_SESSION['is_admin'])) {
     header("Location: adminpw.php");
     exit;
 }
+
+include 'admin-banner.php';
+
+
 
 // Käsittele uloskirjautuminen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
@@ -35,9 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <?php
         if (isset($_SESSION['is_admin'])) {
-            echo '<form method="POST" style="position: fixed; top: 37rem; right: 2rem; z-index: 1000;">
-                <input class="button" type="submit" name="logout" value="Kirjaudu ulos"  />
-                </form>';
+    ?>
+        <form method="POST">
+        <button class="logout-button" type="submit" name="logout">Log out</button>
+        </form>
+    <?php
         }
     ?>
 

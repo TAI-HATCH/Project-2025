@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: admin.php");
         exit;
     } else {
-        $error = "Väärä salasana.";
+        $pwerror = "Incorrect password.";
     }
 }
 ?>
@@ -31,10 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h2>Kirjaudu sisään</h2>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-        <form method="POST">
-            <input type="password" name="password" placeholder="Salasana" required>
-            <input type="submit" value="Kirjaudu sisään">
-        </form>
+   
+    
+        
+        <div class="admin-login">
+            <p>Log in as admin</p>
+            <form method="POST">
+                <div>
+                    <input class="admin-password" type="password" name="password" placeholder="Password" required>
+                    <?php if (isset($pwerror)) echo "<h5 class='pwerror'>$pwerror</h5>"; ?>
+                </div>
+                <div>
+                    <button class="login-button" type="submit" value="Kirjaudu sisään">Log in</button>
+                </div>
+            </form>
+        </div>
 </body>

@@ -121,7 +121,7 @@ ul {
   padding: 2rem;
 }
 .start-button,
-.upload-to-database-button {
+.upload-to-database-button, .logout-button {
   transition: 0.5s;
   text-align: center;
   color: var(--dark-color);

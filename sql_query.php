@@ -102,7 +102,7 @@ function get_selected_topic_info($language_topic_id)
     // Binding together (reflecting) :language_topic_id and $language_topic_id:
     $stmt->bindParam(':language_topic_id', $language_topic_id);
     $stmt->bindParam(':language_id', $language_id);
-    // Run the thing:s
+    // Run the thing:
     $stmt->execute();
 
     $selected_topic_info = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the data that we just fetched and put it into an array

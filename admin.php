@@ -1,4 +1,21 @@
 
+<?php
+session_start();
+
+// Jos ei admin, ohjataan takaisin kirjautumissivulle
+if (!isset($_SESSION['is_admin'])) {
+    header("Location: adminpw.php");
+    exit;
+}
+
+// Käsittele uloskirjautuminen
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: adminpw.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +32,15 @@
   </head>
   <body>
     <h1 hidden>HATCH</h1>
+
+    <?php
+        if (isset($_SESSION['is_admin'])) {
+            echo '<form method="POST" style="position: fixed; top: 37rem; right: 2rem; z-index: 1000;">
+                <input class="button" type="submit" name="logout" value="Kirjaudu ulos"  />
+                </form>';
+        }
+    ?>
+
     <?php include 'header.php'?>
 
     <section class="root-content">

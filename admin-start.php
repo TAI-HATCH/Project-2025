@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <section class="root-content">
         <div class="admin-navigate">
-            <a class="admin-start-action" href="#">
+            <a class="admin-start-action" href="admin-question.php">
                 <div class="admin-start-action">
                      <svg class="admin-start-svg-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                         <path d="m13.679,15.632c-.716.331-1.179,1.119-1.179,2.008v1.36h-1v-1.36c0-1.277.69-2.422,1.759-2.916,1.34-.62,

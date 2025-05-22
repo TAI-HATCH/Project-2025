@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     <section class="root-content">
     <div class="admin-question-upload">
         
-        <form action="upload-to-database.php" method="POST">
+        <form action="upload-to-database.php" method="POST"> <!--Creates the form so that inputted data can be put into POST-variables-->
             <div class="admin-choice">
                 <label for="admin-programming-language-choice">Choose programming language</label>
-                <select class="admin-dropdown-menu" name="language_id" id="language_id">
-                       <?php
+                <select class="admin-dropdown-menu" name="language_id" id="language_id"> 
+                       <?php // php to fetch all languages into the dropdown menu
                         include_once "connection.php";
 
                         try {

@@ -25,9 +25,7 @@ $_SESSION["languages"] = $languages;
     <script>
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
-        console.log(`<?php if (isset($languages)) {
-                            echo var_dump($languages);
-                        } ?>`)
+
     </script>
 </head>
 

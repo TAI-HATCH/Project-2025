@@ -1,15 +1,11 @@
 <?php
 
 session_start(); //Open a php session on the server, is never shut down
-// unset($_SESSION['answers']);
-// unset($_SESSION['correct_answers']);
-
 
 // If we need to check which data is now in the Session:
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 // include "connection.php";
 include_once "sql_query.php";
@@ -121,7 +117,6 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
     <div class="buttons">
         <a class="button" href="?action=show">Show answer</a>
-        <!-- <button class="button" id="check">Check answer</button> -->
         <a class="button" href="#" id="check">Check answer</a> <!--Checks if answer is correct or wrong-->
         <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
         <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
@@ -140,7 +135,6 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         }
         ?>
 
-
         // Output the selected languages_topic_id in console:
         <?php
         if (isset($topic_id)) {
@@ -150,16 +144,12 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         }
         ?>
 
-        // 
         // Processing the Check answer button:
         document.getElementById("check").addEventListener("click", function(event) {
-            event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
+            // event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
 
             //Store the value of user's answer in variable user_answersss:
             const user_answer = document.getElementsByName("answer_one")[0].value;
-            localStorage.setItem("user_answer", user_answer);
-            // console.log("The user's answer is:", user_answer);
-            // console.log("The answer from local session:", localStorage.getItem("user_answer"));
 
             <?php
             $question = $_SESSION["questions"][$_SESSION["current_question"]];
@@ -171,23 +161,20 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             $_SESSION["correct_answers"] = $correct_answers;
             ?>
 
-            //We use variable isCorrect to compare user's answer with correct answer/answers
+            //We use variable isCorrect to decide whether to make input border green or red
             // From the begining isCorrect is False:
             let isCorrect = false;
+            //We use variable checkingResult to compare user's answer with correct answer/answers:
             let checkingResult = null;
 
             <?php
 
             if (isset($_SESSION["correct_answers"])) {
-
                 foreach ($correct_answers as $correct_answer) {
             ?>
-                    console.log(`The correct answer is <?php echo $correct_answer; ?>`);
-                    checkingResult = localStorage.getItem("user_answer").localeCompare(`<?php echo $correct_answer; ?>`);
-                    // console.log("The result of checking:", checkingResult);
+                    checkingResult = user_answer.localeCompare(`<?php echo $correct_answer; ?>`);
 
                     if (checkingResult == 0) {
-
                         isCorrect = true;
                     }
 
@@ -195,7 +182,6 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                 } ?>
 
                 if (isCorrect == true) {
-
                     document.getElementsByName("answer_one")[0].style.borderColor = "green";
                 } else {
                     document.getElementsByName("answer_one")[0].style.borderColor = "red";
@@ -204,7 +190,6 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             <?php
             }
             ?>
-
         })
     </script>
 </body>

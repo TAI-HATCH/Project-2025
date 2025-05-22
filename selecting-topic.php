@@ -29,9 +29,7 @@ $_SESSION["topics"] = $topics;
     <script>
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
-        console.log(`<?php if (isset($topics)) {
-                            echo var_dump($topics);
-                        } ?>`)
+
     </script>
 </head>
 
@@ -110,13 +108,6 @@ $_SESSION["topics"] = $topics;
                     arrowIcon.setAttribute("height", "100");
                     topicListItem.appendChild(arrowIcon);
         <?php
-                }
-
-                // Output the languages_topic_id in console:
-                if (isset($topic_id)) {
-                    ?>
-                    console.log("For selected language the topic <?php echo $topic_id; ?> is available");
-                    <?php
                 }
             }
         }

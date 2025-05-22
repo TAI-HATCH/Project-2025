@@ -273,6 +273,7 @@ ul {
 
 .quiz {
   text-align: center;
+  font-weight: 300;
 }
 
 .breadcrumb {
@@ -306,6 +307,10 @@ ul {
   margin: auto;
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+input[type=text] {
+  padding: 0.2rem;
 }
 
 .buttons {

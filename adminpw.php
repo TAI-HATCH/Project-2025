@@ -6,7 +6,7 @@ $correct_password = 'openTheHatch';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['password'] === $correct_password) {
         $_SESSION['is_admin'] = true;
-        header("Location: admin.php");
+        header("Location: admin-question.php");
         exit;
     } else {
         $pwerror = "Incorrect password.";

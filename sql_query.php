@@ -109,4 +109,20 @@ function get_selected_topic_info($language_topic_id)
     return $selected_topic_info;
 }
 
+function get_all_topics() // Function to fetch all topics in the table "topics" for admin shenanigans
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT 
+                                topic_id, topic_name 
+                            FROM 
+                                topics 
+                            ORDER BY 
+                                topic_id 
+                            ASC;");
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>

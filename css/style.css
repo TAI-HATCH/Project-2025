@@ -382,7 +382,7 @@ input[type=text] {
   width: 75rem;
 }
 
-.admin-add-language-topic-selection {
+.admin-add-content-checkbox-selection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -394,21 +394,21 @@ input[type=text] {
   width: 75rem;
 }
 
-.admin-add-language-topic-selection ul {
+.admin-add-content-checkbox-selection ul {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1rem;
 }
 
-.admin-add-language-label,
-.admin-add-language-topic-selection-content {
+.admin-add-content-label,
+.admin-add-content-checkbox-selection-content {
   font-size: 1.5rem;
   width: 30rem;
   text-align: start;
 }
 
-.admin-add-language-topic-selection {
+.admin-add-content-checkbox-selection {
   width: 28rem;
 }
 
@@ -467,8 +467,7 @@ a.admin-start-action:hover {
   width: 5rem;
 }
 
-
-.admin-add-language-topic-selection-content {
+.admin-add-content-checkbox-selection-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -478,11 +477,11 @@ a.admin-start-action:hover {
   margin-bottom: 1rem;
 }
 
-.admin-add-language-topic-selection-content label {
+.admin-add-content-checkbox-selection-content label {
   margin-bottom: 1rem;
 }
 
-.admin-add-language {
+.admin-add-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -494,7 +493,7 @@ a.admin-start-action:hover {
   width: 30rem;
 }
 
-.admin-add-language-input-field {
+.admin-add-content-input-field {
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 25rem;

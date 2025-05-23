@@ -4,37 +4,37 @@ include "admin-logout.php";
 include_once "sql_query.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo var_dump($_POST['topic']); // Prints the content of the array "topic" in the top of the page
-    $language_name = $_POST['add-language'] ?? null; // If there is no input, return "null"
-    $selected_topics = $_POST['topic'] ?? []; // If nothing in the array, return an empty array "[]"
+    echo var_dump($_POST['language']); // Prints the content of the array "language" in the top of the page
+    $topic_name = $_POST['add-topic'] ?? null; // If nothing is added in the form, return null 
+    $selected_languages = $_POST['language'] ?? []; // If nothing in the array, return an empty array "[]"
 
-    if (!empty($language_name)) {
+    if (!empty($topic_name)) {
         $stmt = $conn->prepare("INSERT INTO 
-                                    languages (language_name) 
+                                    topics (topic_name) 
                                 VALUES 
-                                    (:language_name)");
-        $stmt->bindParam(":language_name", $language_name, PDO::PARAM_STR);
+                                    (:topic_name)");
+        $stmt->bindParam(":topic_name", $topic_name, PDO::PARAM_STR);
         $stmt->execute();
 
-        $language_id = $conn->lastInsertId();
+        $topic_id = $conn->lastInsertId();
 
-        if (!empty($selected_topics)) { // Select content from checkbox
+        if (!empty($selected_languages)) { // Select content from the checkbox
             $stmt = $conn->prepare("INSERT INTO 
                                         languages_topic (language_id, topic_id) 
                                     VALUES 
                                         (:language_id, :topic_id)");
-
+                                        
             $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
             $stmt->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
 
-            foreach ($selected_topics as $topic_id) {
+            foreach ($selected_languages as $language_id) {
                 $stmt->execute();
             }
         }
 
-        echo "Language and optional topics successfully inserted.";
+        echo "Topic and optional languages successfully inserted.";
     } else {
-        echo "Language name is required.";
+        echo "Topic name is required.";
     }
 }
 ?>
@@ -63,35 +63,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post">
         <section class="root-content">
             <div class="admin-add-content">
-                <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here.">
+                <label class="admin-add-content-label" for="add-topic">Add topic</label>
+                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here.">
             </div>
 
             <div class="admin-add-content-checkbox-selection-content">
-                <label for="admin-add-content-checkbox-selection-content">Select topics (optional)</label>
+                <label for="admin-add-content-checkbox-selection-content">Select languages (optional)</label>
                 <div class="admin-add-content-checkbox-selection">
-                    <label for="admin-add-content-checkbox-selection-list">Topics:</label>
+                    <label for="admin-add-content-checkbox-selection-list">Languages:</label>
 
 
                     <ul>
                         <?php
 
-                        $topics = get_all_topics(); // Fetch all topics, function found in sql_query.php
+                        $languages = get_languages(); // Fetch all languages, function found in sql_query.php
 
-                        foreach ($topics as $topic) : ?>
+                        foreach ($languages as $language) : ?>
 
                             <li>
                                 <input class='checkbox' type='checkbox'
-                                    id="topic<?= ($topic['topic_id']) ?>"
-                                    name="topic[]"
-                                    value="<?= ($topic['topic_id']) ?>">
+                                    id="language<?= ($language['language_id']) ?>"
+                                    name="language[]"
+                                    value="<?= ($language['language_id']) ?>">
 
                                 <!--id: Print ID for this topic;
-                                    name: collect all selected topics to array topic[];
+                                    name: collect all selected languages to array language[];
                                     value: define value for checkbox-->
 
-                                <label for="topic<?= ($topic['topic_id']) ?>"> <!--Link checkbox to topic-->
-                                    <?= ($topic['topic_name']) ?> <!--Print topic-->
+                                <label for="language<?= ($language['language_id']) ?>"> <!--Link checkbox to topic-->
+                                    <?= ($language['language_name']) ?> <!--Print language-->
                                 </label>
                             </li>
                         <?php endforeach; ?>

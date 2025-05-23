@@ -148,6 +148,7 @@ ul {
   background-size: 200%;
 
   animation: snakeBorder 3s linear infinite;
+  cursor: pointer;
 }
 
 .start-button:hover,
@@ -275,6 +276,7 @@ ul {
 
 .quiz {
   text-align: center;
+  font-weight: 300;
 }
 
 .breadcrumb {
@@ -310,6 +312,10 @@ ul {
   margin-top: 1rem;
 }
 
+input[type=text] {
+  padding: 0.2rem;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
@@ -323,6 +329,12 @@ ul {
   margin: 0.5rem;
   border-color: var(--dark-color);
   text-align: center;
+}
+
+.check-answer-button {
+  display: flex;
+  justify-content: end;
+  color: var(--dark-color);
 }
 
 .button:hover {

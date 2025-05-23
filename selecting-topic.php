@@ -67,7 +67,7 @@ $_SESSION["topics"] = $topics;
             <?php
             $i = 0; // Increment for if loop to decide whether or not to add arrow after  topic block
             foreach ($topics as $topic) { // Make a loop for every element in array of topics
-                $topic_name = $topic["topic_name"]; // Store the name og th topic
+                $topic_name = $topic["topic_name"]; // Store the name of the topic
                 $icon_name = str_replace(" ", "-", strtolower($topic["topic_name"])); // Create a string based on the topic's name for later use as the icon name
                 $topic_id = $topic["id"]; // Store the topic's id for later use for creating the link to the next page
                 $i = $i + 1;

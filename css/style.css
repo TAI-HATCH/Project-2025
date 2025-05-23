@@ -426,6 +426,36 @@ ul {
   margin-bottom: 1rem;
 }
 
+.admin-navigate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  gap: 7rem;
+}
+
+.admin-navigate img {
+  width: 3rem;
+}
+
+.admin-start-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--dark-color);
+}
+
+a.admin-start-action:hover {
+  transform: scale(95%);
+}
+
+.admin-start-svg-icon {
+  width: 5rem;
+}
+
+
 .admin-add-language-topic-selection-content {
   display: flex;
   flex-direction: column;

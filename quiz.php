@@ -152,80 +152,69 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             const users_inputs = document.querySelectorAll("input"); //Collect all input fields from the page
             const users_answers = []; // Create empty array for storing there the pairs of user's answers
             users_inputs.forEach(users_input => {
-                users_answers.push([users_input.name, users_input.value]);
+                users_answers.push([users_input.name, users_input.value]); // Pair of user's answer is: the name of input field and its value
             });
-            console.log(users_answers);
+            // console.log(users_answers);
 
             <?php
             $question = $_SESSION["questions"][$_SESSION["current_question"]];
             $answers = get_answers($question["question_id"]); //Call the function get_answers from sql_query.php
+            //Array of correct answers from DB will store as a collection of arrays, where the first element is the name of input field, 
+            // and the second element is an array with correct values - can be several correct values for one input field:
             $correct_answers = array();
             foreach ($answers as $answer) {
                 $inputName = $answer["input_name"];
                 $answerValue = $answer["answer_value"];
                 if (!isset($correct_answers[$inputName])) {
-                    $correct_answers[$inputName] = array();
+                    $correct_answers[$inputName] = array(); //Create the first element in the collection - the name of input field
                 }
-                $correct_answers[$inputName][] = $answerValue;
+                $correct_answers[$inputName][] = $answerValue; //Add the value - correct answer
             }
 
             $_SESSION["correct_answers"] = $correct_answers;
-
             ?>
-            //Output the array with correct answers in consol:
-            let dataToOutput = <?php echo json_encode($correct_answers); ?>;
-            console.log("Array correct answers:", dataToOutput);
 
-
-            //We use variable checkingResult to compare user's answer with correct answer/answers:
-            // let checkingResult = null;
+            //Output the array with correct answers in console - just for info:
+            // let dataToOutput = <php echo json_encode($correct_answers); ?>;
+            // console.log("Array correct answers:", dataToOutput);
 
             <?php
 
-            if (isset($_SESSION["correct_answers"])) {
-                // echo json_encode($_SESSION["correct_answers"]);
+            if (isset($_SESSION["correct_answers"]))
+                // Loop in PHP to get the value of the input field and its possible values:
                 foreach ($correct_answers as $inputAnswerName => $correct_answer) {
                     // $inputAnswerName = $correct_answer[];
                     $inputAnswerValue = array_values($correct_answer);
             ?>
-                    // let inputAnswerName = <?php echo json_encode($inputAnswerName); ?>;
-                    // console.log("inputAnswerName is:", inputAnswerName);
-                    // let inputAnswerValue = <?php echo json_encode($inputAnswerValue); ?>;
-                    // console.log("inputAnswerValue is:", inputAnswerValue);
+                //Loop in JS to get the name of input field and user`s value for it:
+                users_answers.forEach(element => {
+                    //We use variable isCorrect to decide whether to make input border green or red
+                    // From the begining isCorrect is False:
+                    let isCorrect = false;
+                    userAnswerName = element[0]; //Get the name of input field
+                    // console.log("The userAnswerName is", userAnswerName);
+                    userAnswerValue = element[1]; //Get the value of the input field
+                    // console.log("The userAnswerValue is", userAnswerValue);
+                    //Check if the user's input field name and correct_answer input name matches:
+                    if (userAnswerName.localeCompare(`<?php echo $inputAnswerName; ?>`) == 0) { // 0 means YES
+                        //Check if the value of user's answer and value of correct answer matches:
 
-                    users_answers.forEach(element => {
-                        //We use variable isCorrect to decide whether to make input border green or red
-                        // From the begining isCorrect is False:
-                        let isCorrect = false;
-                        userAnswerName = element[0];
-                        console.log("The userAnswerName is", userAnswerName);
-                        userAnswerValue = element[1];
-                        console.log("The userAnswerValue is", userAnswerValue);
-                        //Check if the user's input field name and correct_answer input name matches:
-                        if (userAnswerName.localeCompare(`<?php echo $inputAnswerName; ?>`) == 0) { // 0 means YES
-                            //Check if the value of user's answer and value of correct answer matches:
-                            if (`<?php echo json_encode($inputAnswerValue) ?>`.includes(userAnswerValue)) {
-                                isCorrect = true;
-                                // bsreak;
-                            }
-                            if (isCorrect == true) {
-                                console.log("You are right!");
-                                document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
-                            } else {
-                                console.log("You are wrong");
-                                document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
-                            }
+                        // $inputAnswerValue is an array and json_encode() convert PHP data into JavaScript-compatible JSON:
+                        // function .includes() in JS check if the variable inside the brackets is present in the array:
+                        if (`<?php echo json_encode($inputAnswerValue) ?>`.includes(userAnswerValue)) {
+                            isCorrect = true;
                         }
-                    });
-                    
-
-                <?php
-                } ?>
-
-
-
+                        if (isCorrect == true) {
+                            console.log("You are right!"); //Just for info
+                            document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
+                        } else {
+                            console.log("You are wrong"); //Just for info
+                            document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
+                        }
+                    }
+                });
             <?php
-            }
+                }
             ?>
         })
     </script>

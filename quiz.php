@@ -4,6 +4,7 @@ session_start(); //Open a php session on the server, is never shut down
 unset($_SESSION["correct_answers"]);
 
 // If we need to check which data is now in the Session:
+//Using of this code make it as a part of html content:
 // echo "<pre>";
 // print_r($_SESSION);
 // echo "</pre>";
@@ -88,6 +89,11 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
 
+        // Print the array with current question:
+        <?php if (isset($question)) { ?>
+            console.log(`Current question is: <?php echo json_encode($question); ?>`);
+        <?php } ?>
+
         // Print the array with answers:
         <?php if (isset($answers)) { ?>
             console.log(`Array with answers: <?php echo json_encode($answers); ?>`);
@@ -125,6 +131,19 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     </div>
 
     <script>
+        //Script for adjusting the width of input-fields based on the length of the corresponding answer string
+        <?php
+        if (isset($question)) { //If there is current question - call the function to get the length of answers value:
+            $answers_width = get_answer_value_length($question["question_id"]);
+            // Output the width array in console:
+            if (isset($answers_width)) { ?>
+                console.log(`Width array is: <?php echo json_encode($answers_width); ?>`);
+        <?php
+            }
+        }
+        ?>
+
+
         // Script for adding placeholder to the input field after selecting option Show answer:
         <?php
         if (isset($answers)) {

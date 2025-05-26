@@ -1,6 +1,7 @@
 <?php
 
 session_start(); //Open a php session on the server, is never shut down
+unset($_SESSION["correct_answers"]);
 
 // If we need to check which data is now in the Session:
 // echo "<pre>";
@@ -48,16 +49,16 @@ if (isset($_GET['language-topic'])) {
 
         $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
         // echo var_dump($answers);
-    } else if ($action == "check") {
+    } //else if ($action == "check") {
 
-        $question = $_SESSION["questions"][$_SESSION["current_question"]];
-        $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
-        $correct_answers = array();
-        foreach ($answers as $answer) {
-            array_push($correct_answers, $answer["answer_value"]);
-        }
-        $_SESSION["correct_answers"] = $correct_answers;
-    }
+    //     $question = $_SESSION["questions"][$_SESSION["current_question"]];
+    //     $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
+    //     $correct_answers = array();
+    //     foreach ($answers as $answer) {
+    //         array_push($correct_answers, $answer["answer_value"]);
+    //     }
+    //     $_SESSION["correct_answers"] = $correct_answers;
+    // }
 
     //else if ($action == "clear") { // If user selected button Clear session
     // remove all session variables
@@ -89,13 +90,13 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
         // Print the array with answers:
         <?php if (isset($answers)) { ?>
-            console.log(<?php echo json_encode($answers); ?>);
+            console.log(`Array with answers: <?php echo json_encode($answers); ?>`);
         <?php } ?>
 
         // Print the array with correct answer:
         <?php if (isset($correct_answers)) {
         ?>
-            console.log(<?php echo json_encode($correct_answers); ?>);
+            console.log(`Array with correct answers: <?php echo json_encode($correct_answers); ?>`);
         <?php
         } ?>
     </script>
@@ -137,8 +138,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
         // Output the selected languages_topic_id in console:
         <?php
-        if (isset($topic_id)) {
-        ?>
+        if (isset($topic_id)) { ?>
             console.log("Selected topic is <?php echo $topic_id; ?>");
         <?php
         }
@@ -148,47 +148,73 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         document.getElementById("check").addEventListener("click", function(event) {
             // event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
 
-            //Store the value of user's answer in variable user_answersss:
-            const user_answer = document.getElementsByName("answer_one")[0].value;
+            //Store the pair [input_name, input_value] of user's answers in variable users_answers:
+            const users_inputs = document.querySelectorAll("input"); //Collect all input fields from the page
+            const users_answers = []; // Create empty array for storing there the pairs of user's answers
+            users_inputs.forEach(users_input => {
+                users_answers.push([users_input.name, users_input.value]); // Pair of user's answer is: the name of input field and its value
+            });
+            // console.log(users_answers);
 
             <?php
             $question = $_SESSION["questions"][$_SESSION["current_question"]];
-            $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
+            $answers = get_answers($question["question_id"]); //Call the function get_answers from sql_query.php
+            //Array of correct answers from DB will store as a collection of arrays, where the first element is the name of input field, 
+            // and the second element is an array with correct values - can be several correct values for one input field:
             $correct_answers = array();
             foreach ($answers as $answer) {
-                array_push($correct_answers, $answer["answer_value"]);
+                $inputName = $answer["input_name"];
+                $answerValue = $answer["answer_value"];
+                if (!isset($correct_answers[$inputName])) {
+                    $correct_answers[$inputName] = array(); //Create the first element in the collection - the name of input field
+                }
+                $correct_answers[$inputName][] = $answerValue; //Add the value - correct answer
             }
+
             $_SESSION["correct_answers"] = $correct_answers;
             ?>
 
-            //We use variable isCorrect to decide whether to make input border green or red
-            // From the begining isCorrect is False:
-            let isCorrect = false;
-            //We use variable checkingResult to compare user's answer with correct answer/answers:
-            let checkingResult = null;
+            //Output the array with correct answers in console - just for info:
+            // let dataToOutput = <php echo json_encode($correct_answers); ?>;
+            // console.log("Array correct answers:", dataToOutput);
 
             <?php
 
-            if (isset($_SESSION["correct_answers"])) {
-                foreach ($correct_answers as $correct_answer) {
+            if (isset($_SESSION["correct_answers"]))
+                // Loop in PHP to get the value of the input field and its possible values:
+                foreach ($correct_answers as $inputAnswerName => $correct_answer) {
+                    // $inputAnswerName = $correct_answer[];
+                    $inputAnswerValue = array_values($correct_answer);
             ?>
-                    checkingResult = user_answer.localeCompare(`<?php echo $correct_answer; ?>`);
+                //Loop in JS to get the name of input field and user`s value for it:
+                users_answers.forEach(element => {
+                    //We use variable isCorrect to decide whether to make input border green or red
+                    // From the begining isCorrect is False:
+                    let isCorrect = false;
+                    userAnswerName = element[0]; //Get the name of input field
+                    // console.log("The userAnswerName is", userAnswerName);
+                    userAnswerValue = element[1]; //Get the value of the input field
+                    // console.log("The userAnswerValue is", userAnswerValue);
+                    //Check if the user's input field name and correct_answer input name matches:
+                    if (userAnswerName.localeCompare(`<?php echo $inputAnswerName; ?>`) == 0) { // 0 means YES
+                        //Check if the value of user's answer and value of correct answer matches:
 
-                    if (checkingResult == 0) {
-                        isCorrect = true;
+                        // $inputAnswerValue is an array and json_encode() convert PHP data into JavaScript-compatible JSON:
+                        // function .includes() in JS check if the variable inside the brackets is present in the array:
+                        if (`<?php echo json_encode($inputAnswerValue) ?>`.includes(userAnswerValue)) {
+                            isCorrect = true;
+                        }
+                        if (isCorrect == true) {
+                            console.log("You are right!"); //Just for info
+                            document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
+                        } else {
+                            console.log("You are wrong"); //Just for info
+                            document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
+                        }
                     }
-
-                <?php
-                } ?>
-
-                if (isCorrect == true) {
-                    document.getElementsByName("answer_one")[0].style.borderColor = "green";
-                } else {
-                    document.getElementsByName("answer_one")[0].style.borderColor = "red";
-                }
-
+                });
             <?php
-            }
+                }
             ?>
         })
     </script>

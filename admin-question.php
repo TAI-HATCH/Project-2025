@@ -1,22 +1,5 @@
 <?php
-session_start();
-
-// Jos ei admin, ohjataan takaisin kirjautumissivulle
-if (!isset($_SESSION['is_admin'])) {
-    header("Location: adminpw.php");
-    exit;
-}
-
-include 'admin-banner.php';
-
-
-
-// Käsittele uloskirjautuminen
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-    session_destroy();
-    header("Location: adminpw.php");
-    exit;
-}
+include "admin-log.php";
 ?>
 
 <!DOCTYPE html>

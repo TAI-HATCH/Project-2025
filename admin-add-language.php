@@ -1,6 +1,6 @@
 <?php
 
-include "admin-logout.php";
+include "admin-log.php";
 include_once "sql_query.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

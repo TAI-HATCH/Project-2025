@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                 </div>
             </a>
             
-            <a class="admin-start-action" href="#">
+            <a class="admin-start-action" href="admin-add-topic.php">
                 <div class="admin-start-action">
                      <svg class="admin-start-svg-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                        <path xmlns="http://www.w3.org/2000/svg" 

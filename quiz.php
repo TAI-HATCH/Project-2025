@@ -217,26 +217,27 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                     //We use variable isCorrect to decide whether to make input border green or red
                     // From the begining isCorrect is False:
                     let isCorrect = false;
-                    console.log("IsCorrect value is", isCorrect);
+                    // console.log("IsCorrect value is", isCorrect);
                     let userAnswerName = userAnswer[0]; //Get the name of input field
-                    console.log("The userAnswerName is", userAnswerName);
+                    // console.log("The userAnswerName is", userAnswerName);
                     let userAnswerValue = userAnswer[1]; //Get the value of the input field
-                    console.log("The userAnswerValue is", userAnswerValue);
+                    // console.log("The userAnswerValue is", userAnswerValue);
                     //Check if the user's input field name and correct_answer input name matches:
                     if (userAnswerName.localeCompare(`<?php echo $inputAnswerName; ?>`) == 0) { // 0 means YES
                         //Check if the value of user's answer and value of correct answer matches:
 
                         // $inputAnswerValue is an array and json_encode() convert PHP data into JavaScript-compatible JSON:
+
                         // function .includes() in JS check if the variable inside the brackets is present in the array:
-                        if (`<?php echo json_encode($inputAnswerValue); ?>`.includes(userAnswerValue)) {
+                        if (<?php echo json_encode($inputAnswerValue); ?>.includes(userAnswerValue)) {
                             isCorrect = true;
-                            console.log("Yes, user inputs right value");
+                            // console.log("Yes, user inputs right value");
                         }
                         if (isCorrect == true) {
-                            console.log("You are right!", isCorrect); //Just for info
+                            // console.log("You are right!", isCorrect); //Just for info
                             document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
                         } else {
-                            console.log("You are wrong", isCorrect); //Just for info
+                            // console.log("You are wrong", isCorrect); //Just for info
                             document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
                         }
                     }

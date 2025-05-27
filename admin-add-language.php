@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        echo "Language and optional topics successfully inserted.";
+        header("Location: admin-upload-success.php");
     } else {
         echo "Language name is required.";
     }

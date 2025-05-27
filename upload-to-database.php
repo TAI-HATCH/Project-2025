@@ -3,7 +3,7 @@ include_once "connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the form if form's request method is is "post"
     $language_id = $_POST['language_id'] ?? null; // The "$_POST"-variable has the inputted data of [*id*]
-    $topic_id = $_POST['topic_id'] ?? null; // ?? 
+    $topic_id = $_POST['topic_id'] ?? null; // ?? Means that if the array [] is empty, return null instead of having an error on hand
     $question_text = $_POST['question'] ?? '';
     $text_before = $_POST['text_before'] ?? '';
     $text_after = $_POST['text_after'] ?? '';
@@ -50,9 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the 
         } catch (PDOException $e) {
             echo "Error uploading: " . $e->getMessage();
         }
-    } else {
-        echo "Please fill in all required fields.";
-    }
+    } 
 } else {
     echo "Invalid request.";
 }

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        echo "Topic and optional languages successfully inserted.";
+        header("Location: admin-upload-success.php");
     } else {
         echo "Topic name is required.";
     }

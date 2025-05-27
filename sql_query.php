@@ -112,6 +112,37 @@ function get_selected_topic_info($language_topic_id)
     return $selected_topic_info;
 }
 
+//Function to determine the length of each answer value:
+//This data will be used to adjust the width of input fields in html and css:
+function get_answer_value_length($question_id)
+{
+
+    global $conn; //give access to the variable $conn defining in the connection.php
+
+    //Send request to the DB to the table Answers with the question_id = $question["question_id"]
+    $stmt = $conn->prepare("SELECT input_name, answer_value FROM answers WHERE question_id = :question_id;"); // Go into db, take hold of answer for the specific question
+    $stmt->bindParam(':question_id', $question_id); // Binding together (reflecting) :question_id and $question["question_id"]s
+    $stmt->execute(); // Run the thing
+
+    $current_answers = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the answers that we just fetched and put it into array
+
+    //Create array to store the names of input fields and its values:
+    $answers_width = array();
+
+    //Loop through the array with current answers:
+    foreach ($current_answers as $correct_answer) {
+        $input_answer_name = $correct_answer["input_name"];
+        $input_answer_value = $correct_answer["answer_value"];
+        if (!isset($answers_width[$input_answer_name])) {
+            //Create an associative array with a key equal to input name, and a value as an empty array:
+            $answers_width[$input_answer_name] = array();
+        }
+        //Add the value to the array with string width:
+        $answers_width[$input_answer_name][] = strlen($input_answer_value);
+    }
+    return $answers_width;
+}
+
 function get_all_topics() // Function to fetch all topics in the table "topics" for admin shenanigans
 {
     global $conn;

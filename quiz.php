@@ -4,6 +4,7 @@ session_start(); //Open a php session on the server, is never shut down
 unset($_SESSION["correct_answers"]);
 
 // If we need to check which data is now in the Session:
+//Using of this code make it as a part of html content:
 // echo "<pre>";
 // print_r($_SESSION);
 // echo "</pre>";
@@ -88,6 +89,11 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         // script for printing the connection status in console:
         console.log("<?php echo $connection_status; ?>")
 
+        // Print the array with current question:
+        // <php if (isset($question)) { ?>
+        //     console.log(`Current question is: <php echo json_encode($question); ?>`);
+        // <php } ?>
+
         // Print the array with answers:
         <?php if (isset($answers)) { ?>
             console.log(`Array with answers: <?php echo json_encode($answers); ?>`);
@@ -125,6 +131,47 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     </div>
 
     <script>
+        //Script for adjusting the width of input-fields based on the length of the corresponding answer string
+        <?php
+        if (isset($question)) { //If there is current question - call the function to get the length of answers value:
+            $answers_width = get_answer_value_length($question["question_id"]);
+            // Output the width array in console:
+            if (isset($answers_width)) { ?>
+                console.log(`Width array is: <?php echo json_encode($answers_width); ?>`);
+        <?php
+            }
+        }
+        ?>
+        //Collect all input elements in array:
+        const arrayOfInputs = document.querySelectorAll("input");
+        //For each input element on the page:
+        arrayOfInputs.forEach(inputElement => {
+            //Store the name of input field to find and compare it later in the DB:
+            let inputName = inputElement.name;
+            <?php
+            if (isset($answers_width)) {
+                //For each correct answer from the DB:
+                //$input_name is the name of input field from the DB:
+                foreach ($answers_width as $input_name => $width) {
+                    //Find the max string in the array of answer's values:
+                    $width_value = max(array_values($width));
+            ?>
+                    // console.log(`The width of ${inputElement} ${inputName} is ${<php echo ($width_value); ?>}`);
+
+                    //If the input name from DB is equal to input name on the page:
+                    if (inputName.localeCompare(`<?php echo $input_name ?>`) == 0) {
+                        // Set the width of the future input field as the length of the string multiplied by 0.5:
+                        let widthOfInputField = Number.parseInt("<?php echo $width_value; ?>") * 0.5;
+                        // console.log("The calculated width is", widthOfInputField);
+                        //Set the width of input field in rem:
+                        inputElement.style.width = `${widthOfInputField}rem`;
+                    }
+            <?php
+                }
+            }
+            ?>
+        });
+
         // Script for adding placeholder to the input field after selecting option Show answer:
         <?php
         if (isset($answers)) {
@@ -148,13 +195,13 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         document.getElementById("check").addEventListener("click", function(event) {
             // event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
 
-            //Store the pair [input_name, input_value] of user's answers in variable users_answers:
-            const users_inputs = document.querySelectorAll("input"); //Collect all input fields from the page
-            const users_answers = []; // Create empty array for storing there the pairs of user's answers
-            users_inputs.forEach(users_input => {
-                users_answers.push([users_input.name, users_input.value]); // Pair of user's answer is: the name of input field and its value
+            //Store the pair [input_name, input_value] of user's answers in variable usersAnswers:
+            const usersInputs = document.querySelectorAll("input"); //Collect all input fields from the page
+            const usersAnswers = []; // Create empty array for storing there the pairs of user's answers
+            usersInputs.forEach(users_input => {
+                usersAnswers.push([users_input.name, users_input.value]); // Pair of user's answer is: the name of input field and its value
             });
-            // console.log(users_answers);
+            console.log(usersAnswers);
 
             <?php
             $question = $_SESSION["questions"][$_SESSION["current_question"]];
@@ -187,28 +234,31 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                     $inputAnswerValue = array_values($correct_answer);
             ?>
                 //Loop in JS to get the name of input field and user`s value for it:
-                users_answers.forEach(element => {
+                usersAnswers.forEach(userAnswer => {
                     //We use variable isCorrect to decide whether to make input border green or red
                     // From the begining isCorrect is False:
                     let isCorrect = false;
-                    userAnswerName = element[0]; //Get the name of input field
+                    // console.log("IsCorrect value is", isCorrect);
+                    let userAnswerName = userAnswer[0]; //Get the name of input field
                     // console.log("The userAnswerName is", userAnswerName);
-                    userAnswerValue = element[1]; //Get the value of the input field
+                    let userAnswerValue = userAnswer[1]; //Get the value of the input field
                     // console.log("The userAnswerValue is", userAnswerValue);
                     //Check if the user's input field name and correct_answer input name matches:
                     if (userAnswerName.localeCompare(`<?php echo $inputAnswerName; ?>`) == 0) { // 0 means YES
                         //Check if the value of user's answer and value of correct answer matches:
 
                         // $inputAnswerValue is an array and json_encode() convert PHP data into JavaScript-compatible JSON:
+
                         // function .includes() in JS check if the variable inside the brackets is present in the array:
-                        if (`<?php echo json_encode($inputAnswerValue) ?>`.includes(userAnswerValue)) {
+                        if (<?php echo json_encode($inputAnswerValue); ?>.includes(userAnswerValue)) {
                             isCorrect = true;
+                            // console.log("Yes, user inputs right value");
                         }
                         if (isCorrect == true) {
-                            console.log("You are right!"); //Just for info
+                            // console.log("You are right!", isCorrect); //Just for info
                             document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
                         } else {
-                            console.log("You are wrong"); //Just for info
+                            // console.log("You are wrong", isCorrect); //Just for info
                             document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
                         }
                     }

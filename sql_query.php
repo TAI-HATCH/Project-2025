@@ -122,14 +122,19 @@ function get_answer_value_length($question_id)
     $stmt->execute(); // Run the thing
 
     $current_answers = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the answers that we just fetched and put it into array
+
+    //Create array to store the names of input fields and its values:
     $answers_width = array();
 
+    //Loop through the array with current answers:
     foreach ($current_answers as $correct_answer) {
         $input_answer_name = $correct_answer["input_name"];
         $input_answer_value = $correct_answer["answer_value"];
         if (!isset($answers_width[$input_answer_name])) {
+            //Create an associative array with a key equal to input name, and a value as an empty array:
             $answers_width[$input_answer_name] = array();
         }
+        //Add the value to the array with string width:
         $answers_width[$input_answer_name][] = strlen($input_answer_value);
     }
     return $answers_width;

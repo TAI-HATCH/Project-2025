@@ -90,9 +90,9 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         console.log("<?php echo $connection_status; ?>")
 
         // Print the array with current question:
-        <?php if (isset($question)) { ?>
-            console.log(`Current question is: <?php echo json_encode($question); ?>`);
-        <?php } ?>
+        // <php if (isset($question)) { ?>
+        //     console.log(`Current question is: <php echo json_encode($question); ?>`);
+        // <php } ?>
 
         // Print the array with answers:
         <?php if (isset($answers)) { ?>
@@ -138,18 +138,39 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             // Output the width array in console:
             if (isset($answers_width)) { ?>
                 console.log(`Width array is: <?php echo json_encode($answers_width); ?>`);
-            <?php
+        <?php
             }
         }
         ?>
-
+        //Collect all input elements in array:
         const arrayOfInputs = document.querySelectorAll("input");
-        console.log("There are such inputs on the page:", arrayOfInputs);
+        //For each input element on the page:
+        arrayOfInputs.forEach(inputElement => {
+            //Store the name of input field to find and compare it later in the DB:
+            let inputName = inputElement.name;
+            <?php
+            if (isset($answers_width)) {
+                //For each correct answer from the DB:
+                //$input_name is the name of input field from the DB:
+                foreach ($answers_width as $input_name => $width) {
+                    //Find the max string in the array of answer's values:
+                    $width_value = max(array_values($width));
+            ?>
+                    // console.log(`The width of ${inputElement} ${inputName} is ${<php echo ($width_value); ?>}`);
 
-        // arrayOfInputs.forEach(inputElement => {
-        //     let 
-        // });
-
+                    //If the input name from DB is equal to input name on the page:
+                    if (inputName.localeCompare(`<?php echo $input_name ?>`) == 0) {
+                        // Set the width of the future input field as the length of the string multiplied by 0.5:
+                        let widthOfInputField = Number.parseInt("<?php echo $width_value; ?>") * 0.5;
+                        // console.log("The calculated width is", widthOfInputField);
+                        //Set the width of input field in rem:
+                        inputElement.style.width = `${widthOfInputField}rem`;
+                    }
+            <?php
+                }
+            }
+            ?>
+        });
 
         // Script for adding placeholder to the input field after selecting option Show answer:
         <?php
@@ -213,7 +234,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                     $inputAnswerValue = array_values($correct_answer);
             ?>
                 //Loop in JS to get the name of input field and user`s value for it:
-                    usersAnswers.forEach(userAnswer => {
+                usersAnswers.forEach(userAnswer => {
                     //We use variable isCorrect to decide whether to make input border green or red
                     // From the begining isCorrect is False:
                     let isCorrect = false;

@@ -7,6 +7,7 @@
   --hover-color: #2f3d3e;
   --dark-color: #000000;
   --highlight-color: #ffffff;
+  --code-font: "Source Sans 3", sans-serif;
 }
 
 * {
@@ -167,23 +168,6 @@ ul {
   }
 }
 
-.button {
-  color: rgb(0, 0, 0);
-  background-color: aliceblue;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin: 0.5rem;
-  border-color: black;
-  text-align: center;
-  font-family: "Nunito Sans", sans-serif;
-
-  transition: 0.5s;
-}
-
-.button:hover {
-  transform: scale(0.95); /* Subtle 5% shrink */
-}
-
 .root-section {
   display: flex;
   flex-direction: column;
@@ -276,11 +260,6 @@ ul {
 
 /* QUIZ PAGE */
 
-.quiz {
-  text-align: center;
-  font-weight: 300;
-}
-
 .breadcrumb {
   padding: 2rem;
   display: flex;
@@ -304,18 +283,61 @@ ul {
   font-weight: 100;
 }
 
+.quiz {
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.5rem;
+  width: 95%;
+  line-height: 2;
+}
+
+i{
+  font-family: var(--code-font);
+  border: 1px solid var(--brand-color);
+  border-radius: 11px;
+  padding: 0 0.35rem;
+  background-color: var(--brand-color);
+}
+
 .code-snippet {
-  padding: 1rem;
+  padding: 1.4rem;
   border: 0.15rem solid rgba(122, 122, 122, 0.668);
   border-radius: 1rem;
   width: fit-content;
   margin: auto;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.tab{
+  padding-left: 1.5rem;
 }
 
 input[type=text] {
-  padding: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: "Nunito Sans", sans-serif;
+  border-radius: 5px;
+  border: 1px solid var(--brand-color);
+  cursor: pointer;
+  box-shadow: 1px 1px var(--brand-secondary-color);
+  transition: 0.5s;
+  animation: snakeBorder 3s linear infinite;
+}
+
+input.correct{
+  border: 2px solid green;
+  box-shadow: 0 0 1rem #0001004d;
+  background-color: #d2f1d2c3;
+}
+
+input.wrong{
+  border: 2px solid red;
+  box-shadow: 0 0 1rem #ff00003e;
+  background-color: #d29e9ed5;
 }
 
 .buttons {
@@ -331,6 +353,9 @@ input[type=text] {
   margin: 0.5rem;
   border-color: var(--dark-color);
   text-align: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  transition: 0.5s;
 }
 
 .check-answer-button {
@@ -660,11 +685,21 @@ a.admin-start-action:hover {
   #language-section {
     padding: 0 1rem 0 3rem;
   }
+
   .breadcrumb-item {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
+
+  .quiz {
+    font-size: 1.25rem;
+  }
+
+  .code-snippet {
+    font-size: 1rem;
+  }
+
   .admin-choice,
   .admin-input {
     width: 20rem;

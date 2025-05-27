@@ -82,7 +82,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
         rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/style.css">
     <script>
@@ -160,11 +160,11 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
 
                     //If the input name from DB is equal to input name on the page:
                     if (inputName.localeCompare(`<?php echo $input_name ?>`) == 0) {
-                        // Set the width of the future input field as the length of the string multiplied by 0.5:
-                        let widthOfInputField = Number.parseInt("<?php echo $width_value; ?>") * 0.5;
+                        // Set the width of the future input field as the length of the string multiplied by 0.6:
+                        let widthOfInputField = Number.parseInt("<?php echo $width_value; ?>") * 0.7;
                         // console.log("The calculated width is", widthOfInputField);
                         //Set the width of input field in rem:
-                        inputElement.style.width = `${widthOfInputField}rem`;
+                        inputElement.style.maxWidth = `${widthOfInputField}rem`;
                     }
             <?php
                 }
@@ -198,8 +198,14 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             //Store the pair [input_name, input_value] of user's answers in variable usersAnswers:
             const usersInputs = document.querySelectorAll("input"); //Collect all input fields from the page
             const usersAnswers = []; // Create empty array for storing there the pairs of user's answers
-            usersInputs.forEach(users_input => {
-                usersAnswers.push([users_input.name, users_input.value]); // Pair of user's answer is: the name of input field and its value
+            usersInputs.forEach(usersInput => {
+                //Remove classes .wrong and .correct from all the inputs:
+                usersInput.classList.remove("wrong");
+                usersInput.classList.remove("correct");
+                usersInput.removeAttribute("placeholder");
+                // usersInput.value = "";
+
+                usersAnswers.push([usersInput.name, usersInput.value]); // Pair of user's answer is: the name of input field and its value
             });
             console.log(usersAnswers);
 
@@ -256,10 +262,13 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                         }
                         if (isCorrect == true) {
                             // console.log("You are right!", isCorrect); //Just for info
-                            document.getElementsByName(userAnswerName)[0].style.borderColor = "green";
+                            // document.getElementsByName(userAnswerName)[0].style.border = "2px solid green";
+                            // document.getElementsByName(userAnswerName)[0].style.boxShadow = "0 0 1rem #0001004d";
+                            document.getElementsByName(userAnswerName)[0].classList.add("correct");
                         } else {
                             // console.log("You are wrong", isCorrect); //Just for info
-                            document.getElementsByName(userAnswerName)[0].style.borderColor = "red";
+                            // document.getElementsByName(userAnswerName)[0].style.border = "2px solid red";
+                            document.getElementsByName(userAnswerName)[0].classList.add("wrong");
                         }
                     }
                 });

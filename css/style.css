@@ -500,6 +500,12 @@ a.admin-start-action:hover {
   height: 2rem;
 }
 
+.admin-upload-success p, a {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+
 .logout-button {
   position: fixed;
   top: 37rem;

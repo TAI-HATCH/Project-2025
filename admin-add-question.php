@@ -1,22 +1,5 @@
 <?php
-session_start();
-
-// Jos ei admin, ohjataan takaisin kirjautumissivulle
-if (!isset($_SESSION['is_admin'])) {
-    header("Location: adminpw.php");
-    exit;
-}
-
-include 'admin-banner.php';
-
-
-
-// Käsittele uloskirjautuminen
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-    session_destroy();
-    header("Location: adminpw.php");
-    exit;
-}
+include "admin-log.php";
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     <section class="root-content">
     <div class="admin-question-upload">
         
-        <form action="upload-to-database.php" method="POST">
+        <form action="upload-to-database.php" method="POST"> <!--Creates the form so that inputted data can be put into POST-variables-->
             <div class="admin-choice">
                 <label for="admin-programming-language-choice">Choose programming language</label>
-                <select class="admin-dropdown-menu" name="language_id" id="language_id">
-                       <?php
+                <select class="admin-dropdown-menu" name="language_id" id="language_id"> 
+                       <?php // php to fetch all languages into the dropdown menu
                         include_once "connection.php";
 
                         try {
@@ -108,21 +91,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
             </div>
         <div class="admin-input">
             <label for="question-text">Question text</label>
-            <input class="admin-input-field" type="text" id="question_id" name="question" placeholder="Type your question text here.">
+            <input class="admin-input-field" type="text" id="question_id" name="question" placeholder="Type your question text here." required>
         </div>
             <div class="admin-question-content">    
                 <label for="question-content">Question content</label>
                 <div class="admin-input-content">
                     <label for="text-before">Text before user input field:</label>
-                    <input class="admin-input-field" type="text" id="text_before" name="text_before" placeholder="Type the question text before the user input field.">
+                    <input class="admin-input-field" type="text" id="text_before" name="text_before" placeholder="Type the question text before the user input field." required>
                 </div>
                 <div class="admin-input-content">
                     <label for="answer">Answer for the user to type:</label>
-                    <input class="admin-input-field" type="text" id="answer_value" name="answer" placeholder="Type the answer for the user to type.">
+                    <input class="admin-input-field" type="text" id="answer_value" name="answer" placeholder="Type the answer for the user to type." required>
                 </div>
                 <div class="admin-input-content"> 
                     <label for="text-after">Text after user input field:</label>
-                    <input class="admin-input-field" type="text" id="text_after" name="text_after" placeholder="Type the question text after the user input field.">
+                    <input class="admin-input-field" type="text" id="text_after" name="text_after" placeholder="Type the question text after the user input field." required>
                 </div>
             </div>
         

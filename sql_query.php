@@ -12,7 +12,10 @@ function get_languages() // Function to get an array of programming languages fr
     //Send request to the DB to the table Languages without any parameters
     // because we need to get all the records from the tabel:
 
-    $stmt = $conn->prepare("SELECT language_id, language_name FROM languages;");
+    $stmt = $conn->prepare("SELECT 
+                                language_id, language_name 
+                            FROM 
+                                languages;");
     $stmt->execute(); // Run the thing
 
     $languages = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the languages that we just fetched and put it into an array
@@ -138,6 +141,21 @@ function get_answer_value_length($question_id)
         $answers_width[$input_answer_name][] = strlen($input_answer_value);
     }
     return $answers_width;
+}
+
+function get_all_topics() // Function to fetch all topics in the table "topics" for admin shenanigans
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT 
+                                topic_id, topic_name 
+                            FROM 
+                                topics 
+                            ORDER BY 
+                                topic_id;");
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 ?>

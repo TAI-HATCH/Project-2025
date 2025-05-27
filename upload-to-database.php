@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the 
                                              VALUES (?, ?, ?)");
             $answer_insert->execute([$question_id, 'answer_one', $answer_value]);
 
-            echo "Question and answer uploaded successfully!";
+            header("Location: admin-upload-success.php");
         } catch (PDOException $e) {
             echo "Error uploading: " . $e->getMessage();
         }

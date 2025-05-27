@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here.">
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required>
             </div>
 
             <div class="admin-add-content-checkbox-selection-content">

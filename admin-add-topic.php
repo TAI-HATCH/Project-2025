@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>
-                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here.">
+                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here." required>
             </div>
 
             <div class="admin-add-content-checkbox-selection-content">

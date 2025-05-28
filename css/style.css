@@ -542,13 +542,13 @@ a.admin-start-action:hover {
   flex-direction: column;
   margin: 0rem;
   padding: 0rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .admin-navigate-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 
@@ -749,6 +749,14 @@ a.admin-start-action:hover {
 
   .admin-question-upload {
     font-size: 1rem;
+  }
+
+  .admin-navigate-content svg {
+    width: 2rem;
+  }
+
+  .admin-navigate-content label {
+    font-size: 0.8rem;
   }
 
   .logout-button {

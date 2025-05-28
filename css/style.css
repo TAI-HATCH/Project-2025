@@ -482,6 +482,15 @@ input.wrong{
   color: var(--dark-color);
 }
 
+.admin-start-action-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--highlight-color);
+}
+
 a.admin-start-action:hover {
   transform: scale(95%);
 }
@@ -526,6 +535,20 @@ a.admin-start-action:hover {
 .admin-upload-success p, a {
   font-size: 2rem;
   margin-bottom: 2rem;
+}
+
+.admin-navigate {
+  display: flex;
+  flex-direction: column;
+  margin: 0rem;
+  padding: 0rem;
+  gap: 1rem;
+}
+
+.admin-navigate-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 

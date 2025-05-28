@@ -32,9 +32,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 100;
-  background-color: var(
-    --bcg-main-color
-  ); /* Set the background color for all page*/
+  background-color: red; /* Set the background color for all page*/
   background-image: url("../images/whiteblur-stain.png"),
     url("../images/whiteblur-stain.png"); /*Add TWO stains to the bcg as images*/
   background-size: 800px, 800px; /* Set the size of the stain */

@@ -11,6 +11,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp.taikukkula.fi
+        server: 194.197.245.5
         username: pts24_hatch
-        password: ${{ sQaCa)//OjL[qRIo }}
+        password: ${{ secrets.ftp_password }}

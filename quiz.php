@@ -146,6 +146,8 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         const arrayOfInputs = document.querySelectorAll("input");
         //For each input element on the page:
         arrayOfInputs.forEach(inputElement => {
+            //Processing the click on the input field:
+            inputElement.addEventListener("click", hidePlaceholder);
             //Store the name of input field to find and compare it later in the DB:
             let inputName = inputElement.name;
             <?php
@@ -192,6 +194,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         ?>
 
         // Processing the Check answer button:
+        
         document.getElementById("check").addEventListener("click", function(event) {
             // event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
 
@@ -276,6 +279,13 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
                 }
             ?>
         })
+
+        //Function to hide placeholder:
+        function hidePlaceholder(e) {
+            this.removeAttribute("placeholder");
+            this.classList.remove("wrong");
+            this.classList.remove("correct");
+        }
     </script>
 </body>
 

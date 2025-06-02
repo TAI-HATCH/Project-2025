@@ -67,6 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required>
             </div>
 
+            <div class="admin-add-upload-svg">
+                <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button">
+                
+            </div>
+
             <div class="admin-add-content-checkbox-selection-content">
                 <label for="admin-add-content-checkbox-selection-content">Select topics (optional)</label>
                 <div class="admin-add-content-checkbox-selection">

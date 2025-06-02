@@ -425,7 +425,8 @@ input.wrong{
 }
 
 .admin-add-content-label,
-.admin-add-content-checkbox-selection-content {
+.admin-add-content-checkbox-selection-content,
+.upload-svg-button-label {
   font-size: 1.5rem;
   width: 30rem;
   text-align: start;
@@ -513,7 +514,8 @@ a.admin-start-action:hover {
   margin-bottom: 1rem;
 }
 
-.admin-add-content {
+.admin-add-content,
+.admin-add-upload-svg {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -523,6 +525,33 @@ a.admin-start-action:hover {
   padding: 1rem;
   border-radius: 1rem;
   width: 30rem;
+}
+
+input[type="file"]{
+  cursor: pointer;
+  font-family: "Nunito Sans", sans-serif;
+  width: auto;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  color: var(--dark-color);
+  background-color: var(--brand-secondary-color);
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  border: 0.05rem solid transparent;
+  width: 50%;
+  transition: border-color 0.8s;
+  cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  border-color: var(--hover-color);
+}
+
+input[type="file" i]{
+  color: var(--dark-color);
 }
 
 .admin-add-content-input-field {

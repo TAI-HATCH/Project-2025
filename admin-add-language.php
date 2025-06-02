@@ -64,13 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required>
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon()">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button">
-                
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="createNameForSvgIcon()">
+                <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
             <div class="admin-add-content-checkbox-selection-content">
@@ -108,6 +108,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
         <button type="submit" class="upload-to-database-button">Upload to database</button>
     </form>
+
+    <!-- Scripts for this page -->
+    <script>
+        // Script to create name for selected svg-file:
+        function createNameForSvgIcon() {
+            let infoText = "";
+            if (document.getElementById("add-language").value === "") {
+                infoText = `First you should to enter the name of the programming language!`;
+                document.getElementById("add-language").focus();
+            } else {
+                let insertedLanguageName = document.getElementById("add-language").value.toLowerCase().replaceAll(" ", "");
+                // console.log("Inserted language name is", insertedLanguageName);
+                let newName = `${insertedLanguageName}-icon.svg`;
+                // console.log("New name is:", newName);
+                infoText = `The icon-file will be uploaded to the project under the name: <b>${newName}</b>`;
+            }
+            innerTextToParagragh(infoText);
+
+
+
+            // let fileElement = document.getElementById("svg-file");
+            // console.log("Just an element:", fileElement);
+            // console.log("Just files:", fileElement.files);
+            // // console.log("Just an element:", fileElement[0]["name"]);
+            // if ('files' in fileElement){
+            //     console.log("fileElement.files[0]:", fileElement.files[0]);
+            //         console.log("fileElement.files[0]['name']:", fileElement.files[0]["name"]);  
+            //     };                 
+
+        }
+
+        function innerTextToParagragh(text) {
+            let svgInfoTextElement = document.getElementById("upload-svg-info-text");
+            svgInfoTextElement.innerHTML = text;
+        }
+    </script>
 </body>
 
 </html>

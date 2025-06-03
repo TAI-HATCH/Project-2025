@@ -652,6 +652,28 @@ a.admin-start-action:hover {
   border-radius: 0.5rem;
 }
 
+/* ADMIN PREVIEW */
+
+.admin-preview, .admin-preview-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-preview h1  {
+  font-weight: 100;
+  margin-bottom: 1rem;
+
+}
+
+.admin-preview-field {
+  background-color: var(--brand-color);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
 /* RESPONSIVE STYLE */
 
 @media screen and (max-width: 60rem) {

@@ -36,6 +36,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Language name is required.";
     }
+
+    // Processing the file:
+    // https://www.w3schools.com/php/php_file_upload.asp
+    $target_dir = "images/"; //specifies the directory where the file is going to be placed
+    //Get the value of the attribute "name" of the input field type="file":s
+    $target_file = $target_dir . basename($_FILES["svg-file"]["name"]); //specifies the path of the file to be uploaded. 
+    $newFileName = basename($_POST["newFileName"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); //holds the file extension of the file (in lower case)
+
+    // Allow certain file formats
+    if ($imageFileType != "svg") {
+        echo "Sorry, only SVG files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if image file is a actual image or fake image
+    if (isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["svg-file"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["svg-file"]["tmp_name"], $target_file)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["svg-file"]["name"])) . " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
 }
 ?>
 
@@ -60,16 +99,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon()"  onblur="innerTextToParagragh()">
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon()" onblur="innerTextToParagragh()">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="innerTextToParagragh()">
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload()">
                 <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
@@ -117,38 +156,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function createNameForSvgIcon() {
             let inputLanguageNameElement = document.getElementById("add-language"); // define the value of input field
             let insertedLanguageName = inputLanguageNameElement.value.toLowerCase().replaceAll(" ", ""); //Normalize the name: convert to lowercase and remove all spaces
-            // console.log("Inserted language name is", insertedLanguageName);
             let newName = `${insertedLanguageName}-icon.svg`; // Add the ending to the file name and extension
-            // console.log("New name is:", newName); 
             return newName;
         }
 
         //Function to handle upload button:
         function handleFileUpload() {
+            checkFileType(); // call the function to check whether the admin upload svg-type file or not
             let inputLanguageName = document.getElementById("add-language").value; // define the value of input field
             let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p 
             if (inputLanguageName === "") {
-                console.log("The name will be displaed later");
                 svgInfoTextElement.innerHTML = `First you should to enter the name of the programming language!`; //inform admin about the need to first enter the language name
                 document.getElementById("add-language").focus(); // focus on the input field if the input field is empty
             } else {
                 innerTextToParagragh(); // call the function to handle p element
+                
+                let newFileName = createNameForSvgIcon();
+                let file = document.getElementById("svg-file").files[0];
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("newFileName", newFileName);
+
+                fetch("upload.php", {
+                    method: "POST",
+                    body: formData
+                });
             }
         }
 
-        
-        // let fileElement = document.getElementById("svg-file");
-        // console.log("Just an element:", fileElement);
-        // console.log("Just files:", fileElement.files);
+        function checkFileType() {
+            let fileElement = document.getElementById("svg-file");
+            let fileToCheck = '';
+            if ('files' in fileElement) {
+                fileToCheck = fileElement.files[0]["type"];
+            };
+            if (fileToCheck !== "image/svg+xml") {
+                handleErrorPageChangeTheTypeOfTheFile();
+            }
+        }
 
-        // // console.log("Just an element:", fileElement[0]["name"]);
-        // if ('files' in fileElement){
-        //     console.log("fileElement.files[0]:", fileElement.files[0]);
-        //     console.log("Just type of the file:", fileElement.files[0]["type"]);
-        //         console.log("fileElement.files[0]['name']:", fileElement.files[0]["name"]);  
-        //     };                 
+        function handleErrorPageChangeTheTypeOfTheFile() {
+            alert("Choose another type of the file. It should be .svg");
+            document.getElementById("svg-file").value = "";
+        }
 
-        //Function to form and insert info-text depending on whether the user entered a language name or not:
+        //Function to form and insert info-text depending on whether the admin entered a language name or not:
         function innerTextToParagragh() {
             let infoText = "";
             let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p 
@@ -162,7 +214,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             svgInfoTextElement.innerHTML = infoText; // input text in the p element
         }
-
     </script>
 </body>
 

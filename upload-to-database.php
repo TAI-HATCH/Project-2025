@@ -1,7 +1,7 @@
 <?php
 include_once "connection.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the form if form's request method is is "post"
+if ($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST['confirm_upload'])) { // Grab the inputted data from the form if form's request method is is "post" and if upload has been confirmed on preview page
     $language_id = $_POST['language_id'] ?? null; // The "$_POST"-variable has the inputted data of [*id*]
     $topic_id = $_POST['topic_id'] ?? null; // ?? Means that if the array [] is empty, return null instead of having an error on hand
     $question_text = $_POST['question'] ?? '';

@@ -34,7 +34,7 @@ include "admin-log.php";
     <section class="root-content">
     <div class="admin-question-upload">
         
-        <form action="upload-to-database.php" method="POST"> <!--Creates the form so that inputted data can be put into POST-variables-->
+        <form action="admin-preview.php" method="POST"> <!--Creates the form so that inputted data can be put into POST-variables-->
             <div class="admin-choice">
                 <label for="admin-programming-language-choice">Choose programming language</label>
                 <select class="admin-dropdown-menu" name="language_id" id="language_id"> 

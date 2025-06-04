@@ -57,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1 hidden>HATCH</h1>
 
-    <?php include 'header.php' ?>
+    <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post">
+    <form method="post" action="admin-preview.php">
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
         </section>
-        <button type="submit" class="upload-to-database-button">Upload to database</button>
+        <button type="submit" class="upload-to-database-button">Preview and upload</button>
     </form>
 </body>
 

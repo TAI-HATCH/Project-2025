@@ -373,21 +373,40 @@ input.wrong{
   gap: 1rem;
 }
 
+.about img {
+  width: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-text-jump-in img {
+  width: 3rem;
+}
+
+
 .about-text {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
   font-size: 1rem;
   border-radius: 1rem;
   padding: 1rem;
   gap: 4rem;
   margin: 1rem;
+  
 }
 
+.about-text-p:hover {
+  transform: scale(98%);
+}
+
+
 .about-text-p {
-  background-color: var(--brand-secondary-color);
+  background-color: var(--highlight-color);
   border-radius: 1rem;
   width: 10rem;
   padding: 1rem;
+ box-shadow: 0rem 0rem 1rem 0.0rem var(--highlight-color);
+ transition: 0.5s;
 }
 
 
@@ -744,6 +763,21 @@ a.admin-start-action:hover {
 
   .code-snippet {
     font-size: 1rem;
+  }
+
+  .about-text {
+    justify-content: center;
+    gap: 2rem;
+    padding: 0rem;
+    margin: 0rem;
+  }
+
+  .about-text-p {
+    width: 7rem;
+  }
+
+  .about-text-jump-in {
+    margin-top: 1rem;
   }
 
   .admin-choice,

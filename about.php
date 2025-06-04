@@ -47,7 +47,7 @@
                     <p>Open the hatch and jump in!</p>
                 </div>
                 <div>
-                    <a class="button" href="admin-start.php">To start page</a>
+                    <a class="button" href="selecting-language.php">To training</a>
                 </div>
             
         </div>

@@ -1,5 +1,6 @@
 <?php
 include_once "connection.php";
+include_once "sql_query.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { // Grab the inputted data from the form if form's request method is is "post" and if upload has been confirmed on preview page
     $language_id = $_POST['language_id'] ?? null; // The "$_POST"-variable has the inputted data of [*id*]

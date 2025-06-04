@@ -182,6 +182,7 @@ ul {
 .icon-lang-list {
   display: flex;
   gap: 13.625rem;
+  flex-wrap: wrap;
   justify-content: center;
 }
 

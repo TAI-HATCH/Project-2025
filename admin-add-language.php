@@ -3,7 +3,9 @@
 include "admin-log.php";
 include_once "sql_query.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check whether the form was sent using the method=post and whether the request contains a file with the "name"="svg-file":
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
+
     echo var_dump($_POST['topic']); // Prints the content of the array "topic" in the top of the page
     $language_name = $_POST['add-language'] ?? null; // If there is no input, return "null"
     $selected_topics = $_POST['topic'] ?? []; // If nothing in the array, return an empty array "[]"
@@ -32,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        header("Location: admin-upload-success.php");
+        // header("Location: admin-upload-success.php");
     } else {
         echo "Language name is required.";
     }
@@ -40,38 +42,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Processing the file:
     // https://www.w3schools.com/php/php_file_upload.asp
     $target_dir = "images/"; //specifies the directory where the file is going to be placed
-    //Get the value of the attribute "name" of the input field type="file":s
-    $target_file = $target_dir . basename($_FILES["svg-file"]["name"]); //specifies the path of the file to be uploaded. 
+    //Get a name that was previously generated in JS code:
+    //basename() is a save way to get the name of the file without potentially dangerous paths:
     $newFileName = basename($_POST["newFileName"]);
+    $target_file = $target_dir . $newFileName; //Form the path with a file name, that should be uploaded to the server
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); //holds the file extension of the file (in lower case)
 
-    // Allow certain file formats
-    if ($imageFileType != "svg") {
-        echo "Sorry, only SVG files are allowed.";
+       // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
         $uploadOk = 0;
     }
 
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["svg-file"]["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
-
     // Check if $uploadOk is set to 0 by an error
+
+    echo "<pre>";
+    var_dump($_FILES);
+    echo "</pre>";
+
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["svg-file"]["tmp_name"], $target_file)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["svg-file"]["name"])) . " has been uploaded.";
+        if (move_uploaded_file($_FILES["svg-file"]["tmp_name"], $target_file)) { //copy the temporary file to the server in the folder specified by $target_file
+        ?>
+            <script>
+                console.log(`echo "The file " . <?php htmlspecialchars(basename($_FILES["svg-file"]["name"])) ?> . " has been uploaded to <?php $target_file ?>.";`);
+            </script>
+        <?php
+
         } else {
+        ?>
+            <script>
+                console.log(`Sorry, there was an error uploading your file.`);
+            </script>
+<?php
             echo "Sorry, there was an error uploading your file.";
         }
     }
@@ -145,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
         </section>
-        <button type="submit" class="upload-to-database-button">Upload to database</button>
+        <button type="submit" class="upload-to-database-button" >Upload to database</button>
     </form>
 
     <!-- Scripts for this page -->
@@ -170,14 +176,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 document.getElementById("add-language").focus(); // focus on the input field if the input field is empty
             } else {
                 innerTextToParagragh(); // call the function to handle p element
-                
+
                 let newFileName = createNameForSvgIcon();
-                let file = document.getElementById("svg-file").files[0];
+                console.log("the new name, that will be is", newFileName);
+                let svgFile = document.getElementById("svg-file").files[0];
                 const formData = new FormData();
-                formData.append("file", file);
+                formData.append("svg-file", svgFile);
                 formData.append("newFileName", newFileName);
 
-                fetch("upload.php", {
+                fetch("admin-add-language.php", {
                     method: "POST",
                     body: formData
                 });

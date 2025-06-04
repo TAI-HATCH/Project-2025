@@ -373,6 +373,10 @@ input.wrong{
   gap: 1rem;
 }
 
+.about-hero {
+  padding-bottom: 2rem;
+}
+
 .about img {
   width: 1.5rem;
   margin-bottom: 1rem;

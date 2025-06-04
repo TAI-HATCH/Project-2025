@@ -18,7 +18,7 @@
 
     <section class="root-content">
         <div class="about">
-            <p>Hatch is a project with the goal of creating a practice space for coding.</p>
+            <p class="about-hero">Hatch is a project with the goal of creating a practice space for coding.</p>
             <div class="about-text">
                 <div class="about-text-p">
                     <img src="./images/about-code.png" alt="Brackets">

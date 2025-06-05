@@ -1,6 +1,6 @@
 <?php
+  // same as yhteys.php
 
-// same as yhteys.php
 foreach (parse_ini_file('.env') as $key => $value) {
   $_ENV[$key] = $value;
 }
@@ -11,6 +11,7 @@ $password = $_ENV['DB_PASSWORD'];
 $db_name = $_ENV['DB_NAME'];
 
 try {
+
     $conn = new PDO("mysql:host=$servername;dbname=$db_name", $username, $password); // connect to the database in phpMyAdmin
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Don't know, don't care

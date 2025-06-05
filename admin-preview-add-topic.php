@@ -1,1 +1,0 @@
-<input type="hidden" name="form_type" value="add_topic">

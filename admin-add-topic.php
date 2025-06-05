@@ -4,9 +4,9 @@ include "admin-log.php";
 include_once "sql_query.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo var_dump($_POST['language']); // Prints the content of the array "language" in the top of the page
+    echo var_dump($_POST['languages']); // Prints the content of the array "language" in the top of the page
     $topic_name = $_POST['add-topic'] ?? null; // If nothing is added in the form, return null 
-    $selected_languages = $_POST['language'] ?? []; // If nothing in the array, return an empty array "[]"
+    $selected_languages = $_POST['languages'] ?? []; // If nothing in the array, return an empty array "[]"
 
     if (!empty($topic_name)) {
         $stmt = $conn->prepare("INSERT INTO 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         languages_topic (language_id, topic_id) 
                                     VALUES 
                                         (:language_id, :topic_id)");
-                                        
+
             $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
             $stmt->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
 
@@ -60,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post">
+    <form method="post" action="admin-preview.php">
+        <input type="hidden" name="form_type" value="add_topic">
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>
@@ -83,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li>
                                 <input class='checkbox' type='checkbox'
                                     id="language<?= ($language['language_id']) ?>"
-                                    name="language[]"
+                                    name="languages[]"
                                     value="<?= ($language['language_id']) ?>">
 
                                 <!--id: Print ID for this topic;
-                                    name: collect all selected languages to array language[];
-                                    value: define value for checkbox-->
+                                        name: collect all selected languages to array languages[];
+                                        value: define value for checkbox-->
 
                                 <label for="language<?= ($language['language_id']) ?>"> <!--Link checkbox to topic-->
                                     <?= ($language['language_name']) ?> <!--Print language-->

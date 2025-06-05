@@ -1,69 +1,81 @@
 <?php
-
 include "admin-log.php";
+include_once "sql_query.php";
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: admin-start.php"); // Redirect to admin start page if accessed directly
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: admin-start.php");
     exit;
 }
 
-// Grab all POST data from form on page
-$language_id = $_POST['language_id'] ?? null;
-$topic_id = $_POST['topic_id'] ?? null;
-$question_text = $_POST['question'] ?? '';
-$text_before = $_POST['text_before'] ?? '';
-$text_after = $_POST['text_after'] ?? '';
-$answer_value = $_POST['answer'] ?? '';
-
-// Build form content preview
-$form_content = "<div><span>" . $text_before . "</span><input type=\"text\" name=\"answer_one\"><span>" . $text_after . "</span></div>";
+$form_type = $_POST['form_type'] ?? null;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HATCH - Quiz</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-        rel="stylesheet" />
-
-
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8" />
+    <title>HATCH - Preview</title>
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
-
-
 <body>
     <section>
         <div class="admin-preview">
-        <h1>Preview Question</h1>
-        <div class="admin-preview-field">
+            <?php
+            switch ($form_type) {
+                case 'add_language':
+                    $language_name = $_POST['add-language'] ?? '';
+                    $selected_topics = $_POST['topic'] ?? [];
 
-        <?= $question_text ?>
-        <?= $form_content ?>
-        </div>
+                    echo "<h1>Preview: Add Programming Language</h1>";
+                    echo "<p><strong>Language Name:</strong> " . htmlspecialchars($language_name) . "</p>";
 
-        <form method="POST" action="upload-to-database.php">
-            <!-- Pass all data forward as hidden fields -->
-            <input type="hidden" name="language_id" value="<?= $language_id ?>">
-            <input type="hidden" name="topic_id" value="<?= $topic_id ?>">
-            <input type="hidden" name="question" value="<?= $question_text ?>">
-            <input type="hidden" name="text_before" value="<?= $text_before ?>">
-            <input type="hidden" name="text_after" value="<?= $text_after ?>">
-            <input type="hidden" name="answer" value="<?= $answer_value ?>">
+                    if (!empty($selected_topics)) {
+                        $topics = get_all_topics();
+                        $topic_names = [];
+                        foreach ($topics as $topic) {
+                            if (in_array($topic['topic_id'], $selected_topics)) {
+                                $topic_names[] = htmlspecialchars($topic['topic_name']);
+                            }
+                        }
+                        echo "<p><strong>Selected Topics:</strong> " . implode(", ", $topic_names) . "</p>";
+                    } else {
+                        echo "<p><strong>No topics selected.</strong></p>";
+                    }
 
-            <button class="button" type="submit" name="confirm_upload" value="1">Confirm upload</button>
-        </form>
+                    echo '<form method="POST" action="upload-to-database.php">';
+                    echo '<input type="hidden" name="form_type" value="add_language">';
+                    echo '<input type="hidden" name="add-language" value="' . htmlspecialchars($language_name) . '">';
+                    foreach ($selected_topics as $topic_id) {
+                        echo '<input type="hidden" name="topic[]" value="' . htmlspecialchars($topic_id) . '">';
+                    }
+                    echo '<button type="submit">Upload to database</button>';
+                    echo '</form>';
+                    break;
 
-        <form method="GET" action="admin-add-question.php" style="margin-top: 1em;">
-            <button class="button" type="submit">Cancel</button>
-        </form>
+                case 'edit_language':
+                    // Similar block, with preview of current and edited values
+                    break;
+
+                case 'add_topic':
+                    // Preview topic name
+                    break;
+
+                case 'add_question':
+                    // Preview question structure and answer
+                    break;
+
+                // Add more cases as needed
+
+                default:
+                    echo "<p>Invalid preview type.</p>";
+                    break;
+            }
+            ?>
+
+            <form method="GET" action="admin-start.php">
+                <button class="button" type="submit">Cancel</button>
+            </form>
         </div>
     </section>
 </body>
-
 </html>

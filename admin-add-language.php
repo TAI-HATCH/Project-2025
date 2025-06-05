@@ -60,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post" action="admin-preview-language.php">
+    <form method="post" action="admin-preview.php">
+        <input type="hidden" name="form_type" value="add_language">
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>

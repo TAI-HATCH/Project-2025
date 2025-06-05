@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             <!-- Pass the data from the form onto upload-to-database.php-->
 
             <form method="POST" action="upload-to-database.php">
+                <input type="hidden" name="form_type" value="add_language">
+                
                 <input type="hidden" name="add-language" value="<?= htmlspecialchars($language_name) ?>">
                 <?php foreach ($selected_topics as $topic_id): ?>
                     <input type="hidden" name="topic[]" value="<?= htmlspecialchars($topic_id) ?>">

@@ -13,7 +13,7 @@
           <a href="selecting-language.php" class="nav-link">Training</a>
         </li>
         <li class="nav-list-item">
-          <a href="#" class="nav-link">About</a>
+          <a href="about.php" class="nav-link">About</a>
         </li>
         <!--<li class="nav-list-item">
             <a href="#" class="nav-link">Sign up</a> Not for MVP -->

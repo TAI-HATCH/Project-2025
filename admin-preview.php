@@ -33,7 +33,7 @@ $form_type = $_POST['form_type'] ?? null;
                     <h1>Preview add programming language</h1>
                     <p><strong>Language Name:</strong> <?= htmlspecialchars($language_name) ?></p>
 
-                    <?
+                    <?php
                     if (!empty($selected_topics)) {
                         $topics = get_all_topics();
                         $topic_names = [];
@@ -58,7 +58,7 @@ $form_type = $_POST['form_type'] ?? null;
                         <?php } ?>
                         <button type="submit">Upload to database</button>
                     </form>
-            <?php
+                <?php
                     break;
 
                 // ========= EDIT LANGUAGE ==========
@@ -68,14 +68,14 @@ $form_type = $_POST['form_type'] ?? null;
                 // ========= ADD TOPIC ==========
                 case 'add_topic':
                     $topic_name = $_POST['add-topic'] ?? '';
-                    $selected_languages = $_POST['languages'] ?? [];?>
+                    $selected_languages = $_POST['languages'] ?? []; ?>
 
                     <h1>Preview add topic</h1>
                     <p><strong>Topic name:</strong><?= $topic_name ?></p>
 
                     <?php
-                    
-                        if (!empty($selected_languages)) {
+
+                    if (!empty($selected_languages)) {
                         $languages = get_languages();
                         $language_names = [];
                         foreach ($languages as $language) {
@@ -90,16 +90,16 @@ $form_type = $_POST['form_type'] ?? null;
                     <?php } ?>
 
                     <form method="POST" action="upload-to-database.php">
-                    <input type="hidden" name="form_type" value="add_topic">
-                    <input type="hidden" name="add-topic" value="<?= $topic_name ?>">
-                    
-                   <?php 
-                   foreach ($selected_languages as $language_id) { ?>
-                        <input type="hidden" name="languages[]" value="<?= $language_id ?>">
-                    <?php } ?>
-                    <button type="submit">Upload to database</button>
+                        <input type="hidden" name="form_type" value="add_topic">
+                        <input type="hidden" name="add-topic" value="<?= $topic_name ?>">
+
+                        <?php
+                        foreach ($selected_languages as $language_id) { ?>
+                            <input type="hidden" name="languages[]" value="<?= $language_id ?>">
+                        <?php } ?>
+                        <button type="submit">Upload to database</button>
                     </form>
-                    <?php break;
+            <?php break;
 
                 case 'edit topic':
                     break;

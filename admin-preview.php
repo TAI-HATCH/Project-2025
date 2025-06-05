@@ -28,10 +28,12 @@ $form_type = $_POST['form_type'] ?? null;
                 case 'add_language':
                     $language_name = $_POST['add-language'] ?? '';
                     $selected_topics = $_POST['topic'] ?? [];
+            ?>
 
-                    echo "<h1>Preview add programming language</h1>";
-                    echo "<p><strong>Language Name:</strong> " . htmlspecialchars($language_name) . "</p>";
+                    <h1>Preview add programming language</h1>
+                    <p><strong>Language Name:</strong> <?= htmlspecialchars($language_name) ?></p>
 
+                    <?
                     if (!empty($selected_topics)) {
                         $topics = get_all_topics();
                         $topic_names = [];
@@ -40,19 +42,23 @@ $form_type = $_POST['form_type'] ?? null;
                                 $topic_names[] = htmlspecialchars($topic['topic_name']);
                             }
                         }
-                        echo "<p><strong>Selected Topics:</strong> " . implode(", ", $topic_names) . "</p>";
-                    } else {
-                        echo "<p><strong>No topics selected.</strong></p>";
-                    }
+                    ?>
+                        <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
+                    <?php } else { ?>
+                        <p>No topics selected.</p>
+                    <?php } ?>
 
-                    echo '<form method="POST" action="upload-to-database.php">';
-                    echo '<input type="hidden" name="form_type" value="add_language">';
-                    echo '<input type="hidden" name="add-language" value="' . htmlspecialchars($language_name) . '">';
-                    foreach ($selected_topics as $topic_id) {
-                        echo '<input type="hidden" name="topic[]" value="' . htmlspecialchars($topic_id) . '">';
-                    }
-                    echo '<button type="submit">Upload to database</button>';
-                    echo '</form>';
+                    <form method="POST" action="upload-to-database.php">
+                        <input type="hidden" name="form_type" value="add_language">
+                        <input type="hidden" name="add-language" value=" <?= $language_name ?>">
+
+
+                        <?php foreach ($selected_topics as $topic_id) { ?>
+                            <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
+                        <?php } ?>
+                        <button type="submit">Upload to database</button>
+                    </form>
+            <?php
                     break;
 
                 // ========= EDIT LANGUAGE ==========
@@ -62,38 +68,43 @@ $form_type = $_POST['form_type'] ?? null;
                 // ========= ADD TOPIC ==========
                 case 'add_topic':
                     $topic_name = $_POST['add-topic'] ?? '';
-                    $selected_languages = $_POST['languages'] ?? [];
+                    $selected_languages = $_POST['languages'] ?? [];?>
 
-                    echo "<h1>Preview add topic</h1>";
-                    echo "<p><strong>Topic name:</strong> " . htmlspecialchars($topic_name) . "</p>";
+                    <h1>Preview add topic</h1>
+                    <p><strong>Topic name:</strong><?= $topic_name ?></p>
 
-                    if (!empty($selected_languages)) {
+                    <?php
+                    
+                        if (!empty($selected_languages)) {
                         $languages = get_languages();
                         $language_names = [];
                         foreach ($languages as $language) {
                             if (in_array($language['language_id'], $selected_languages)) {
                                 $language_names[] = htmlspecialchars($language['language_name']);
                             }
-                        }
-                        echo "<p><strong>Selected languages:</strong> " . implode(", ", $language_names) . "</p>";
-                    } else {
-                        echo "<p><strong>No languages selected.</strong></p>";
-                    }
+                        } ?>
 
-                    echo '<form method="POST" action="upload-to-database.php">';
-                    echo '<input type="hidden" name="form_type" value="add_topic">';
-                    echo '<input type="hidden" name="add-topic" value="' . htmlspecialchars($topic_name) . '">';
-                    foreach ($selected_languages as $language_id) {
-                        echo '<input type="hidden" name="languages[]" value="' . htmlspecialchars($language_id) . '">';
-                    }
-                    echo '<button type="submit">Upload to database</button>';
-                    echo '</form>';
-                    break;
+                        <p><strong>Selected languages:</strong> <?= implode(", ", $language_names) ?></p>
+                    <?php } else { ?>
+                        <p><strong>No languages selected.</strong></p>
+                    <?php } ?>
+
+                    <form method="POST" action="upload-to-database.php">
+                    <input type="hidden" name="form_type" value="add_topic">
+                    <input type="hidden" name="add-topic" value="<?= $topic_name ?>">
+                    
+                   <?php 
+                   foreach ($selected_languages as $language_id) { ?>
+                        <input type="hidden" name="languages[]" value="<?= $language_id ?>">
+                    <?php } ?>
+                    <button type="submit">Upload to database</button>
+                    </form>
+                    <?php break;
 
                 case 'edit topic':
                     break;
 
-                 // ========= ADD QUESTION ==========
+                // ========= ADD QUESTION ==========
                 case 'add_question':
                     // Grab all POST data from form on page
                     $language_id = $_POST['language_id'] ?? null;
@@ -109,7 +120,7 @@ $form_type = $_POST['form_type'] ?? null;
                     echo $question_text;
                     echo $form_content;
                     break;
-                
+
                 case 'edit question':
                     break;
 

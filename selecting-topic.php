@@ -51,7 +51,7 @@ $_SESSION["topics"] = $topics;
         // Script for filling the list class="topic-list" with elements:
         <?php
         if (isset($topics)) {
-            $language_icon_name = str_replace(" ", "", strtolower($topics[0]["language_name"]));
+            $language_icon_name = str_replace(" ", "-", strtolower($topics[0]["language_name"]));
         ?>
 
             langIcon = document.createElement("img");

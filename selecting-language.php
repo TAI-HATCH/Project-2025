@@ -45,7 +45,7 @@ $_SESSION["languages"] = $languages;
         if (isset($languages)) {
             foreach ($languages as $language) { // Make a loop for every element in array of languages
                 $language_name = $language["language_name"];
-                $icon_name = strtolower($language["language_name"]);
+                $icon_name = str_replace(" ", "", strtolower($language["language_name"])); // Create a string based on the language's name for later use as the icon name
                 $lang_id = $language["language_id"];
         ?>
 

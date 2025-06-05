@@ -182,6 +182,7 @@ ul {
 .icon-lang-list {
   display: flex;
   gap: 13.625rem;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -366,6 +367,54 @@ input.wrong{
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
+.about {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  gap: 1rem;
+}
+
+.about-hero {
+  padding-bottom: 2rem;
+}
+
+.about img {
+  width: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-text-jump-in img {
+  width: 3rem;
+}
+
+
+.about-text {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  gap: 4rem;
+  margin: 1rem;
+  
+}
+
+.about-text-p:hover {
+  transform: scale(98%);
+}
+
+
+.about-text-p {
+  background-color: var(--highlight-color);
+  border-radius: 1rem;
+  width: 10rem;
+  padding: 1rem;
+ box-shadow: 0rem 0rem 1rem 0.0rem var(--highlight-color);
+ transition: 0.5s;
+}
+
+
 /* ADMIN PAGEs */
 
 .root-section h2 {
@@ -425,7 +474,8 @@ input.wrong{
 }
 
 .admin-add-content-label,
-.admin-add-content-checkbox-selection-content {
+.admin-add-content-checkbox-selection-content,
+.upload-svg-button-label {
   font-size: 1.5rem;
   width: 30rem;
   text-align: start;
@@ -513,7 +563,8 @@ a.admin-start-action:hover {
   margin-bottom: 1rem;
 }
 
-.admin-add-content {
+.admin-add-content,
+.admin-add-upload-svg {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -523,6 +574,41 @@ a.admin-start-action:hover {
   padding: 1rem;
   border-radius: 1rem;
   width: 30rem;
+}
+
+input[type="file"]{
+  cursor: pointer;
+  font-family: "Nunito Sans", sans-serif;
+  width: auto;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  color: var(--dark-color);
+  background-color: var(--brand-secondary-color);
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  border: 0.05rem solid transparent;
+  width: 50%;
+  transition: border-color 0.8s;
+  cursor: pointer;
+  margin-right: 1rem; /*Distance between button and text about uploaded file */ 
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  border-color: var(--hover-color);
+}
+
+input[type="file" i]{
+  color: var(--dark-color);
+}
+
+.upload-svg-info-text{
+  font-size: 0.75rem;
+  text-align: left;
+  height: 1.3rem;
+  /* display: none; */
 }
 
 .admin-add-content-input-field {
@@ -741,6 +827,21 @@ a.admin-start-action:hover {
 
   .code-snippet {
     font-size: 1rem;
+  }
+
+  .about-text {
+    justify-content: center;
+    gap: 2rem;
+    padding: 0rem;
+    margin: 0rem;
+  }
+
+  .about-text-p {
+    width: 7rem;
+  }
+
+  .about-text-jump-in {
+    margin-top: 1rem;
   }
 
   .admin-choice,

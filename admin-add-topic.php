@@ -3,7 +3,9 @@
 include "admin-log.php";
 include_once "sql_query.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check whether the form was sent using the method=post and whether the request contains a file with the "name"="svg-file":
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
+    
     echo var_dump($_POST['languages']); // Prints the content of the array "language" in the top of the page
     $topic_name = $_POST['add-topic'] ?? null; // If nothing is added in the form, return null 
     $selected_languages = $_POST['languages'] ?? []; // If nothing in the array, return an empty array "[]"
@@ -32,10 +34,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        header("Location: admin-upload-success.php");
+        // header("Location: admin-upload-success.php");
     } else {
         echo "Topic name is required.";
     }
+
+    // Processing the file:
+    // https://www.w3schools.com/php/php_file_upload.asp
+
+    //specifies the directory where the file is going to be placed:
+        $target_dir = "images/";
+        //Get the temporary file from the server with original name:
+        $tempFile = $_FILES["svg-file"]["tmp_name"];
+        //Get the extension of the selected file by admin:
+        $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
+        //create a new name for the file according to the defined rules for uploading to the server: 
+        $newFileName = str_replace(" ", "-", strtolower($topic_name)) . "-icon";
+        $newFile = $newFileName . '.' . $fileExtension;
+    
+        $target_file = $target_dir . $newFile; //Form the path with a file name, that should be uploaded to the server
+        $uploadOk = 1;
+        // $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); //holds the file extension of the file (in lower case)
+    
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+    
+        // Check if $uploadOk is set to 0 by an error
+    
+        // echo "<pre>";
+        // var_dump($_FILES);
+        // echo "</pre>";
+    
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            //copy the temporary file to the server with a new name in the folder specified by $target_file:
+            if (move_uploaded_file($tempFile, $target_file)) {
+    ?>
+                <script>
+    
+                    console.log(`The file <?php echo htmlspecialchars($_FILES["svg-file"]["name"]) ?>  has been uploaded to <?php echo $target_file ?>.`);
+                </script>
+            <?php
+    
+            } else {
+            ?>
+                <script>
+                    console.log(`Sorry, there was an error uploading your file.`);
+                </script>
+    <?php
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
 }
 ?>
 
@@ -60,19 +114,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post" action="admin-preview.php">
-        <input type="hidden" name="form_type" value="add-topic">
+    <form method="post" enctype="multipart/form-data"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>
-                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here." required>
+                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here." required onchange="createNameForSvgIcon('add-topic')" onblur="innerTextToParagragh('add-topic')">
+            </div>
+
+            <div class="admin-add-upload-svg">
+                <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-topic')">
+                <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
             <div class="admin-add-content-checkbox-selection-content">
                 <label for="admin-add-content-checkbox-selection-content">Select languages (optional)</label>
                 <div class="admin-add-content-checkbox-selection">
                     <label for="admin-add-content-checkbox-selection-list">Languages:</label>
-
 
                     <ul>
                         <?php
@@ -81,7 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         foreach ($languages as $language) : ?>
 
-                            <li>
+                            <li> <!--It is important to use name="languages[]" with [] in the case with checkbox. 
+                            If we will not, then in PHP in $_POST['languages'] we recieve only the value of last element -->
                                 <input class='checkbox' type='checkbox'
                                     id="language<?= ($language['language_id']) ?>"
                                     name="languages[]"
@@ -101,8 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
         </section>
-        <button type="submit" class="upload-to-database-button">Preview and upload</button>
+
+        <button type="submit" class="upload-to-database-button">Upload to database</button>
     </form>
+
+<!-- Scripts for this page -->
+ <script src="./js/upload-icon.js"></script>
+ 
 </body>
 
 </html>

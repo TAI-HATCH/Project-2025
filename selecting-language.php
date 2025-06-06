@@ -32,6 +32,7 @@ $_SESSION["languages"] = $languages;
 <body>
 
     <?php include 'header.php' ?>
+    
     <section class="root-section">
         <h2>Select programming language:</h2>
         <ul class="icon-lang-list" id="lang-list"> <!--Create an unordered list of icons, each of which corresponds to its own programming language -->
@@ -45,7 +46,7 @@ $_SESSION["languages"] = $languages;
         if (isset($languages)) {
             foreach ($languages as $language) { // Make a loop for every element in array of languages
                 $language_name = $language["language_name"];
-                $icon_name = str_replace(" ", "", strtolower($language["language_name"])); // Create a string based on the language's name for later use as the icon name
+                $icon_name = str_replace(" ", "-", strtolower($language["language_name"])); // Create a string based on the language's name for later use as the icon name
                 $lang_id = $language["language_id"];
         ?>
 

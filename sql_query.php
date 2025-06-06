@@ -25,6 +25,28 @@ function get_languages() // Function to get an array of programming languages fr
     return $languages;
 }
 
+function get_selected_language_name($language_id)
+{
+    global $conn;
+
+    //Send request to the DB to the table Languages with language_id:
+
+    $stmt = $conn->prepare("SELECT 
+                                language_id, language_name, is_active 
+                            FROM 
+                                languages
+                            WHERE
+                                is_active = 1
+                            AND
+                                language_id = :language_id;");
+    $stmt->bindParam(':language_id', $language_id); // Binding together (reflecting) :language_id and $language_id
+    $stmt->execute(); // Run the thing
+
+    $language = $stmt->fetch(PDO::FETCH_ASSOC); // Take the info about the language into an array
+
+    return $language ? $language["language_name"] : null; //ternary operator
+}
+
 function get_topics($language_id) //Function to get an array of topics from the DB with the specified language id:
 {
 

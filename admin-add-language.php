@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
             }
         }
 
-        header("Location: admin-upload-success.php");
+        // header("Location: admin-upload-success.php");
     } else {
         echo "Language name is required.";
     }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
     //Get the extension of the selected file by admin:
     $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
     //create a new name for the file according to the defined rules for uploading to the server: 
-    $newFileName = str_replace(" ", "", strtolower($language_name)) . "-icon";
+    $newFileName = str_replace(" ", "-", strtolower($language_name)) . "-icon";
     $newFile = $newFileName . '.' . $fileExtension;
 
     $target_file = $target_dir . $newFile; //Form the path with a file name, that should be uploaded to the server
@@ -118,12 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon()" onblur="innerTextToParagragh()">
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon('add-language')" onblur="innerTextToParagragh('add-language')">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload()">
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-language')">
                 <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
@@ -131,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
                 <label for="admin-add-content-checkbox-selection-content">Select topics (optional)</label>
                 <div class="admin-add-content-checkbox-selection">
                     <label for="admin-add-content-checkbox-selection-list">Topics:</label>
-
 
                     <ul>
                         <?php
@@ -161,65 +160,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
             </div>
         </section>
+
         <button type="submit" class="upload-to-database-button">Upload to database</button>
     </form>
 
     <!-- Scripts for this page -->
-    <script>
-        // Script to create name for selected svg-file:
-
-        // Function to form the name for svg-icon based on the language's name:
-        function createNameForSvgIcon() {
-            let inputLanguageNameElement = document.getElementById("add-language"); // define the value of input field
-            let insertedLanguageName = inputLanguageNameElement.value.toLowerCase().replaceAll(" ", ""); //Normalize the name: convert to lowercase and remove all spaces
-            let newName = `${insertedLanguageName}-icon.svg`; // Add the ending to the file name and extension
-            return newName;
-        }
-
-        //Function to handle upload button:
-        function handleFileUpload() {
-            checkFileType(); // call the function to check whether the admin upload svg-type file or not
-            let inputLanguageName = document.getElementById("add-language").value; // define the value of input field
-            let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p 
-            if (inputLanguageName === "") {
-                svgInfoTextElement.innerHTML = `First you should to enter the name of the programming language!`; //inform admin about the need to first enter the language name
-                document.getElementById("add-language").focus(); // focus on the input field if the input field is empty
-            } else {
-                innerTextToParagragh(); // call the function to handle p element
-            }
-        }
-
-        function checkFileType() {
-            let fileElement = document.getElementById("svg-file");
-            let fileToCheck = '';
-            if ('files' in fileElement) {
-                fileToCheck = fileElement.files[0]["type"];
-            };
-            if (fileToCheck !== "image/svg+xml") {
-                handleErrorPageChangeTheTypeOfTheFile();
-            }
-        }
-
-        function handleErrorPageChangeTheTypeOfTheFile() {
-            alert("Choose another type of the file. It should be .svg");
-            document.getElementById("svg-file").value = "";
-        }
-
-        //Function to form and insert info-text depending on whether the admin entered a language name or not:
-        function innerTextToParagragh() {
-            let infoText = "";
-            let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p 
-            let inputLanguageName = document.getElementById("add-language").value; // define the value of input field
-            if (inputLanguageName === "") {
-                infoText = `First you should to enter the name of the programming language!`; // form the text
-                document.getElementById("add-language").focus(); // focus on the input field if the input field is empty
-            } else {
-                let newName = createNameForSvgIcon();
-                infoText = `The icon-file will be uploaded to the project under the name: <b>${newName}</b>`; // form the text
-            }
-            svgInfoTextElement.innerHTML = infoText; // input text in the p element
-        }
-    </script>
+    <script src="./js/upload-icon.js"></script>
 </body>
 
 </html>

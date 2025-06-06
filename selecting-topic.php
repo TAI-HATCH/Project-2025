@@ -41,6 +41,10 @@ $_SESSION["topics"] = $topics;
     </section>
 
     <section class="topic-section">
+        <p class="quiz" id="info-text"></p>
+        <a href="selecting-language.php" class="hidden-btn" id="btn-return">
+            <button type="button" class="return-button">Return to selection</button>
+        </a>
         <ul class="topic-list" id="topic-list"> <!--Create an unordered list of icons, each of which corresponds to its own programming language's topic -->
             <!--Elements will be created by script -->
         </ul>
@@ -57,7 +61,6 @@ $_SESSION["topics"] = $topics;
 
             langIcon = document.createElement("img");
             langIcon.classList.add("language-icon-img");
-            console.log("<?php echo $language_name ?>");
             langIcon.setAttribute("src", "./images/<?php echo $language_icon_name ?>-icon.svg");
             langIcon.setAttribute("alt", "Icon for <?php echo $language_name ?>");
             langIcon.setAttribute("height", "50");
@@ -65,8 +68,9 @@ $_SESSION["topics"] = $topics;
 
             <?php
         }
+
         // Script for filling the list class="topic-list" with elements:
-        if (isset($topics)) {
+        if (!empty($topics)) {
             $i = 0; // Increment for if loop to decide whether or not to add arrow after  topic block
             foreach ($topics as $topic) { // Make a loop for every element in array of topics
                 $topic_name = $topic["topic_name"]; // Store the name of the topic
@@ -95,11 +99,7 @@ $_SESSION["topics"] = $topics;
                 topicName.classList.add("topic-name");
                 topicName.innerHTML = "<?php echo $topic_name ?>";
                 topicLink.appendChild(topicName);
-
                 topicListItem.appendChild(topicLink);
-
-
-
                 document.getElementById("topic-list").appendChild(topicListItem);
 
                 <?php
@@ -111,9 +111,19 @@ $_SESSION["topics"] = $topics;
                     arrowIcon.setAttribute("alt", "Icon for down arrow");
                     arrowIcon.setAttribute("height", "100");
                     topicListItem.appendChild(arrowIcon);
-        <?php
+            <?php
                 }
             }
+        } else {
+            $language_name = get_selected_language_name($language_id);
+            ?>
+            let btnToShow = document.getElementById("btn-return");
+            btnToShow.classList.remove("hidden-btn");
+            let elementForInfoMessage = document.getElementById("info-text");
+            let textMessage = `Sorry, there are no questions available for language <?php echo $language_name; ?> - yet!`;
+            elementForInfoMessage.innerHTML = textMessage;
+
+        <?php
         }
         ?>
     </script>

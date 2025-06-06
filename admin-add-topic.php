@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php include 'admin-banner.php' ?>
     <form method="post" action="admin-preview.php">
-        <input type="hidden" name="form_type" value="add_topic">
+        <input type="hidden" name="form_type" value="add-topic">
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>

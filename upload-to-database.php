@@ -46,8 +46,9 @@ switch ($form_type) {
 
         header("Location: admin-upload-success.php");
         exit;
+        break;
 
-    case 'add_question':
+    case 'add-question':
         $language_id = $_POST['language_id'] ?? null;
         $topic_id = $_POST['topic_id'] ?? null;
         $question_text = $_POST['question'] ?? '';

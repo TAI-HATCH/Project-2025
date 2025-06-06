@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
     <?php include 'admin-banner.php' ?>
     <form method="post" enctype="multipart/form-data" action="admin-preview.php"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
-        <input type="hidden" name="form_type" value="add_language">
+        <input type="hidden" name="form_type" value="add-language">
         
         <section class="root-content">
             <div class="admin-add-content">

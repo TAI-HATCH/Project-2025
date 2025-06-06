@@ -367,6 +367,7 @@ input.wrong{
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
+
 .about {
   display: flex;
   flex-direction: column;
@@ -759,6 +760,36 @@ input[type="file" i]{
   padding: 1rem;
   border-radius: 1rem;
 }
+
+.admin-preview-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--brand-color);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.admin-preview-question {
+  text-align: center;
+  background-color: var(--brand-secondary-color);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.admin-preview-question-content {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--brand-color);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.admin-form-buttons {
+  display: flex;
+  margin-top: 1rem;
+}
+
+
 
 /* RESPONSIVE STYLE */
 

@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     }
     ?>
 
-    <?php include 'header.php' ?>
+    <?php include 'admin-header.php' ?>
 
     <section class="root-content">
         <div class="admin-upload-success">

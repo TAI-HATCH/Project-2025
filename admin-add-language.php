@@ -111,10 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 <body>
     <h1 hidden>HATCH</h1>
 
-    <?php include 'header.php' ?>
+    <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
-    <form method="post" enctype="multipart/form-data"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
+    <form method="post" enctype="multipart/form-data" action="admin-preview.php"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
+        <input type="hidden" name="form_type" value="add-language">
+        
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
@@ -160,8 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
             </div>
         </section>
-
-        <button type="submit" class="upload-to-database-button">Upload to database</button>
+        <button type="submit" class="upload-to-database-button">Preview and upload</button>
     </form>
 
     <!-- Scripts for this page -->

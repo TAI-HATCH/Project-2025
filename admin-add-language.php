@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
             }
         }
 
-        // header("Location: admin-upload-success.php");
+        header("Location: admin-upload-success.php");
     } else {
         echo "Language name is required.";
     }
@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
         if (move_uploaded_file($tempFile, $target_file)) {
 ?>
             <script>
+
                 console.log(`The file <?php echo htmlspecialchars($_FILES["svg-file"]["name"]) ?>  has been uploaded to <?php echo $target_file ?>.`);
             </script>
         <?php

@@ -45,7 +45,7 @@ if (isset($_GET['language-topic'])) {
         // store the id of selected language:
         $lang_id = $selected_topic_info[0]["language_id"];
         // string to form the "src"-element for language icon:
-        $language_icon_name = strtolower($selected_topic_info[0]["language_name"]);
+        $language_icon_name = str_replace(" ","-", strtolower($selected_topic_info[0]["language_name"]));
         // string to form the "src"-element for topic icon:
         $topic_icon_name = str_replace(" ", "-", strtolower($selected_topic_info[0]["topic_name"]));
         // string to form the "h3"-element for topic name:

@@ -9,6 +9,64 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $form_type = $_POST['form_type'] ?? null;
+
+// Processing the uploading of the icon-file:
+// https://www.w3schools.com/php/php_file_upload.asp
+
+//specify the name of the element - it can be the name of the prog.language or the name of the topic:
+if (isset($_POST['add-topic'])) {
+    $element_name = $_POST['add-topic'];
+} elseif (isset($_POST['add-language'])) {
+    $element_name = $_POST['add-language'];
+}
+
+//specifies the directory where the file is going to be placed:
+$target_dir = "images/";
+//Get the temporary file from the server with original name:
+$tempFile = $_FILES["svg-file"]["tmp_name"];
+//Get the extension of the selected file by admin:
+$fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
+//create a new name for the file according to the defined rules for uploading to the server: 
+$newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
+$newFile = $newFileName . '.' . $fileExtension;
+
+$target_file = $target_dir . $newFile; //Form the path with a file name, that should be uploaded to the server
+$uploadOk = 1;
+
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+
+// Check if $uploadOk is set to 0 by an error
+
+// echo "<pre>";
+// var_dump($_FILES);
+// echo "</pre>";
+
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+} else {
+    //copy the temporary file to the server with a new name in the folder specified by $target_file:
+    if (move_uploaded_file($tempFile, $target_file)) {
+?>
+        <script>
+            console.log(`The file <?php echo htmlspecialchars($_FILES["svg-file"]["name"]) ?>  has been uploaded to <?php echo $target_file ?>.`);
+        </script>
+    <?php
+
+    } else {
+    ?>
+        <script>
+            console.log(`Sorry, there was an error uploading your file.`);
+        </script>
+<?php
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -187,6 +245,9 @@ $form_type = $_POST['form_type'] ?? null;
             ?>
         </div>
     </section>
+
+    <!-- Scripts for this page -->
+    <script src="./js/upload-icon.js"></script>
 </body>
 
 </html>

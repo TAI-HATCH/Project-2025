@@ -5,11 +5,9 @@
 include_once "sql_query.php";
 
 //Check if there is an array $selected_topic_info in Session:
-
 if (isset($_GET['language-topic'])) {
     // Read the URL-parameter named 'language_topic' and store it in variable
     // This variable is an id of the selected topic for sertain selected language - table 'languages_topic' in DB
-    // 
     $language_topic_id = $_GET['language-topic'];
 
     // Call the function get_selected_topic_info from sql_query.php
@@ -22,7 +20,6 @@ if (isset($_GET['language-topic'])) {
 }
 
 ?>
-
 
 <ul class="breadcrumb" id="breadcrumb">
     <!-- There is an item for selected language icon: -->
@@ -42,19 +39,13 @@ if (isset($_GET['language-topic'])) {
     </li>
 </ul>
 
-
-
 <script>
     // Script for filling the breadcrumb id="breadcrumb" with icons for selected language and topic:
     <?php
-
-    // Check if there is an array $selected_topic_info in Session:
-    if (isset($selected_topic_info)) {
-        // If Session contains $selected_topic_info then create variables:
         // store the id of selected language:
         $lang_id = $selected_topic_info[0]["language_id"];
         // string to form the "src"-element for language icon:
-        $language_icon_name = strtolower($selected_topic_info[0]["language_name"]);
+        $language_icon_name = str_replace(" ","-", strtolower($selected_topic_info[0]["language_name"]));
         // string to form the "src"-element for topic icon:
         $topic_icon_name = str_replace(" ", "-", strtolower($selected_topic_info[0]["topic_name"]));
         // string to form the "h3"-element for topic name:
@@ -80,10 +71,4 @@ if (isset($_GET['language-topic'])) {
         topicName = document.getElementById("topic-section-name");
         topicName.innerHTML = "<?php echo $topic_name ?>";
 
-
-    <?php
-    }
-
-
-    ?>
 </script>

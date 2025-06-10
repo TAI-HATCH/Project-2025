@@ -3,6 +3,7 @@ include "admin-log.php";
 include_once "sql_query.php";
 include "admin-header.php";
 
+//a security mechanism that prevents a page from being processed if it is opened directly through a browser. Instead, it redirects the user to the start page.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: admin-start.php");
     exit;
@@ -10,60 +11,72 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $form_type = $_POST['form_type'] ?? null;
 
-// Processing the uploading of the icon-file:
-// https://www.w3schools.com/php/php_file_upload.asp
+if (isset($_FILES["svg-file"])) {
+    
+    // echo "<pre>";
+    // var_dump($_FILES);
+    // echo "</pre>";
 
-//specify the name of the element - it can be the name of the prog.language or the name of the topic:
-if (isset($_POST['add-topic'])) {
-    $element_name = $_POST['add-topic'];
-} elseif (isset($_POST['add-language'])) {
-    $element_name = $_POST['add-language'];
-}
+    // Processing the uploading of the icon-file:
+    // https://www.w3schools.com/php/php_file_upload.asp
 
-//specifies the directory where the file is going to be placed:
-$target_dir = "images/";
-//Get the temporary file from the server with original name:
-$tempFile = $_FILES["svg-file"]["tmp_name"];
-//Get the extension of the selected file by admin:
-$fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
-//create a new name for the file according to the defined rules for uploading to the server: 
-$newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
-$newFile = $newFileName . '.' . $fileExtension;
+    //specify the name of the element - it can be the name of the prog.language or the name of the topic:
+    if (isset($_POST['add-topic'])) {
+        $element_name = $_POST['add-topic'];
+    } elseif (isset($_POST['add-language'])) {
+        $element_name = $_POST['add-language'];
+    }
 
-$target_file = $target_dir . $newFile; //Form the path with a file name, that should be uploaded to the server
-$uploadOk = 1;
+    //Get the extension of the selected file by admin:
+    $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
+    //create a new NAME for the file according to the defined rules for uploading to the server without extension:
+    $newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
+    //create the full  NAME for the file with extension:
+    $newFile = $newFileName . '.' . $fileExtension;
 
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}
 
-// Check if $uploadOk is set to 0 by an error
+    //specify the directory to store TEMPORARY files:
+    $temp_upload_dir = "temp-uploads/";
+    //Get a temporary file with the initial name:
+    $tempFile = $_FILES["svg-file"]["tmp_name"];
+    //Set the unique name to the file just to store it as temporary file before uploading to the server:
+    $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
+    //Set the path to store the file (folder/temp-name.extension):
+    $temp_file_path = $temp_upload_dir . $temp_file_name;
 
-// echo "<pre>";
-// var_dump($_FILES);
-// echo "</pre>";
+    $uploadOk = 1;
 
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
-} else {
-    //copy the temporary file to the server with a new name in the folder specified by $target_file:
-    if (move_uploaded_file($tempFile, $target_file)) {
-?>
-        <script>
-            console.log(`The file <?php echo htmlspecialchars($_FILES["svg-file"]["name"]) ?>  has been uploaded to <?php echo $target_file ?>.`);
-        </script>
-    <?php
+    // Check if file already exists
+    if (file_exists($temp_file_path)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
 
+    // Check if $uploadOk is set to 0 by an error  
+
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
     } else {
-    ?>
-        <script>
-            console.log(`Sorry, there was an error uploading your file.`);
-        </script>
+        //copy the temporary file to the server with a new name in the folder specified by $target_file:
+        //Syntax: move_uploaded_file(file, dest):
+        // file - filename of the uploaded file
+        //dest - the new location for the file
+        if (move_uploaded_file($tempFile, $temp_file_path)) {
+?>
+            <script>
+                console.log(`The temporary file <?php echo $temp_file_name ?>  has been uploaded to <?php echo $temp_file_path ?>.`);
+            </script>
+        <?php
+
+        } else {
+        ?>
+            <script>
+                console.log(`Sorry, there was an error uploading your file.`);
+            </script>
 <?php
-        echo "Sorry, there was an error uploading your file.";
+            echo "Sorry, there was an error uploading your file.";
+        }
     }
 }
 
@@ -90,8 +103,8 @@ if ($uploadOk == 0) {
         <div class="admin-preview">
             <?php
             switch ($form_type) {
-                // ========= ADD LANGUAGE ==========
 
+                // ========= ADD LANGUAGE ==========
                 case 'add-language':
                     $language_name = $_POST['add-language'] ?? '';
                     $selected_topics = $_POST['topic'] ?? [];
@@ -118,19 +131,26 @@ if ($uploadOk == 0) {
                         <?php } ?>
                     </div>
 
-                    <div class="admin-form-buttons">
-                        <form method="POST" action="upload-to-database.php">
-                            <input type="hidden" name="form_type" value="add-language">
-                            <input type="hidden" name="add-language" value="<?= $language_name ?>">
+                    <div class="admin-preview-content">
+                        <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                    </div>
 
-                            <?php foreach ($selected_topics as $topic_id): ?>
-                                <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
-                            <?php endforeach; ?>
-                            <button class="button" type="submit">Upload to database</button>
-                        </form>
+                    <div class="admin-form-buttons">
+                            <form method="POST" action="upload-to-database.php">
+                                <input type="hidden" name="form_type" value="add-language">
+                                <input type="hidden" name="add-language" value="<?= $language_name ?>">
+                                <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
+                                <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
+
+                                <?php foreach ($selected_topics as $topic_id): ?>
+                                    <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
+                                <?php endforeach; ?>
+                                <button class="upload-to-database-button" type="submit">Upload to database</button>
+                            </form>
 
                         <form method="GET" action="admin-add-language.php">
-                            <button class="button" type="submit">Cancel</button>
+                            <button class="upload-to-database-button" type="submit">Cancel</button>
                         </form>
                     </div>
 
@@ -144,7 +164,7 @@ if ($uploadOk == 0) {
                 // ========= ADD TOPIC ==========
                 case 'add-topic':
                     $topic_name = $_POST['add-topic'] ?? '';
-                    $selected_languages = $_POST['languages'] ?? []; ?>
+                    $selected_languages = $_POST['language'] ?? []; ?>
 
                     <h1>Preview add topic</h1>
                     <div class="admin-preview-content">
@@ -156,9 +176,10 @@ if ($uploadOk == 0) {
                             $language_names = [];
                             foreach ($languages as $language) {
                                 if (in_array($language['language_id'], $selected_languages)) {
-                                    $language_names[] = htmlspecialchars($language['language_name']);
+                                    $language_names[] = $language['language_name'];
                                 }
-                            } ?>
+                            } 
+                        ?>
 
                             <p><strong>Selected languages: </strong> <?= implode(", ", $language_names) ?></p>
                         <?php } else { ?>
@@ -166,19 +187,26 @@ if ($uploadOk == 0) {
                         <?php } ?>
                     </div>
 
+                    <div class="admin-preview-content">
+                        <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                    </div>
+
                     <div class="admin-form-buttons">
                         <form method="POST" action="upload-to-database.php">
                             <input type="hidden" name="form_type" value="add-topic">
                             <input type="hidden" name="add-topic" value="<?= $topic_name ?>">
+                            <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
+                            <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
 
-                            <?php
-                            foreach ($selected_languages as $language_id) { ?>
-                                <input type="hidden" name="languages[]" value="<?= $language_id ?>">
-                            <?php } ?>
-                            <button class="button" type="submit">Upload to database</button>
+                            <?php foreach ($selected_languages as $language_id): ?>
+                                <input type="hidden" name="language[]" value="<?= $language_id ?>">
+                            <?php endforeach; ?>
+                            <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
+                        
                         <form method="GET" action="admin-add-topic.php">
-                            <button class="button" type="submit">Cancel</button>
+                            <button class="upload-to-database-button" type="submit">Cancel</button>
                         </form>
                     </div>
                 <?php
@@ -225,10 +253,10 @@ if ($uploadOk == 0) {
                             <input type="hidden" name="text_before" value="<?= htmlspecialchars($text_before) ?>">
                             <input type="hidden" name="text_after" value="<?= htmlspecialchars($text_after) ?>">
                             <input type="hidden" name="answer" value="<?= htmlspecialchars($answer_value) ?>">
-                            <button class="button" type="submit">Upload to database</button>
+                            <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
                         <form method="GET" action="admin-add-question.php">
-                            <button class="button" type="submit">Cancel</button>
+                            <button class="upload-to-database-button" type="submit">Cancel</button>
                         </form>
                     </div>
 

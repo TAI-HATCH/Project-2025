@@ -42,22 +42,11 @@ if (!$tempFileName) {
     } else {
         //copy the temporary file to the server with a new name in the folder specified by $target_file:  
         if (rename('temp-uploads/' . $tempFileName, $target_dir . $newFileName)) {
-        ?>
-            <script>
-                console.log(`The file <?php echo $_POST['temp-icon-file'] ?>  has been uploaded to <?php echo $newFileName ?>.`);
-            </script>
-        <?php
-    
+                // echo $_POST['temp-icon-file'] . " has been uploaded to " . $newFileName;    
         } else {
-        ?>
-            <script>
-                console.log(`Sorry, there was an error uploading your file.`);
-            </script>
-    <?php
             echo "Sorry, there was an error uploading your file.";
         }
     }
-
 }
 
 switch ($form_type) {
@@ -84,13 +73,16 @@ switch ($form_type) {
                 $stmt->execute();
             }
         }
-
+        
+        session_start();
+        $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
         header("Location: admin-upload-success.php");
         exit;
         break;
 
     case 'add-topic':
         $topic_name = $_POST['add-topic'] ?? null;
+        $selected_languages = $_POST['language'] ?? [];
 
         $stmt = $conn->prepare("INSERT INTO 
                                     topics (topic_name) 
@@ -99,6 +91,22 @@ switch ($form_type) {
         $stmt->bindParam(":topic_name", $topic_name);
         $stmt->execute();
 
+        $topic_id = $conn->lastInsertId();
+
+        if (!empty($selected_languages)) {
+            $stmt = $conn->prepare("INSERT INTO 
+                                            languages_topic (language_id, topic_id) 
+                                        VALUES (:language_id, :topic_id)");
+
+            foreach ($selected_languages as $language_id) {
+                $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
+                $stmt->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+        }
+        
+        session_start();
+        $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
         header("Location: admin-upload-success.php");
         exit;
         break;
@@ -139,6 +147,8 @@ switch ($form_type) {
                                                     VALUES (?, ?, ?)");
                 $answer_insert->execute([$question_id, 'answer_one', $answer_value]);
 
+                session_start();
+                $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
                 header("Location: admin-upload-success.php");
                 exit;
             } catch (PDOException $e) {

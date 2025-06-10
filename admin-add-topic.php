@@ -6,9 +6,9 @@ include_once "sql_query.php";
 // Check whether the form was sent using the method=post and whether the request contains a file with the "name"="svg-file":
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
-    echo var_dump($_POST['languages']); // Prints the content of the array "language" in the top of the page
+    echo var_dump($_POST['language']); // Prints the content of the array "language" in the top of the page
     $topic_name = $_POST['add-topic'] ?? null; // If nothing is added in the form, return null 
-    $selected_languages = $_POST['languages'] ?? []; // If nothing in the array, return an empty array "[]"
+    $selected_languages = $_POST['language'] ?? []; // If nothing in the array, return an empty array "[]"
 
     if (!empty($topic_name)) {
         $stmt = $conn->prepare("INSERT INTO 
@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
     <?php include 'admin-banner.php' ?>
     <form method="post" enctype="multipart/form-data" action="admin-preview.php"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
         <input type="hidden" name="form_type" value="add-topic">
+        
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
                             If we will not, then in PHP in $_POST['languages'] we recieve only the value of last element -->
                                 <input class='checkbox' type='checkbox'
                                     id="language<?= ($language['language_id']) ?>"
-                                    name="languages[]"
+                                    name="language[]"
                                     value="<?= ($language['language_id']) ?>">
 
                                 <!--id: Print ID for this topic;

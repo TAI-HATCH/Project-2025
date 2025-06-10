@@ -7,6 +7,12 @@ if (!isset($_SESSION['is_admin'])) {
     exit;
 }
 
+if ($_SESSION['text-message']) {
+    $textMessage = $_SESSION['text-message'];
+    // echo $textMessage;
+    unset($_SESSION['text-message']);
+}
+
 include 'admin-banner.php';
 
 // Käsittele uloskirjautuminen
@@ -49,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <section class="root-content">
         <div class="admin-upload-success">
+        <p><?= $textMessage?></p>
         <p>Upload successful.</p>
         <a class="button" href="admin-start.php">To admin start page</a>
         </div>

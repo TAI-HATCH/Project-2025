@@ -19,7 +19,7 @@
     <?php include 'header.php' ?>
     <?php include 'breadcrumb.php' ?>
 
-    <p class="quiz">Sorry, there are no questions available for topic "<?php echo $topic_name; ?>" – yet!</p>
+    <p class="quiz">Sorry, there are no questions available for the <?= $selected_topic_info[0]["language_name"] ?> topic "<?php echo $topic_name; ?>" – yet!</p>
     <a href="selecting-topic.php?language-id=<?php echo $lang_id; ?>">
         <button type="button" class="return-button">Return to selection</button>
     </a>

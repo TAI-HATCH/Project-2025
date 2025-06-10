@@ -3,7 +3,62 @@ include_once "connection.php";
 include_once "sql_query.php";
 
 $form_type = $_POST['form_type'] ?? null;
+$tempFileName = $_POST['temp-icon-file'] ?? null; //Get the name of temporary file: temp-name.extension
+$newFileName = $_POST['new-icon-file-name'] ?? null; //Get the new name of file to upload: name.extension
 
+// Processing the uploading of the icon-file:
+
+//specify the name of the element - it can be the name of the prog.language or the name of the topic:
+if (isset($_POST['add-topic'])) {
+    $element_name = $_POST['add-topic'];
+} elseif (isset($_POST['add-language'])) {
+    $element_name = $_POST['add-language'];
+}
+
+//specify the directory where the file is going to be placed:
+$target_dir = "images/";
+
+//Get the name of the temporary file from the folder uploads/temp with the temporary name:
+if (!$tempFileName) {
+?>
+    <script>
+        console.log("There is no $_POST['temp-icon-file']");
+    </script>
+
+    <?php
+} else {
+    $uploadOk = 1;
+
+    // Check if file already exists
+    //Syntax: file_exists(path), where "path" specifies the path to the file or directory to check:
+    if (file_exists($target_dir . $newFileName)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+        // if everything is ok, try to upload file
+    } else {
+        //copy the temporary file to the server with a new name in the folder specified by $target_file:  
+        if (rename('temp-uploads/' . $tempFileName, $target_dir . $newFileName)) {
+        ?>
+            <script>
+                console.log(`The file <?php echo $_POST['temp-icon-file'] ?>  has been uploaded to <?php echo $newFileName ?>.`);
+            </script>
+        <?php
+    
+        } else {
+        ?>
+            <script>
+                console.log(`Sorry, there was an error uploading your file.`);
+            </script>
+    <?php
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+
+}
 
 switch ($form_type) {
     case 'add-language':
@@ -96,3 +151,5 @@ switch ($form_type) {
         echo "Invalid form type.";
         break;
 }
+
+?>

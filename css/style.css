@@ -624,6 +624,10 @@ input[type="file" i]{
   /* display: none; */
 }
 
+.alert-message{
+  color: red;
+}
+
 .admin-add-content-input-field {
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -779,6 +783,8 @@ input[type="file" i]{
   background-color: var(--brand-color);
   padding: 1rem;
   border-radius: 1rem;
+  width: 70%;
+  gap: 1rem;
 }
 
 .admin-preview-question {
@@ -798,6 +804,7 @@ input[type="file" i]{
 
 .admin-form-buttons {
   display: flex;
+  gap: 1rem;
   margin-top: 1rem;
 }
 

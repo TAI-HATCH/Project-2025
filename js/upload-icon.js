@@ -18,6 +18,7 @@ function handleFileUpload(element_id) {
   let inputElementValue = inputElement.value; // define the value of input field
   let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p
   if (inputElementValue === "") {
+    svgInfoTextElement.classList.add("alert-message");
     svgInfoTextElement.innerHTML = `First you should to enter the name!`; //inform admin about the need to first enter the name
     inputElement.focus(); // focus on the input field if the input field is empty
   } else {
@@ -43,6 +44,9 @@ function handleErrorPageChangeTheTypeOfTheFile() {
 
 //Function to form and insert info-text depending on whether the admin entered a language name or not:
 function innerTextToParagragh(element_id) {
+  if (document.getElementById("upload-svg-info-text").classList.contains("alert-message")) {
+    document.getElementById("upload-svg-info-text").classList.remove("alert-message");
+  }
   let infoText = "";
   let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p
   let inputElement = document.getElementById(element_id); // define the input field

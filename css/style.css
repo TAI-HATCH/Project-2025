@@ -32,7 +32,9 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 100;
-  background-color: var(--bcg-main-color); /* Set the background color for all page*/
+  background-color: var(
+    --bcg-main-color
+  ); /* Set the background color for all page*/
   background-image: url("../images/whiteblur-stain.png"),
     url("../images/whiteblur-stain.png"); /*Add TWO stains to the bcg as images*/
   background-size: 800px, 800px; /* Set the size of the stain */
@@ -152,7 +154,7 @@ ul {
   cursor: pointer;
 }
 
-.return-button{
+.return-button {
   display: block;
   margin: 3rem auto;
 }
@@ -203,7 +205,7 @@ ul {
 
 /* PAGE for SELECTING TOPIC */
 
-.hidden-btn{
+.hidden-btn {
   display: none;
 }
 
@@ -301,7 +303,7 @@ ul {
   line-height: 2;
 }
 
-i{
+i {
   font-family: var(--code-font);
   border: 1px solid var(--brand-color);
   border-radius: 11px;
@@ -321,11 +323,11 @@ i{
   text-align: left;
 }
 
-.tab{
+.tab {
   padding-left: 1.5rem;
 }
 
-input[type=text] {
+input[type="text"] {
   padding: 0.1rem 0.4rem;
   text-align: center;
   font-size: 1.2rem;
@@ -338,13 +340,13 @@ input[type=text] {
   animation: snakeBorder 3s linear infinite;
 }
 
-input.correct{
+input.correct {
   border: 2px solid green;
   box-shadow: 0 0 1rem #0001004d;
   background-color: #d2f1d2c3;
 }
 
-input.wrong{
+input.wrong {
   border: 2px solid red;
   box-shadow: 0 0 1rem #ff00003e;
   background-color: #d29e9ed5;
@@ -379,7 +381,6 @@ input.wrong{
   transform: scale(0.95); /* Subtle 5% shrink */
 }
 
-
 .about {
   display: flex;
   flex-direction: column;
@@ -400,7 +401,6 @@ input.wrong{
   width: 3rem;
 }
 
-
 .about-text {
   display: flex;
   justify-content: flex-start;
@@ -410,23 +410,20 @@ input.wrong{
   padding: 1rem;
   gap: 4rem;
   margin: 1rem;
-  
 }
 
 .about-text-p:hover {
   transform: scale(98%);
 }
 
-
 .about-text-p {
   background-color: var(--highlight-color);
   border-radius: 1rem;
   width: 10rem;
   padding: 1rem;
- box-shadow: 0rem 0rem 1rem 0.0rem var(--highlight-color);
- transition: 0.5s;
+  box-shadow: 0rem 0rem 1rem 0rem var(--highlight-color);
+  transition: 0.5s;
 }
-
 
 /* ADMIN PAGEs */
 
@@ -589,7 +586,7 @@ a.admin-start-action:hover {
   width: 30rem;
 }
 
-input[type="file"]{
+input[type="file"] {
   cursor: pointer;
   font-family: "Nunito Sans", sans-serif;
   width: auto;
@@ -606,25 +603,25 @@ input[type="file"]::-webkit-file-upload-button {
   width: 50%;
   transition: border-color 0.8s;
   cursor: pointer;
-  margin-right: 1rem; /*Distance between button and text about uploaded file */ 
+  margin-right: 1rem; /*Distance between button and text about uploaded file */
 }
 
 input[type="file"]::-webkit-file-upload-button:hover {
   border-color: var(--hover-color);
 }
 
-input[type="file" i]{
+input[type="file" i] {
   color: var(--dark-color);
 }
 
-.upload-svg-info-text{
+.upload-svg-info-text {
   font-size: 0.75rem;
   text-align: left;
   height: 1.3rem;
   /* display: none; */
 }
 
-.alert-message{
+.alert-message {
   color: red;
 }
 
@@ -635,9 +632,15 @@ input[type="file" i]{
   height: 2rem;
 }
 
-.admin-upload-success p, a {
+.admin-upload-success p,
+a {
   font-size: 2rem;
   margin-bottom: 2rem;
+}
+
+.admin-upload-success .info-text-small {
+  font-size: 1rem;
+  text-align: left;
 }
 
 .admin-navigate {
@@ -653,7 +656,6 @@ input[type="file" i]{
   flex-wrap: wrap;
   gap: 4rem;
 }
-
 
 .logout-button {
   position: fixed;
@@ -757,7 +759,8 @@ input[type="file" i]{
 
 /* ADMIN PREVIEW */
 
-.admin-preview, .admin-preview-field {
+.admin-preview,
+.admin-preview-field {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -765,10 +768,9 @@ input[type="file" i]{
   gap: 0.5rem;
 }
 
-.admin-preview h1  {
+.admin-preview h1 {
   font-weight: 100;
   margin-bottom: 1rem;
-
 }
 
 .admin-preview-field {
@@ -807,8 +809,6 @@ input[type="file" i]{
   gap: 1rem;
   margin-top: 1rem;
 }
-
-
 
 /* RESPONSIVE STYLE */
 

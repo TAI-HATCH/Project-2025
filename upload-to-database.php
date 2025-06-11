@@ -75,7 +75,7 @@ switch ($form_type) {
         }
         
         session_start();
-        $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
+        $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
         header("Location: admin-upload-success.php");
         exit;
         break;
@@ -106,7 +106,7 @@ switch ($form_type) {
         }
         
         session_start();
-        $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
+        $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
         header("Location: admin-upload-success.php");
         exit;
         break;
@@ -148,7 +148,7 @@ switch ($form_type) {
                 $answer_insert->execute([$question_id, 'answer_one', $answer_value]);
 
                 session_start();
-                $_SESSION['text-message'] = $_POST['temp-icon-file'] . " from temp-uploads/ has been removed to images/" . $newFileName;
+                $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
                 header("Location: admin-upload-success.php");
                 exit;
             } catch (PDOException $e) {

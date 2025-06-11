@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <section class="root-content">
         <div class="admin-upload-success">
-        <p><?= $textMessage?></p>
         <p>Upload successful.</p>
+        <p class="info-text-small"><?= $textMessage?></p>
         <a class="button" href="admin-start.php">To admin start page</a>
         </div>
     </section>

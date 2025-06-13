@@ -1,0 +1,361 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.5">
+  <diagram name="Page-1" id="_Tp_P9EOkaHcpFpm4Qid">
+    <mxGraphModel dx="4360" dy="2525" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-2" target="sZrP5ZYWWnOfZu56KgDg-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-2" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255); font-size: 10px;&quot;&gt;admin-add-language.php:&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input text name=add_language&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input FILE name=svg_file&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input array(selected_topic) name=topic[ ]&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;action &lt;/b&gt;= admin-preview.php&lt;/font&gt;&lt;/div&gt;&lt;/blockquote&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="662.25" y="100" width="248.75" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-8" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Redirection to the page&amp;nbsp;&lt;/span&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;error&lt;/font&gt;&lt;/b&gt;&lt;b style=&quot;color: light-dark(rgb(51, 51, 255), rgb(168, 168, 255));&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#3333ff&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-message&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;return button&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="920.75" width="150.37" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-13" target="sZrP5ZYWWnOfZu56KgDg-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-70" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;b&gt;No&lt;/b&gt;, there is no such file&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-69">
+          <mxGeometry x="-0.3658" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-13" target="sZrP5ZYWWnOfZu56KgDg-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-83" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-75">
+          <mxGeometry x="-0.0559" relative="1" as="geometry">
+            <mxPoint x="18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-13" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Validation:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Is there a file in the folder &lt;b style=&quot;&quot;&gt;images &lt;/b&gt;with the specified name?&lt;/font&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="470" y="673" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endArrow=block;endFill=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-20" target="sZrP5ZYWWnOfZu56KgDg-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="308" />
+              <mxPoint x="980" y="165" />
+            </Array>
+            <mxPoint x="900" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-19" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-18">
+          <mxGeometry x="-0.6376" y="-1" relative="1" as="geometry">
+            <mxPoint y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-20" target="sZrP5ZYWWnOfZu56KgDg-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-20" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;font style=&quot;&quot;&gt;Click on&lt;/font&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;b&gt;Preview&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;b style=&quot;font-size: 10px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;and upload&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;(&lt;/b&gt;type=submit&lt;b&gt;)?&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="689.13" y="268" width="195.25" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-38" target="sZrP5ZYWWnOfZu56KgDg-79">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="801.0000000000002" y="889.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-38" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;1. Upload temporary icon-file in the &lt;b style=&quot;&quot;&gt;uploads-temp&lt;/b&gt; folder;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;font style=&quot;&quot;&gt;2.&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;Generate a&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-message&lt;/font&gt;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;&amp;nbsp;stating that the selected file will be uploaded to the server under a new name&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="690" y="780" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-40" target="sZrP5ZYWWnOfZu56KgDg-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-40" value="Delete the temporary icon-file from the &lt;b&gt;uploads-temp&lt;/b&gt; folder" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="1330" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-52" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Version 1&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;All forms have action. It means that all POST requests are processed on the page mentioned in the form POST in the action.&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;And all validations and redirections are happend on that page too&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="130" y="30" width="440" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-53" target="sZrP5ZYWWnOfZu56KgDg-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-53" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-preview.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="711.75" y="382" width="150.25" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-55" target="sZrP5ZYWWnOfZu56KgDg-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-55" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;1. Query the DB and get all existing languages, including the column is_active;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px; line-height: 270%;&quot;&gt;2. POST request processing&lt;/font&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="667" y="480" width="239" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-56" value="&lt;font style=&quot;font-size: 7px;&quot;&gt;Make this button disabled,&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 7px;&quot;&gt;if input fields with name and file&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 7px;&quot;&gt;&amp;nbsp;are empty&lt;/font&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.oval_callout;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="845.75" y="233" width="123.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-57" target="sZrP5ZYWWnOfZu56KgDg-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="553" y="638" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-60" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-58">
+          <mxGeometry x="-0.2884" y="-2" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-57" target="sZrP5ZYWWnOfZu56KgDg-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-62" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Yes&lt;/b&gt;, name exists&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-61">
+          <mxGeometry x="-0.3057" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-57" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Validation:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Is there a language in&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;the DB table &quot;languages&quot; with the&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;specified&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp;name?&lt;/font&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="676" y="583" width="221.38" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-59" target="sZrP5ZYWWnOfZu56KgDg-98">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-103" value="&lt;b&gt;No&lt;/b&gt;, is_action=1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-102">
+          <mxGeometry x="-0.2958" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-59" target="sZrP5ZYWWnOfZu56KgDg-105">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-107" value="&lt;b&gt;Yes&lt;/b&gt;, is_action=0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-106">
+          <mxGeometry x="-0.403" y="4" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-59" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Validation:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Is there an is_action for the specified name = 0?&lt;/font&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="680" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-72" target="sZrP5ZYWWnOfZu56KgDg-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-72" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;1. Upload temporary icon-file in the &lt;b style=&quot;&quot;&gt;uploads-temp&lt;/b&gt; folder;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;2.&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;Generate a&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-message&lt;/font&gt;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;&amp;nbsp;stating that a file with that name already exists.&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="250" y="773" width="210" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-74" target="sZrP5ZYWWnOfZu56KgDg-78">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-74" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Render the page&amp;nbsp;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-preview.php&lt;/font&gt;:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Show images of two icon-files: temporary and existing one. Give the possibility to choose, which one should to keep - checkbox?&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=form_type&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden FILE name=temp-icon-file&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=new-icon-file-name&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=add-language&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden array(selected_topic) name=topic[ ]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; action&amp;nbsp;&lt;/b&gt;= upload-to-database.php&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="175" y="889" width="305" height="221" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-77" target="sZrP5ZYWWnOfZu56KgDg-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-85" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-84">
+          <mxGeometry x="-0.2392" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-77" target="sZrP5ZYWWnOfZu56KgDg-86">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-88" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-87">
+          <mxGeometry x="-0.3026" y="-2" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-77" value="Validation:&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Did the admin select a new image to upload?&lt;/span&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="527.75" y="1230" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-78" target="sZrP5ZYWWnOfZu56KgDg-77">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-78" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-to-database.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#3333ff&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;POST request processing&lt;/span&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="535" y="1120.5" width="150.25" height="69.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-79" target="sZrP5ZYWWnOfZu56KgDg-78">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-79" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Render the page&amp;nbsp;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-preview.php&lt;/font&gt;:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input hidden name=form_type&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input hidden FILE name=temp-icon-file&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input hidden name=new-icon-file-name&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input hidden name=add-language&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;input hidden array(selected_topic) name=topic[ ]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;action&amp;nbsp;&lt;/b&gt;= upload-to-database.php&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="679" y="889" width="281" height="153.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-91" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-86" target="sZrP5ZYWWnOfZu56KgDg-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-86" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;1. Delete the existing icon-file from the &lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;images&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;folder;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;2. Move the temporary icon-file to the &lt;b&gt;images &lt;/b&gt;folder&lt;/span&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1330" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-89" target="sZrP5ZYWWnOfZu56KgDg-100">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="589.5999999999999" y="1540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-89" value="SQL-request to the DB INSERT INTO:&lt;div&gt;table &quot;languages&quot; and IF topic[ ] is not empty - to the table &quot;topics&quot;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1420" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-98" target="sZrP5ZYWWnOfZu56KgDg-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-98" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;Generate a&amp;nbsp;&lt;b&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;message&lt;/font&gt;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;stating that the specified language cannot be added to the database because it already exists.&lt;/span&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="773" width="150.25" height="103" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-100" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-&lt;/font&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-success&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;color: light-dark(rgb(51, 51, 255), rgb(168, 168, 255));&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;return button&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="522.88" y="1550" width="135.12" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-105" target="sZrP5ZYWWnOfZu56KgDg-112">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-105" value="&lt;span style=&quot;font-size: 11px;&quot;&gt;1. Generate a&amp;nbsp;&lt;b&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;message&lt;/font&gt;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;stating that the specified language was already exists earlier but was deleted.&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;2. SQL request to the DB, find:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;- all is_active=0 topics for this language&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;- all is_active=0 questions for this language&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;3. Try to find an icon-image in images folder with the language&#39;s name&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="773" width="310" height="147" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-112" target="sZrP5ZYWWnOfZu56KgDg-114">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-109" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;&lt;b&gt;No&lt;/b&gt;, there is no such file&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-108">
+          <mxGeometry x="-0.3658" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-112" target="sZrP5ZYWWnOfZu56KgDg-116">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-111" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-110">
+          <mxGeometry x="-0.0559" relative="1" as="geometry">
+            <mxPoint x="18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-112" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Validation:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Is there a file in the folder &lt;b style=&quot;&quot;&gt;images &lt;/b&gt;with the specified name?&lt;/font&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="1515" y="960" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-113" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-114" target="sZrP5ZYWWnOfZu56KgDg-118">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1846" y="1176.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-114" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;1. Upload temporary icon-file in the &lt;b style=&quot;&quot;&gt;uploads-temp&lt;/b&gt; folder;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;font style=&quot;&quot;&gt;2.&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;Generate a&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-message&lt;/font&gt;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-align: center;&quot;&gt;&amp;nbsp;stating that the selected file will be uploaded to the server under a new name&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1735" y="1067" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-116" target="sZrP5ZYWWnOfZu56KgDg-117">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-116" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;1. Upload temporary icon-file in the &lt;b style=&quot;&quot;&gt;uploads-temp&lt;/b&gt; folder;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;2.&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;Generate a&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;text-message&lt;/font&gt;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: x-small; text-align: center;&quot;&gt;&amp;nbsp;stating that a file with that name already exists.&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1295" y="1060" width="210" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-117" target="sZrP5ZYWWnOfZu56KgDg-133">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-117" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Render the page&amp;nbsp;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-preview.php&lt;/font&gt;:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Show all topics and questions with is_action=0 and add a posibility&amp;nbsp;to check-in for each of them.&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Ask admin to select the topics/questions, that need to be updated in the DB.&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Show images of two icon-files: temporary and existing one. Give the possibility to choose, which one should to keep - (checkbox?).&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Ask admin: Do the selected language, topics and related questions need to be reactivated?&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=form_type&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden FILE name=temp-icon-file&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=new-icon-file-name&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=add-language&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden array(selected_topic) name=topic[ ]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; action&amp;nbsp;&lt;/b&gt;= upload-to-database.php&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="1176" width="305" height="284" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-118" target="sZrP5ZYWWnOfZu56KgDg-147">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-118" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Render the page&amp;nbsp;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-preview.php&lt;/font&gt;:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Show all topics and questions with is_action=0 and add a posibility&amp;nbsp;to check-in for each of them.&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Ask admin to select the topics/questions, that need to be updated in the DB.&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Show image of the temporary icon-file.&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Ask admin: Do the selected language, topics and related questions need to be reactivated?&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=form_type&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden FILE name=temp-icon-file&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=new-icon-file-name&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden name=add-language&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;input hidden array(selected_topic) name=topic[ ]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; action&amp;nbsp;&lt;/b&gt;= upload-to-database.php&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1724" y="1176" width="306" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-120" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-121" target="sZrP5ZYWWnOfZu56KgDg-130">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-121" value="Delete the temporary icon-file from the &lt;b&gt;uploads-temp&lt;/b&gt; folder" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="1826" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-122" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-126" target="sZrP5ZYWWnOfZu56KgDg-121">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-123" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-122">
+          <mxGeometry x="-0.2392" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-126" target="sZrP5ZYWWnOfZu56KgDg-128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-125" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-124">
+          <mxGeometry x="-0.3026" y="-2" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-126" value="Validation:&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Did the admin select a new image to upload?&lt;/span&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="907.75" y="1726" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-128" target="sZrP5ZYWWnOfZu56KgDg-130">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-128" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;1. Delete the existing icon-file from the &lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;images&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;folder;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;2. Move the temporary icon-file to the &lt;b&gt;images &lt;/b&gt;folder&lt;/span&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="1826" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-130" target="sZrP5ZYWWnOfZu56KgDg-131">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="969.5999999999999" y="2036" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-130" value="SQL-request to the DB UPDATE &quot;tables&quot; SET &#39;is_active&#39;=0 for language, all checked topics and questions" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="1916" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-131" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-&lt;/font&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-success&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;color: light-dark(rgb(51, 51, 255), rgb(168, 168, 255));&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;return button&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="891" y="2056" width="157.56" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-136" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-132" target="sZrP5ZYWWnOfZu56KgDg-126">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-137" value="&lt;b&gt;Yes&lt;/b&gt;, reactivate" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-136">
+          <mxGeometry x="-0.4631" y="3" relative="1" as="geometry">
+            <mxPoint x="-19" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-141" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-132" target="sZrP5ZYWWnOfZu56KgDg-138">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-142" value="&lt;b&gt;No&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-141">
+          <mxGeometry x="-0.4896" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-132" value="Validation:&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Did the admin select reactivate?&lt;/span&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="1290.62" y="1616" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-133" target="sZrP5ZYWWnOfZu56KgDg-132">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-133" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-to-database.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#3333ff&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;POST request processing&lt;/span&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1297.37" y="1500" width="150.25" height="69.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-138" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Redirection to the page&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-start&lt;/font&gt;&lt;/b&gt;&lt;b style=&quot;color: light-dark(rgb(51, 51, 255), rgb(168, 168, 255));&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="1746" width="150.37" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-150" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-145" target="sZrP5ZYWWnOfZu56KgDg-138">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-151" value="&lt;b&gt;No&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-150">
+          <mxGeometry x="-0.5267" y="5" relative="1" as="geometry">
+            <mxPoint x="-2" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-156" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-145" target="sZrP5ZYWWnOfZu56KgDg-152">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-157" value="&lt;b&gt;Yes&lt;/b&gt;, reactivate" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="sZrP5ZYWWnOfZu56KgDg-156">
+          <mxGeometry x="-0.3888" y="1" relative="1" as="geometry">
+            <mxPoint x="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-145" value="Validation:&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Did the admin select reactivate?&lt;/span&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="1">
+          <mxGeometry x="1796" y="1606" width="165" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-146" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-147" target="sZrP5ZYWWnOfZu56KgDg-145">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-147" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-to-database.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#3333ff&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;POST request processing&lt;/span&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1802.75" y="1490" width="150.25" height="69.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-152" target="sZrP5ZYWWnOfZu56KgDg-154">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-152" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Move the temporary icon-file to the &lt;/span&gt;&lt;b style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;images &lt;/b&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;folder&lt;/span&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="2000" y="1700" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-153" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="sZrP5ZYWWnOfZu56KgDg-154" target="sZrP5ZYWWnOfZu56KgDg-155">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2099.6" y="1946" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-154" value="SQL-request to the DB UPDATE &quot;tables&quot; SET &#39;is_active&#39;=0 for language, all checked topics and questions" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="1995" y="1826" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sZrP5ZYWWnOfZu56KgDg-155" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Redirection to the page &lt;b&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;admin-&lt;/font&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;upload-success&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;b style=&quot;color: light-dark(rgb(51, 51, 255), rgb(168, 168, 255));&quot;&gt;&lt;font style=&quot;color: rgb(51, 51, 255);&quot;&gt;.php&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 51, 255);&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;return button&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="2016" y="1966" width="157.56" height="66" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -12,7 +12,7 @@ function createNameForSvgIcon(element_id) {
 
 //Function to handle upload button:
 function handleFileUpload(element_id) {
-    console.log("The parameter from the page:", element_id);
+  console.log("The parameter from the page:", element_id);
   checkFileType(); // call the function to check whether the admin upload svg-type file or not
   let inputElement = document.getElementById(element_id); // define the input field
   let inputElementValue = inputElement.value; // define the value of input field
@@ -44,8 +44,14 @@ function handleErrorPageChangeTheTypeOfTheFile() {
 
 //Function to form and insert info-text depending on whether the admin entered a language name or not:
 function innerTextToParagragh(element_id) {
-  if (document.getElementById("upload-svg-info-text").classList.contains("alert-message")) {
-    document.getElementById("upload-svg-info-text").classList.remove("alert-message");
+  if (
+    document
+      .getElementById("upload-svg-info-text")
+      .classList.contains("alert-message")
+  ) {
+    document
+      .getElementById("upload-svg-info-text")
+      .classList.remove("alert-message");
   }
   let infoText = "";
   let svgInfoTextElement = document.getElementById("upload-svg-info-text"); //define the element p
@@ -59,4 +65,33 @@ function innerTextToParagragh(element_id) {
     infoText = `The icon-file will be uploaded to the project under the name: <b>${newName}</b>`; // form the text
   }
   svgInfoTextElement.innerHTML = infoText; // input text in the p element
+}
+
+function activateButton() {
+  const inputLanguage = document.getElementById("add-language");
+  const inputFile = document.getElementById("svg-file");
+  const buttonToActivate = document.getElementById("submitBtn");
+
+  if (inputLanguage.value.trim() !== "" || inputFile.value.trim() !== "") {
+    buttonToActivate.disabled = false;
+  } else {
+    buttonToActivate.disabled = true;
+  }
+}
+
+function validateForm(event) {
+  const inputLanguage = document.getElementById("add-language");
+  const inputFile = document.getElementById("svg-file");
+  const buttonToActivate = document.getElementById("submitBtn");
+
+  if (inputLanguage.value.trim() === "") {
+    buttonToActivate.disabled = true;
+    alert("Enter the name");
+    event.preventDefault();
+  }
+  if (inputFile.value.trim() === "") {
+    buttonToActivate.disabled = true;
+    alert("Upload the file");
+    event.preventDefault();
+  }
 }

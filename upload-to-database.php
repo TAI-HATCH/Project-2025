@@ -56,16 +56,18 @@ switch ($form_type) {
 
         $stmt = $conn->prepare("INSERT INTO 
                                         languages (language_name) 
-                                    VALUES (:language_name)");
-        $stmt->bindParam(":language_name", $language_name);
+                                    VALUES 
+                                        (:language_name)");
+        $stmt->bindParam(":language_name", $language_name, PDO::PARAM_STR);
         $stmt->execute();
 
         $language_id = $conn->lastInsertId();
 
-        if (!empty($selected_topics)) {
+        if (!empty($selected_topics)) { // Select content from checkbox
             $stmt = $conn->prepare("INSERT INTO 
                                             languages_topic (language_id, topic_id) 
-                                        VALUES (:language_id, :topic_id)");
+                                        VALUES 
+                                            (:language_id, :topic_id)");
 
             foreach ($selected_topics as $topic_id) {
                 $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
@@ -96,7 +98,8 @@ switch ($form_type) {
         if (!empty($selected_languages)) {
             $stmt = $conn->prepare("INSERT INTO 
                                             languages_topic (language_id, topic_id) 
-                                        VALUES (:language_id, :topic_id)");
+                                        VALUES 
+                                            (:language_id, :topic_id)");
 
             foreach ($selected_languages as $language_id) {
                 $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);

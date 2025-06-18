@@ -95,3 +95,26 @@ function validateForm(event) {
     event.preventDefault();
   }
 }
+
+function handleRadioButtonText() {
+  const tagForText = document.getElementById("image-inform-text");
+  const radioBtns = document.querySelectorAll("input[name='image']");
+  let text = '';
+
+  radioBtns.forEach(btn => {
+  btn.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      if (event.target.value === 'new upload') {
+        // console.log("new upload");
+        text = '<strong>Please note</strong>: The existing file will be deleted. The file you uploaded will be saved in its place.'
+        tagForText.innerHTML = text;
+      } else if (event.target.value === 'existing image') {
+        // console.log('existing');
+        text = '<strong>Please note</strong>: The file you uploaded will be deleted. The existing file will remain.';
+        tagForText.innerHTML = text;
+      }
+      
+    }
+  })  
+  });
+}

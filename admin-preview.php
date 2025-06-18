@@ -23,9 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $newFile = generateNewFileName($element_name);
     $temp_file_name = generateTempFileName();
 
-    // echo "<pre>";
-    // var_dump($temp_file_name);
-    // echo "</pre>";
+    // Check if file with $newFile-name already exists in images-folder: 
+    if (file_exists('images/' . $newFile)) {
+        $isAlreadyExist = true;
+    }
+
 
     switch ($form_type) {
         case 'add-language':
@@ -49,20 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 }
             }
 
-            echo "<pre>";
-            echo "The value of isUnique: ";
-            var_dump($isUnique);
-            echo "The value of isActive: ";
-            var_dump($isActive);
-            echo "</pre>";
+            // echo "<pre>";
+            // echo "The value of isUnique: ";
+            // var_dump($isUnique);
+            // echo "The value of isActive: ";
+            // var_dump($isActive);
+            // echo "</pre>";
 
 
             if ($isUnique == false) { //It means that the mentioned programming language already exists in the DB
                 # code...
 
-                echo "<pre>";
-                var_dump("You want to add an existing language in the DB");
-                echo "</pre>";
+                // echo "<pre>";
+                // var_dump("You want to add an existing language in the DB");
+                // echo "</pre>";
 
                 //Validation: if this language active or not:
                 if ($isActive == 1) {
@@ -73,24 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     exit;
                 } else {
                     # code...
-                    $text_message = "The programming language $inputed_name was earlier deactivated. Do you want to restore it and all topics and questions for it? You can choose:";
+                    $text_message = "The programming language $inputed_name was previously deactivated. Do you want to restore it along with all its related topics and questions? You can choose:";
                     $all_existing_topics = get_all_existing_topics($lang_id);
                     $all_existing_questions = get_all_existing_questions($lang_id);
-                    echo "<pre>";
-                    var_dump($all_existing_topics);
-                    var_dump($all_existing_questions);
-                    echo "</pre>";
+                    // echo "<pre>";
+                    // var_dump($all_existing_topics);
+                    // var_dump($all_existing_questions);
+                    // echo "</pre>";
                     handleTempIconFile($temp_file_name);
                 }
 
 
-                echo "<pre>";
-                var_dump($text_message);
-                echo "</pre>";
+                // echo "<pre>";
+                // var_dump($text_message);
+                // echo "</pre>";
             } else {
-                echo "<pre>";
-                var_dump("You want to add a new language");
-                echo "</pre>";
+                // echo "<pre>";
+                // var_dump("You want to add a new language");
+                // echo "</pre>";
                 handleTempIconFile($temp_file_name);
             }
 
@@ -143,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                         <p><strong>Language name:</strong> <?= $language_name ?></p>
 
                         <?php
-                        if ($text_message) {
+                        if (isset($text_message)) {
                         ?>
                             <p><strong><?php echo $text_message ?></strong></p>
                         <?php
@@ -154,46 +156,99 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                         ?>
                             <ul>
                                 <?php
-                                foreach ($all_existing_topics as $topic) {
-                                    $topic_id = $topic['id'];
+                                foreach ($all_existing_topics as $ex_topic) {
+                                    $topic_id = $ex_topic['id'];
                                 ?>
                                     <li>
-                                        <input type="checkbox" name="topic[]" id="topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
-                                            <?php if ($topic['is_active'] == 1) {
+                                        <input type="checkbox" name="topic[]" id="ex_topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
+                                            <?php if ($ex_topic['is_active'] == 1) {
                                             ?>
                                             checked
                                             <?php
                                             } ?>>
-                                        <label for="topic<?php echo $topic_id; ?>"><?php echo $topic['topic_name']; ?></label>
+                                        <label for="ex_topic<?php echo $topic_id; ?>"><?php echo $ex_topic['topic_name']; ?></label>
                                     </li>
+                                    <?php
+                                }
+
+                                if (!empty($selected_topics)) {
+                                    $s_topics = get_all_topics();
+                                    // echo "<pre>";
+                                    // var_dump($s_topics);
+                                    // echo "</pre>";
+                                    foreach ($s_topics as $s_topic) {
+                                        if (in_array($s_topic["topic_id"], $selected_topics)) {
+                                    ?>
+                                            <li>
+                                                <input type="checkbox" name="topic[]" id="s_topic<?php echo $s_topic['topic_id']; ?>" value="<?php echo $s_topic['topic_id']; ?>" class="checkbox" checked>
+                                                <label for="s_topic<?php echo $s_topic['topic_id']; ?>"><?php echo $s_topic['topic_name']; ?></label>
+                                            </li>
                                 <?php
+                                        }
+                                    }
                                 }
                                 ?>
                             </ul>
                         <?php
 
+                        } else {
+                            if (!empty($selected_topics)) {
+                                $topics = get_all_topics();
+                                $topic_names = [];
+                                foreach ($topics as $topic) {
+                                    if (in_array($topic['topic_id'], $selected_topics)) {
+                                        $topic_names[] = $topic['topic_name'];
+                                    }
+                                }
+                            ?>
+                                <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
+                            <?php } else { ?>
+                                <p>No topics selected.</p>
+                            <?php }
                         }
                         ?>
-
-                        <?php
-                        if (!empty($selected_topics)) {
-                            $topics = get_all_topics();
-                            $topic_names = [];
-                            foreach ($topics as $topic) {
-                                if (in_array($topic['topic_id'], $selected_topics)) {
-                                    $topic_names[] = $topic['topic_name'];
-                                }
-                            }
-                        ?>
-                            <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
-                        <?php } else { ?>
-                            <p>No topics selected.</p>
-                        <?php } ?>
                     </div>
 
                     <div class="admin-preview-content">
-                        <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
-                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                        <?php
+                        if (!isset($isAlreadyExist) || $isAlreadyExist == false) {
+                        ?>
+                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                            <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                        <?php
+                        } else {
+                        ?>
+                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                            <p>But the file <strong><?php echo $newFile ?></strong> already exists in the <strong>images</strong> folder for <?php echo $element_name; ?>.</p>
+                            <p>Which one do you want to use — the existing file or the new upload?</p>
+                            <ul class="images-list">
+                                <li class="images-list-item">
+                                    <label for="selected_image" class="images-list-item">
+                                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for selected icon-file" width="70">
+                                        <p>new upload</p>
+                                        <input type="radio" name="image" id="selected_image" value="new upload" onclick="handleRadioButtonText()">
+                                    </label>
+
+                                </li>
+                                <li class="images-list-item">
+                                    <label for="existing_image" class="images-list-item">
+                                        <img src="<?= "./images/" . htmlspecialchars($newFile) ?>" alt="The preview for existing icon-file" width="70">
+                                        <p>existing file</p>
+                                        <input type="radio" name="image" id="existing_image" value="existing image" onclick="handleRadioButtonText()">
+                                    </label>
+
+                                </li>
+                            </ul>
+                            <p id="image-inform-text"></p>
+
+
+                        <?php
+                        }
+
+
+                        ?>
+
+
                     </div>
 
                     <div class="admin-form-buttons">

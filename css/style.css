@@ -632,6 +632,20 @@ input[type="file" i] {
   height: 2rem;
 }
 
+.images-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.images-list-item{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+}
+
 .admin-upload-success p,
 a {
   font-size: 2rem;

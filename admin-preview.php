@@ -75,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     exit;
                 } else {
                     # code...
-                    $text_message = "The programming language $inputed_name was previously deactivated. Do you want to restore it along with all its related topics and questions? You can choose:";
-                    $all_existing_topics = get_all_existing_topics($lang_id);
+                    $text_message = "The programming language $inputed_name was previously deactivated. Do you want to restore it along with all its related topics and questions?";
+                    $all_existing_topics_for_language = get_all_existing_topics_for_language($lang_id);
                     $all_existing_questions = get_all_existing_questions($lang_id);
                     // echo "<pre>";
-                    // var_dump($all_existing_topics);
+                    // var_dump($all_existing_topics_for_language);
                     // var_dump($all_existing_questions);
                     // echo "</pre>";
                     handleTempIconFile($temp_file_name);
@@ -148,48 +148,69 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                         if (isset($text_message)) {
                         ?>
                             <p><strong><?php echo $text_message ?></strong></p>
+
+                            <?php
+                            if (!empty($all_existing_topics_for_language) && !empty($selected_topics)) {
+                            ?>
+                                <p><strong>Below is a list of all topics currently stored in the database for the <?php echo $element_name ?>.</strong></p>
+                                <p>Topics that are already active or were selected on the previous page are marked with checkmarks.</p>
+                                <p>Topics without checkmarks were previously deactivated.</p>
+                                <p>You can modify this selection before saving — check or uncheck the topics as needed:</p>
                         <?php
-                        }
-
-
-                        if (!empty($all_existing_topics)) {
-                        ?>
-                            <ul>
-                                <?php
-                                foreach ($all_existing_topics as $ex_topic) {
-                                    $topic_id = $ex_topic['id'];
-                                ?>
-                                    <li>
-                                        <input type="checkbox" name="topic[]" id="ex_topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
-                                            <?php if ($ex_topic['is_active'] == 1) {
-                                            ?>
-                                            checked
-                                            <?php
-                                            } ?>>
-                                        <label for="ex_topic<?php echo $topic_id; ?>"><?php echo $ex_topic['topic_name']; ?></label>
-                                    </li>
-                                    <?php
+                                $all_topics = get_all_topics();
+                                $temp_topics_array = [];
+                                foreach ($all_topics as $topic) {
+                                    if (in_array($topic['topic_id'], $selected_topics)) {
+                                        $topic_item = ['topic_name' => $topic['topic_name'], 'is_active' => $topic['is_active'], 'topic_id' => $topic['topic_id']];
+                                        array_push($temp_topics_array, $topic_item);
+                                    }
                                 }
 
-                                if (!empty($selected_topics)) {
-                                    $s_topics = get_all_topics();
-                                    // echo "<pre>";
-                                    // var_dump($s_topics);
-                                    // echo "</pre>";
-                                    foreach ($s_topics as $s_topic) {
-                                        if (in_array($s_topic["topic_id"], $selected_topics)) {
-                                    ?>
-                                            <li>
-                                                <input type="checkbox" name="topic[]" id="s_topic<?php echo $s_topic['topic_id']; ?>" value="<?php echo $s_topic['topic_id']; ?>" class="checkbox" checked>
-                                                <label for="s_topic<?php echo $s_topic['topic_id']; ?>"><?php echo $s_topic['topic_name']; ?></label>
-                                            </li>
-                                <?php
+                                $merged_topic_array = [];
+                                $all_ids = [];
+                                foreach ([$all_existing_topics_for_language, $temp_topics_array] as $topic_array) {
+                                    foreach ($topic_array as $topic) {
+                                        if (!in_array($topic['topic_id'], $all_ids)) {
+                                            $merged_topic_array[] = $topic;
+                                            $all_ids[] = $topic['topic_id'];
                                         }
                                     }
                                 }
+
+                                // echo "<pre>";
+                                // echo "Merged array:";
+                                // var_dump($merged_topic_array);
+                                // echo "</pre>";
+                            } else {
+                                echo "<pre>";
+                                var_dump("No topics");
+                                echo "</pre>";
+                            }
+                        } else {
+                            echo "<pre>";
+                            var_dump("No text message");
+                            echo "</pre>";
+                        }
+                        ?>
+
+                        <?php
+                        if (!empty($merged_topic_array)) {
+                        ?>
+                            <ul>
+                                <?php
+                                foreach ($merged_topic_array as $topic) {
+                                    $topic_id = $topic['topic_id'];
+                                ?>
+                                    <li>
+                                        <input type="checkbox" name="topic[]" id="topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
+                                            <?php if ($topic['is_active'] == 1) { ?> checked <?php } ?>>
+                                        <label for="topic<?php echo $topic_id; ?>"><?php echo $topic['topic_name']; ?></label>
+                                    </li>
+                                <?php
+                                }
                                 ?>
                             </ul>
-                        <?php
+                            <?php
 
                         } else {
                             if (!empty($selected_topics)) {
@@ -204,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                 <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
                             <?php } else { ?>
                                 <p>No topics selected.</p>
-                            <?php }
+                        <?php }
                         }
                         ?>
                     </div>
@@ -240,15 +261,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                 </li>
                             </ul>
                             <p id="image-inform-text"></p>
-
-
                         <?php
                         }
-
-
                         ?>
-
-
                     </div>
 
                     <div class="admin-form-buttons">

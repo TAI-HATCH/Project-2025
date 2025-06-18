@@ -96,12 +96,12 @@ function get_topics($language_id) //Function to get an array of topics from the 
     return $topics;
 }
 
-function get_all_existing_topics($language_id) //Function to get an array of topics from the DB with the specified language id:
+function get_all_existing_topics_for_language($language_id) //Function to get an array of topics from the DB with the specified language id:
 {
     global $conn; //give access to the variable $conn defining in the connection.php
     $table_name = "languages_topic"; // Create a variable with the table name
     $stmt = $conn->prepare("SELECT 
-                                    L.language_name, T.topic_name, $table_name.id, $table_name.is_active 
+                                    T.topic_name, $table_name.is_active, $table_name.topic_id 
                                 FROM 
                                     $table_name, 
                                     `languages` AS L,
@@ -146,7 +146,7 @@ function get_all_existing_questions($language_id)
 {
 
     $table_name = "questions"; // Create a variable with the table name
-    $all_related_topics = get_all_existing_topics($language_id);
+    $all_related_topics = get_all_existing_topics_for_language($language_id);
     $all_questions = [];
 
     global $conn; //give access to the variable $conn defining in the connection.php

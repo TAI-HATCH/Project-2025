@@ -25,7 +25,7 @@ if (!$tempFileName) {
         console.log("There is no $_POST['temp-icon-file']");
     </script>
 
-    <?php
+<?php
 } else {
     $uploadOk = 1;
 
@@ -42,7 +42,7 @@ if (!$tempFileName) {
     } else {
         //copy the temporary file to the server with a new name in the folder specified by $target_file:  
         if (rename('temp-uploads/' . $tempFileName, $target_dir . $newFileName)) {
-                // echo $_POST['temp-icon-file'] . " has been uploaded to " . $newFileName;    
+            // echo $_POST['temp-icon-file'] . " has been uploaded to " . $newFileName;    
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
@@ -53,6 +53,10 @@ switch ($form_type) {
     case 'add-language':
         $language_name = $_POST['add-language'] ?? null;
         $selected_topics = $_POST['topic'] ?? [];
+
+        echo "<pre>";
+        var_dump($selected_topics);
+        echo "</pre>";
 
         $stmt = $conn->prepare("INSERT INTO 
                                         languages (language_name) 
@@ -75,10 +79,10 @@ switch ($form_type) {
                 $stmt->execute();
             }
         }
-        
+
         session_start();
         $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
-        header("Location: admin-upload-success.php");
+        // header("Location: admin-upload-success.php");
         exit;
         break;
 
@@ -107,7 +111,7 @@ switch ($form_type) {
                 $stmt->execute();
             }
         }
-        
+
         session_start();
         $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
         header("Location: admin-upload-success.php");

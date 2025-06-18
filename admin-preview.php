@@ -7,15 +7,8 @@ include "admin-header.php";
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: admin-start.php");
     exit;
-}
-
-$form_type = $_POST['form_type'] ?? null;
-
-if (isset($_FILES["svg-file"])) {
-    
-    // echo "<pre>";
-    // var_dump($_FILES);
-    // echo "</pre>";
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["svg-file"])) {
+    $form_type = $_POST['form_type'] ?? null;
 
     // Processing the uploading of the icon-file:
     // https://www.w3schools.com/php/php_file_upload.asp
@@ -27,58 +20,92 @@ if (isset($_FILES["svg-file"])) {
         $element_name = $_POST['add-language'];
     }
 
-    //Get the extension of the selected file by admin:
-    $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
-    //create a new NAME for the file according to the defined rules for uploading to the server without extension:
-    $newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
-    //create the full  NAME for the file with extension:
-    $newFile = $newFileName . '.' . $fileExtension;
+    $newFile = generateNewFileName($element_name);
+    $temp_file_name = generateTempFileName();
+
+    // echo "<pre>";
+    // var_dump($temp_file_name);
+    // echo "</pre>";
+
+    switch ($form_type) {
+        case 'add-language':
+            // echo "<pre>";F
+            // var_dump($form_type);
+            // echo "</pre>";
+
+            //Validation: Is there a language in the DB table "languages" with the specified name?:
+            $all_languages = get_all_languages(); //Get an array of ALL prog.languages with is_active
+            $inputed_name = $_POST['add-language'];
+            $isUnique = true;
+            $isActive = null;
+            $lang_id = null;
+            foreach ($all_languages as $language_set) {
+                if ($language_set['language_name'] === $inputed_name) {
+                    $isUnique = false;
+                    $isActive = $language_set['is_active'];
+                    $lang_id = $language_set['language_id'];
+
+                    break;
+                }
+            }
+
+            echo "<pre>";
+            echo "The value of isUnique: ";
+            var_dump($isUnique);
+            echo "The value of isActive: ";
+            var_dump($isActive);
+            echo "</pre>";
 
 
-    //specify the directory to store TEMPORARY files:
-    $temp_upload_dir = "temp-uploads/";
-    //Get a temporary file with the initial name:
-    $tempFile = $_FILES["svg-file"]["tmp_name"];
-    //Set the unique name to the file just to store it as temporary file before uploading to the server:
-    $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
-    //Set the path to store the file (folder/temp-name.extension):
-    $temp_file_path = $temp_upload_dir . $temp_file_name;
+            if ($isUnique == false) { //It means that the mentioned programming language already exists in the DB
+                # code...
 
-    $uploadOk = 1;
+                echo "<pre>";
+                var_dump("You want to add an existing language in the DB");
+                echo "</pre>";
 
-    // Check if file already exists
-    if (file_exists($temp_file_path)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    }
+                //Validation: if this language active or not:
+                if ($isActive == 1) {
+                    $text_message = "The programming language $inputed_name can not be added to the database, because it already exists.";
+                    session_start();
+                    $_SESSION['text-message'] = $text_message;
+                    header("Location: error.php");
+                    exit;
+                } else {
+                    # code...
+                    $text_message = "The programming language $inputed_name was earlier deactivated. Do you want to restore it and all topics and questions for it? You can choose:";
+                    $all_existing_topics = get_all_existing_topics($lang_id);
+                    $all_existing_questions = get_all_existing_questions($lang_id);
+                    echo "<pre>";
+                    var_dump($all_existing_topics);
+                    var_dump($all_existing_questions);
+                    echo "</pre>";
+                    handleTempIconFile($temp_file_name);
+                }
 
-    // Check if $uploadOk is set to 0 by an error  
 
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-    } else {
-        //copy the temporary file to the server with a new name in the folder specified by $target_file:
-        //Syntax: move_uploaded_file(file, dest):
-        // file - filename of the uploaded file
-        //dest - the new location for the file
-        if (move_uploaded_file($tempFile, $temp_file_path)) {
-?>
-            <script>
-                console.log(`The temporary file <?php echo $temp_file_name ?>  has been uploaded to <?php echo $temp_file_path ?>.`);
-            </script>
-        <?php
+                echo "<pre>";
+                var_dump($text_message);
+                echo "</pre>";
+            } else {
+                echo "<pre>";
+                var_dump("You want to add a new language");
+                echo "</pre>";
+                handleTempIconFile($temp_file_name);
+            }
 
-        } else {
-        ?>
-            <script>
-                console.log(`Sorry, there was an error uploading your file.`);
-            </script>
-<?php
-            echo "Sorry, there was an error uploading your file.";
-        }
+
+            break; //This break is for case add-language
+
+        default: //This default is for switch form_type
+            echo "<pre>";
+            var_dump("You added something else but not language");
+            echo "</pre>";
+            handleTempIconFile($temp_file_name);
+            break;
     }
 }
+
 
 ?>
 
@@ -116,6 +143,39 @@ if (isset($_FILES["svg-file"])) {
                         <p><strong>Language name:</strong> <?= $language_name ?></p>
 
                         <?php
+                        if ($text_message) {
+                        ?>
+                            <p><strong><?php echo $text_message ?></strong></p>
+                        <?php
+                        }
+
+
+                        if (!empty($all_existing_topics)) {
+                        ?>
+                            <ul>
+                                <?php
+                                foreach ($all_existing_topics as $topic) {
+                                    $topic_id = $topic['id'];
+                                ?>
+                                    <li>
+                                        <input type="checkbox" name="topic[]" id="topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
+                                            <?php if ($topic['is_active'] == 1) {
+                                            ?>
+                                            checked
+                                            <?php
+                                            } ?>>
+                                        <label for="topic<?php echo $topic_id; ?>"><?php echo $topic['topic_name']; ?></label>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        <?php
+
+                        }
+                        ?>
+
+                        <?php
                         if (!empty($selected_topics)) {
                             $topics = get_all_topics();
                             $topic_names = [];
@@ -137,17 +197,17 @@ if (isset($_FILES["svg-file"])) {
                     </div>
 
                     <div class="admin-form-buttons">
-                            <form method="POST" action="upload-to-database.php">
-                                <input type="hidden" name="form_type" value="add-language">
-                                <input type="hidden" name="add-language" value="<?= $language_name ?>">
-                                <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
-                                <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
+                        <form method="POST" action="upload-to-database.php">
+                            <input type="hidden" name="form_type" value="add-language">
+                            <input type="hidden" name="add-language" value="<?= $language_name ?>">
+                            <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
+                            <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
 
-                                <?php foreach ($selected_topics as $topic_id): ?>
-                                    <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
-                                <?php endforeach; ?>
-                                <button class="upload-to-database-button" type="submit">Upload to database</button>
-                            </form>
+                            <?php foreach ($selected_topics as $topic_id): ?>
+                                <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
+                            <?php endforeach; ?>
+                            <button class="upload-to-database-button" type="submit">Upload to database</button>
+                        </form>
 
                         <form method="GET" action="admin-add-language.php">
                             <button class="upload-to-database-button" type="submit">Cancel</button>
@@ -178,7 +238,7 @@ if (isset($_FILES["svg-file"])) {
                                 if (in_array($language['language_id'], $selected_languages)) {
                                     $language_names[] = $language['language_name'];
                                 }
-                            } 
+                            }
                         ?>
 
                             <p><strong>Selected languages: </strong> <?= implode(", ", $language_names) ?></p>
@@ -204,7 +264,7 @@ if (isset($_FILES["svg-file"])) {
                             <?php endforeach; ?>
                             <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
-                        
+
                         <form method="GET" action="admin-add-topic.php">
                             <button class="upload-to-database-button" type="submit">Cancel</button>
                         </form>

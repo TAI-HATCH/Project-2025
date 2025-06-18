@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if (isset($_SESSION['text-message'])) {
+    $text_message = $_SESSION["text-message"];
+    unset($_SESSION['text-message']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,5 +17,6 @@
 </head>
 <body>
     <p>There is a language in the DB with the specified name! Wrong!</p>
+    <p><?php echo $text_message; ?></p>
 </body>
 </html>

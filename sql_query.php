@@ -101,7 +101,7 @@ function get_all_existing_topics_for_language($language_id) //Function to get an
     global $conn; //give access to the variable $conn defining in the connection.php
     $table_name = "languages_topic"; // Create a variable with the table name
     $stmt = $conn->prepare("SELECT 
-                                    T.topic_name, $table_name.is_active, $table_name.topic_id 
+                                    T.topic_name, $table_name.is_active, $table_name.topic_id, $table_name.id  
                                 FROM 
                                     $table_name, 
                                     `languages` AS L,
@@ -142,11 +142,15 @@ function get_questions($topic_id)
     return $questions;
 }
 
-function get_all_existing_questions($language_id)
+function get_all_existing_questions_for_language($language_id)
 {
 
     $table_name = "questions"; // Create a variable with the table name
     $all_related_topics = get_all_existing_topics_for_language($language_id);
+    // echo "<pre>";
+    // echo 'All related topics:';
+    // var_dump($all_related_topics);
+    // echo "</pre>";
     $all_questions = [];
 
     global $conn; //give access to the variable $conn defining in the connection.php
@@ -171,6 +175,9 @@ function get_all_existing_questions($language_id)
         $all_questions = array_merge($all_questions, $results);
     }
 
+    // echo "<pre>";
+    // var_dump($all_questions);
+    // echo "</pre>";
     return $all_questions;
 }
 
@@ -188,6 +195,24 @@ function get_answers($question_id)
                             AND
                                 is_active = 1;"); // Go into db, take hold of answer for the specific question
     $stmt->bindParam(':question_id', $question_id); // Binding together (reflecting) :question_id and $question["question_id"]s
+    $stmt->execute(); // Run the thing
+
+    $answers = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the answers that we just fetched and put it into an array
+    return $answers;
+}
+
+function get_all_answers($question_id)
+{
+    global $conn; //give access to the variable $conn defining in the connection.php
+
+    //Send request to the DB to the table Answers with the question_id = $question["question_id"]
+    $stmt = $conn->prepare("SELECT 
+                                input_name, answer_value, is_active, id 
+                            FROM 
+                                answers 
+                            WHERE
+                                 question_id = :question_id;"); // Go into db, take hold of answer for the specific question
+    $stmt->bindParam(':question_id', $question_id); // Binding together (reflecting) :question_id and $question["question_id"]
     $stmt->execute(); // Run the thing
 
     $answers = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the answers that we just fetched and put it into an array
@@ -330,7 +355,8 @@ function handleTempIconFile($temp_file_name)
     }
 }
 
-function generateNewFileName($element_name) {
+function generateNewFileName($element_name)
+{
     //Get the extension of the selected file by admin:
     $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
     //create a new NAME for the file according to the defined rules for uploading to the server without extension:
@@ -340,11 +366,11 @@ function generateNewFileName($element_name) {
     return $newFile;
 }
 
-function generateTempFileName() {
+function generateTempFileName()
+{
     //Set the unique name to the file just to store it as temporary file before uploading to the server:
-        $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
-        return $temp_file_name;
-    
+    $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
+    return $temp_file_name;
 }
 
 ?>

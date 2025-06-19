@@ -79,7 +79,7 @@ include_once "sql_query.php";
 
     </form>
     <!-- Scripts for this page -->
-    <script src="./js/upload-icon.js"></script>
+    <script src="./js/scripts.js"></script>
 
 </body>
 

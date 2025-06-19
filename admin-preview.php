@@ -286,11 +286,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                     // var_dump($all_answers);
                                     // echo "</pre>";
                                 ?>
-                                    <li class="question-list-item">
+                                    <li class="question-list-item checkbox-group">
 
                                         <div class="question-list-item-checkbox">
-                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>" class="checkbox"
-                                                <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
+                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>" 
+                                            class="checkbox checkbox-parent" onchange="handleCheckboxUncheck(this)"
+                                            <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
                                         </div>
 
                                         <div class="question-list-item-wrapper">
@@ -311,7 +312,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                                     foreach ($all_answers as $answer) {
                                                     ?>
                                                         <li class="answer-list-item">
-                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>" class="checkbox"
+                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>" 
+                                                                class="checkbox checkbox-child"
                                                                 <?php if ($answer['is_active'] == 1) { ?> checked <?php } ?>>
                                                             <label for="answer<?php echo $answer['id']; ?>">
                                                                 <?php echo $answer['input_name']; ?>
@@ -482,7 +484,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     </section>
 
     <!-- Scripts for this page -->
-    <script src="./js/upload-icon.js"></script>
+    <script src="./js/scripts.js"></script>
 </body>
 
 </html>

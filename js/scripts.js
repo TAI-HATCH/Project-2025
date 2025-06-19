@@ -118,3 +118,15 @@ function handleRadioButtonText() {
   })  
   });
 }
+
+function handleCheckboxUncheck(element) {
+  console.log(element);
+  const checkBoxGroup = element.closest('.checkbox-group');
+  console.log(checkBoxGroup);
+  const checkBoxChild = checkBoxGroup.querySelectorAll('.checkbox-child');
+  if (!element.checked) {
+    checkBoxChild.forEach(child => {
+      child.checked = false;
+    })
+  }  
+}

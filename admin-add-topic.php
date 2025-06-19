@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
     </form>
 
     <!-- Scripts for this page -->
-    <script src="./js/upload-icon.js"></script>
+    <script src="./js/scripts.js"></script>
 
 </body>
 

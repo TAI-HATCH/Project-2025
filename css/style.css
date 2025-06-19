@@ -672,6 +672,9 @@ input[type="file" i] {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
+
+.question-list-item-snippet{
   pointer-events: none;
 }
 

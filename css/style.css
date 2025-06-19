@@ -667,6 +667,7 @@ input[type="file" i] {
   gap: 1rem;
 }
 
+.question-list-item-text,
 .question-list-item-snippet,
 .question-list-item-answer {
   display: flex;

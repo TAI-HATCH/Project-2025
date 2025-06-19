@@ -289,35 +289,35 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                     <li class="question-list-item checkbox-group">
 
                                         <div class="question-list-item-checkbox">
-                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>" 
-                                            class="checkbox checkbox-parent" onchange="handleCheckboxUncheck(this)"
-                                            <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
+                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>"
+                                                class="checkbox checkbox-parent" onchange="handleCheckboxUncheck(this)"
+                                                <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
                                         </div>
 
                                         <div class="question-list-item-wrapper">
                                             <div class="question-list-item-text">
-                                                <!-- <p>Question text:</p> -->
+                                                <p><strong>Question text:</strong></p>
                                                 <label for="question<?php echo $question['question_id']; ?>"><?php echo $question['question']; ?></label>
                                             </div>
 
                                             <div class="question-list-item-snippet">
                                                 <p><strong>Question code snippet:</strong></p>
-                                                <p><?php echo $question['form_content']; ?></p>
+                                                <p class="question-list-item-snippet-paragragh"><?php echo $question['form_content']; ?></p>
                                             </div>
 
                                             <div class="question-list-item-answer">
-                                            <p><strong>Answers:</strong></p>
+                                                <p><strong>Answers:</strong></p>
                                                 <ul class="answer-list">
                                                     <?php
                                                     foreach ($all_answers as $answer) {
                                                     ?>
                                                         <li class="answer-list-item">
-                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>" 
+                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>"
                                                                 class="checkbox checkbox-child"
                                                                 <?php if ($answer['is_active'] == 1) { ?> checked <?php } ?>>
                                                             <label for="answer<?php echo $answer['id']; ?>">
                                                                 <?php echo $answer['input_name']; ?>
-                                                                : 
+                                                                :
                                                                 <?php echo $answer['answer_value']; ?>
                                                             </label>
                                                         </li>

@@ -99,34 +99,48 @@ function validateForm(event) {
 function handleRadioButtonText() {
   const tagForText = document.getElementById("image-inform-text");
   const radioBtns = document.querySelectorAll("input[name='image']");
-  let text = '';
+  let text = "";
 
-  radioBtns.forEach(btn => {
-  btn.addEventListener('change', (event) => {
-    if (event.target.checked) {
-      if (event.target.value === 'new upload') {
-        // console.log("new upload");
-        text = '<strong>Please note</strong>: The existing file will be deleted. The file you uploaded will be saved in its place.'
-        tagForText.innerHTML = text;
-      } else if (event.target.value === 'existing image') {
-        // console.log('existing');
-        text = '<strong>Please note</strong>: The file you uploaded will be deleted. The existing file will remain.';
-        tagForText.innerHTML = text;
+  radioBtns.forEach((btn) => {
+    btn.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        if (event.target.value === "new upload") {
+          // console.log("new upload");
+          text =
+            "<strong>Please note</strong>: The existing file will be deleted. The file you uploaded will be saved in its place.";
+          tagForText.innerHTML = text;
+        } else if (event.target.value === "existing image") {
+          // console.log('existing');
+          text =
+            "<strong>Please note</strong>: The file you uploaded will be deleted. The existing file will remain.";
+          tagForText.innerHTML = text;
+        }
       }
-      
-    }
-  })  
+    });
   });
 }
 
 function handleCheckboxUncheck(element) {
-  console.log(element);
-  const checkBoxGroup = element.closest('.checkbox-group');
-  console.log(checkBoxGroup);
-  const checkBoxChild = checkBoxGroup.querySelectorAll('.checkbox-child');
+  const checkBoxGroup = element.closest(".checkbox-group");
+  const checkBoxChild = checkBoxGroup.querySelectorAll(".checkbox-child");
   if (!element.checked) {
-    checkBoxChild.forEach(child => {
+    checkBoxChild.forEach((child) => {
       child.checked = false;
-    })
-  }  
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll(".question-list-item-snippet")
+    .forEach((element) => {
+      handlePlaceholder(element);
+    });
+});
+
+function handlePlaceholder(element) {
+  const inputElements = element.querySelectorAll("input");
+  inputElements.forEach(element => {
+    element.placeholder = element.name;
+  });
 }

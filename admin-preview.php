@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
             //Validation: Is there a language in the DB table "languages" with the specified name?:
             $all_languages = get_all_languages(); //Get an array of ALL prog.languages with is_active
-            $inputed_name = $_POST['add-language'];
+            $inputed_name = trim(strtolower($_POST['add-language']));
             $isUnique = true;
             $isActive = null;
             $lang_id = null;
             foreach ($all_languages as $language_set) {
-                if ($language_set['language_name'] === $inputed_name) {
+                if (trim(strtolower($language_set['language_name'])) === $inputed_name) {
                     $isUnique = false;
                     $isActive = $language_set['is_active'];
                     $lang_id = $language_set['language_id'];

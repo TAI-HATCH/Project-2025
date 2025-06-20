@@ -140,7 +140,39 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function handlePlaceholder(element) {
   const inputElements = element.querySelectorAll("input");
-  inputElements.forEach(element => {
+  inputElements.forEach((element) => {
     element.placeholder = element.name;
   });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  let allCheckBoxTopic = document.querySelectorAll("input[name='topic[]']");
+  allCheckBoxTopic.forEach((item) => {
+    item.addEventListener("click", () => {
+      refreshFormDivTopics(divHiddenInputTopic);
+    });
+  });
+  let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
+  const divHiddenInputTopic = document.getElementById("form-input-hidden-topics");
+  checkedTopics.forEach((item) => {
+    const hiddenInputTopic = document.createElement("input");
+    hiddenInputTopic.name = "topic[]";
+    hiddenInputTopic.type = "hidden";
+    hiddenInputTopic.value = item.defaultValue;
+    divHiddenInputTopic.appendChild(hiddenInputTopic);
+  });
+});
+
+function refreshFormDivTopics(element) {
+  element.innerHTML = "";
+  console.log("Element to change:", element);
+  let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
+  checkedTopics.forEach((item) => {
+    const hiddenInputTopic = document.createElement("input");
+    hiddenInputTopic.name = "topic[]";
+    hiddenInputTopic.type = "hidden";
+    hiddenInputTopic.value = item.defaultValue;
+    element.appendChild(hiddenInputTopic);
+  });
+  console.log("New FORM:", element);
 }

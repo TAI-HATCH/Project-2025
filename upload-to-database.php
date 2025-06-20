@@ -2,6 +2,10 @@
 include_once "connection.php";
 include_once "sql_query.php";
 
+echo '<pre>';
+var_dump($_POST);
+echo '</pre>';
+
 $form_type = $_POST['form_type'] ?? null;
 $tempFileName = $_POST['temp-icon-file'] ?? null; //Get the name of temporary file: temp-name.extension
 $newFileName = $_POST['new-icon-file-name'] ?? null; //Get the new name of file to upload: name.extension
@@ -9,11 +13,11 @@ $newFileName = $_POST['new-icon-file-name'] ?? null; //Get the new name of file 
 // Processing the uploading of the icon-file:
 
 //specify the name of the element - it can be the name of the prog.language or the name of the topic:
-if (isset($_POST['add-topic'])) {
-    $element_name = $_POST['add-topic'];
-} elseif (isset($_POST['add-language'])) {
-    $element_name = $_POST['add-language'];
-}
+// if (isset($_POST['add-topic'])) {
+//     $element_name = $_POST['add-topic'];
+// } elseif (isset($_POST['add-language'])) {
+//     $element_name = $_POST['add-language'];
+// }
 
 //specify the directory where the file is going to be placed:
 $target_dir = "images/";
@@ -54,9 +58,9 @@ switch ($form_type) {
         $language_name = $_POST['add-language'] ?? null;
         $selected_topics = $_POST['topic'] ?? [];
 
-        echo "<pre>";
-        var_dump($selected_topics);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($selected_topics);
+        // echo "</pre>";
 
         $stmt = $conn->prepare("INSERT INTO 
                                         languages (language_name) 
@@ -114,7 +118,7 @@ switch ($form_type) {
 
         session_start();
         $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
-        header("Location: admin-upload-success.php");
+        // header("Location: admin-upload-success.php");
         exit;
         break;
 
@@ -156,7 +160,7 @@ switch ($form_type) {
 
                 session_start();
                 $_SESSION['text-message'] = "The temporary icon-file <b>" . $_POST['temp-icon-file'] . "</> from <b>temp-uploads/</b> has been moved to <b>images/</b> and renamed to <b>" . $newFileName . "</b>.";
-                header("Location: admin-upload-success.php");
+                // header("Location: admin-upload-success.php");
                 exit;
             } catch (PDOException $e) {
                 echo "Error uploading: " . $e->getMessage();

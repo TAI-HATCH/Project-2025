@@ -9,6 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["svg-file"])) {
     $form_type = $_POST['form_type'] ?? null;
+    // a variable that will be passed via POST for further processing of the sql-request: whether to add a new record to the DB or update existing ones:
+    // by default it is "add" action. We assume that the admin will add a record that does not yet exist.
+    $sql_action = 'sql-add';
+    // a variable that will be passed via POST for further processing of the icon-file: whether to upload a new file to the server or keep existing one:
+    // by default it is "upload-new" action. We assume that the admin will add a record that does not yet exist, and therefore there is no such file on the server yet
+    $server_file_action = 'upload-new';
 
     // Processing the uploading of the icon-file:
     // https://www.w3schools.com/php/php_file_upload.asp
@@ -60,8 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 
             if ($isUnique == false) { //It means that the mentioned programming language already exists in the DB
-                # code...
-
                 // echo "<pre>";
                 // var_dump("You want to add an existing language in the DB");
                 // echo "</pre>";
@@ -71,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $text_message = "The programming language $inputed_name can not be added to the database, because it already exists.";
                     session_start();
                     $_SESSION['text-message'] = $text_message;
-                    header("Location: error.php");
+                    header("Location: error.php"); // redirection to the error-page
                     exit;
                 } else {
-                    # code...
+                    $sql_action = 'sql-update';
                     $text_message = "The programming language $inputed_name was previously deactivated. Do you want to restore it along with all its related topics and questions?";
                     $all_existing_topics_for_language = get_all_existing_topics_for_language($lang_id);
                     $all_existing_questions = get_all_existing_questions_for_language($lang_id);
@@ -141,11 +145,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
                     <h1>Preview add programming language</h1>
 
+                    <!-- Block for processing the selected topics -->
                     <div class="admin-preview-content">
                         <p><strong>Language name:</strong> <?= $language_name ?></p>
 
                         <?php
-                        if (isset($text_message)) {
+                        if (isset($text_message)) { //It means that admin typed the language's name, that already exists in the DB and it is unactive (is_active = 0)
                         ?>
                             <p><strong><?php echo $text_message ?></strong></p>
 
@@ -158,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                 <p>You can modify this selection before saving — check or uncheck the topics as needed:</p>
                         <?php
                                 $all_topics = get_all_topics();
-                                $temp_topics_array = [];
+                                $temp_topics_array = []; // the array to store all necessary information about selected topics (name, id and is_active)
                                 foreach ($all_topics as $topic) {
                                     if (in_array($topic['topic_id'], $selected_topics)) {
                                         $topic_item = ['topic_name' => $topic['topic_name'], 'is_active' => $topic['is_active'], 'topic_id' => $topic['topic_id']];
@@ -166,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                     }
                                 }
 
-                                $merged_topic_array = [];
+                                $merged_topic_array = []; // array to merge all already existing topics and selected topics
                                 $all_ids = [];
                                 foreach ([$all_existing_topics_for_language, $temp_topics_array] as $topic_array) {
                                     foreach ($topic_array as $topic) {
@@ -194,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                         ?>
 
                         <?php
-                        if (!empty($merged_topic_array)) {
+                        if (!empty($merged_topic_array)) { // If there is at least one item (topic) in the merged topics array, then we output this block:
                         ?>
                             <ul>
                                 <?php
@@ -230,14 +235,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                         ?>
                     </div>
 
+                    <!-- Block for processing the selected icon-file -->
                     <div class="admin-preview-content">
                         <?php
-                        if (!isset($isAlreadyExist) || $isAlreadyExist == false) {
+                        if (!isset($isAlreadyExist) || $isAlreadyExist == false) { //The situation, when there is no icon-file with this name in the server:
                         ?>
                             <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
                             <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
                         <?php
-                        } else {
+                        } else { //The situation, when there is ALREADY icon-file with this name in the server:
                         ?>
                             <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
                             <p>But the file <strong><?php echo $newFile ?></strong> already exists in the <strong>images</strong> folder for <?php echo $element_name; ?>.</p>
@@ -256,6 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                         <img src="<?= "./images/" . htmlspecialchars($newFile) ?>" alt="The preview for existing icon-file" width="70">
                                         <p>existing file</p>
                                         <input type="radio" name="image" id="existing_image" value="existing image" onclick="handleRadioButtonText()">
+                                        <?php $server_file_action = "keep-existing" ?>
                                     </label>
 
                                 </li>
@@ -329,9 +336,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
                                             </div>
                                         </div>
-
-
-
                                     </li>
                                 <?php
                                 }
@@ -348,13 +352,43 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     <div class="admin-form-buttons">
                         <form method="POST" action="upload-to-database.php">
                             <input type="hidden" name="form_type" value="add-language">
-                            <input type="hidden" name="add-language" value="<?= $language_name ?>">
-                            <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
-                            <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
+                            <input type="hidden" name="add-language" value="<?= $language_name; ?>">
+                            <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name); ?>">
+                            <input type="hidden" name="new-icon-file-name" value="<?= $newFile; ?>">
+                            <input type="hidden" name="sql-action" value="<?php echo $sql_action; ?>">
+                            <input type="hidden" name="server-file-action" value="<?php echo $server_file_action; ?>">
 
-                            <?php foreach ($selected_topics as $topic_id): ?>
-                                <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
-                            <?php endforeach; ?>
+                            <!-- Validation: is there merged topics-array or not? -->
+                            <?php
+                            if (!empty($merged_topic_array)) {
+                            ?>
+                                <div id="form-input-hidden-topics">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+                                <?php
+                            } else {
+                                foreach ($selected_topics as $topic_id): ?>
+                                    <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
+                            <?php endforeach;
+                            }
+                            ?>
+
+                            <!-- Validation: is there questions-array or not? -->
+                            <?php
+                            if (!empty($all_existing_questions)) {
+                                foreach ($all_existing_questions as $question) { ?>
+                                    <input type="hidden" name="question[]" value="<?= $question['question_id'] ?>">
+                                    <?php
+                                    foreach ($all_answers as $answer) { ?>
+                                        <input type="hidden" name="answer[]" value="<?= $answer['id'] ?>">
+                            <?php
+                                    }
+                                }
+                            }
+
+                            ?>
+
+
                             <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
 

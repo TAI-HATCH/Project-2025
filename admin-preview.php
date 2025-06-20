@@ -376,18 +376,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                             <!-- Validation: is there questions-array or not? -->
                             <?php
                             if (!empty($all_existing_questions)) {
-                                foreach ($all_existing_questions as $question) { ?>
-                                    <input type="hidden" name="question[]" value="<?= $question['question_id'] ?>">
-                                    <?php
-                                    foreach ($all_answers as $answer) { ?>
-                                        <input type="hidden" name="answer[]" value="<?= $answer['id'] ?>">
-                            <?php
-                                    }
-                                }
+                                ?>
+                                <div id="form-input-hidden-questions">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+                                <div id="form-input-hidden-answers">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+
+                                <?php
                             }
-
                             ?>
-
 
                             <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>

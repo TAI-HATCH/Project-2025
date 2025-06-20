@@ -7,15 +7,8 @@ include "admin-header.php";
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: admin-start.php");
     exit;
-}
-
-$form_type = $_POST['form_type'] ?? null;
-
-if (isset($_FILES["svg-file"])) {
-    
-    // echo "<pre>";
-    // var_dump($_FILES);
-    // echo "</pre>";
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES["svg-file"])) {
+    $form_type = $_POST['form_type'] ?? null;
 
     // Processing the uploading of the icon-file:
     // https://www.w3schools.com/php/php_file_upload.asp
@@ -27,58 +20,94 @@ if (isset($_FILES["svg-file"])) {
         $element_name = $_POST['add-language'];
     }
 
-    //Get the extension of the selected file by admin:
-    $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
-    //create a new NAME for the file according to the defined rules for uploading to the server without extension:
-    $newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
-    //create the full  NAME for the file with extension:
-    $newFile = $newFileName . '.' . $fileExtension;
+    $newFile = generateNewFileName($element_name);
+    $temp_file_name = generateTempFileName();
 
-
-    //specify the directory to store TEMPORARY files:
-    $temp_upload_dir = "temp-uploads/";
-    //Get a temporary file with the initial name:
-    $tempFile = $_FILES["svg-file"]["tmp_name"];
-    //Set the unique name to the file just to store it as temporary file before uploading to the server:
-    $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
-    //Set the path to store the file (folder/temp-name.extension):
-    $temp_file_path = $temp_upload_dir . $temp_file_name;
-
-    $uploadOk = 1;
-
-    // Check if file already exists
-    if (file_exists($temp_file_path)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
+    // Check if file with $newFile-name already exists in images-folder: 
+    if (file_exists('images/' . $newFile)) {
+        $isAlreadyExist = true;
     }
 
-    // Check if $uploadOk is set to 0 by an error  
 
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-    } else {
-        //copy the temporary file to the server with a new name in the folder specified by $target_file:
-        //Syntax: move_uploaded_file(file, dest):
-        // file - filename of the uploaded file
-        //dest - the new location for the file
-        if (move_uploaded_file($tempFile, $temp_file_path)) {
-?>
-            <script>
-                console.log(`The temporary file <?php echo $temp_file_name ?>  has been uploaded to <?php echo $temp_file_path ?>.`);
-            </script>
-        <?php
+    switch ($form_type) {
+        case 'add-language':
+            // echo "<pre>";F
+            // var_dump($form_type);
+            // echo "</pre>";
 
-        } else {
-        ?>
-            <script>
-                console.log(`Sorry, there was an error uploading your file.`);
-            </script>
-<?php
-            echo "Sorry, there was an error uploading your file.";
-        }
+            //Validation: Is there a language in the DB table "languages" with the specified name?:
+            $all_languages = get_all_languages(); //Get an array of ALL prog.languages with is_active
+            $inputed_name = $_POST['add-language'];
+            $isUnique = true;
+            $isActive = null;
+            $lang_id = null;
+            foreach ($all_languages as $language_set) {
+                if ($language_set['language_name'] === $inputed_name) {
+                    $isUnique = false;
+                    $isActive = $language_set['is_active'];
+                    $lang_id = $language_set['language_id'];
+
+                    break;
+                }
+            }
+
+            // echo "<pre>";
+            // echo "The value of isUnique: ";
+            // var_dump($isUnique);
+            // echo "The value of isActive: ";
+            // var_dump($isActive);
+            // echo "</pre>";
+
+
+            if ($isUnique == false) { //It means that the mentioned programming language already exists in the DB
+                # code...
+
+                // echo "<pre>";
+                // var_dump("You want to add an existing language in the DB");
+                // echo "</pre>";
+
+                //Validation: if this language active or not:
+                if ($isActive == 1) {
+                    $text_message = "The programming language $inputed_name can not be added to the database, because it already exists.";
+                    session_start();
+                    $_SESSION['text-message'] = $text_message;
+                    header("Location: error.php");
+                    exit;
+                } else {
+                    # code...
+                    $text_message = "The programming language $inputed_name was previously deactivated. Do you want to restore it along with all its related topics and questions?";
+                    $all_existing_topics_for_language = get_all_existing_topics_for_language($lang_id);
+                    $all_existing_questions = get_all_existing_questions_for_language($lang_id);
+                    // echo "<pre>";
+                    // var_dump($all_existing_topics_for_language);
+                    // var_dump($all_existing_questions);
+                    // echo "</pre>";
+                    handleTempIconFile($temp_file_name);
+                }
+
+
+                // echo "<pre>";
+                // var_dump($text_message);
+                // echo "</pre>";
+            } else {
+                // echo "<pre>";
+                // var_dump("You want to add a new language");
+                // echo "</pre>";
+                handleTempIconFile($temp_file_name);
+            }
+
+
+            break; //This break is for case add-language
+
+        default: //This default is for switch form_type
+            echo "<pre>";
+            var_dump("You added something else but not language");
+            echo "</pre>";
+            handleTempIconFile($temp_file_name);
+            break;
     }
 }
+
 
 ?>
 
@@ -116,38 +145,218 @@ if (isset($_FILES["svg-file"])) {
                         <p><strong>Language name:</strong> <?= $language_name ?></p>
 
                         <?php
-                        if (!empty($selected_topics)) {
-                            $topics = get_all_topics();
-                            $topic_names = [];
-                            foreach ($topics as $topic) {
-                                if (in_array($topic['topic_id'], $selected_topics)) {
-                                    $topic_names[] = $topic['topic_name'];
-                                }
-                            }
+                        if (isset($text_message)) {
                         ?>
-                            <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
-                        <?php } else { ?>
-                            <p>No topics selected.</p>
-                        <?php } ?>
+                            <p><strong><?php echo $text_message ?></strong></p>
+
+                            <?php
+                            if (!empty($all_existing_topics_for_language) && !empty($selected_topics)) {
+                            ?>
+                                <p><strong>Below is a list of all topics currently stored in the database for the <?php echo $element_name ?>.</strong></p>
+                                <p>Topics that are already active or were selected on the previous page are marked with checkmarks.</p>
+                                <p>Topics without checkmarks were previously deactivated.</p>
+                                <p>You can modify this selection before saving — check or uncheck the topics as needed:</p>
+                        <?php
+                                $all_topics = get_all_topics();
+                                $temp_topics_array = [];
+                                foreach ($all_topics as $topic) {
+                                    if (in_array($topic['topic_id'], $selected_topics)) {
+                                        $topic_item = ['topic_name' => $topic['topic_name'], 'is_active' => $topic['is_active'], 'topic_id' => $topic['topic_id']];
+                                        array_push($temp_topics_array, $topic_item);
+                                    }
+                                }
+
+                                $merged_topic_array = [];
+                                $all_ids = [];
+                                foreach ([$all_existing_topics_for_language, $temp_topics_array] as $topic_array) {
+                                    foreach ($topic_array as $topic) {
+                                        if (!in_array($topic['topic_id'], $all_ids)) {
+                                            $merged_topic_array[] = $topic;
+                                            $all_ids[] = $topic['topic_id'];
+                                        }
+                                    }
+                                }
+
+                                // echo "<pre>";
+                                // echo "Merged array:";
+                                // var_dump($merged_topic_array);
+                                // echo "</pre>";
+                            } else {
+                                echo "<pre>";
+                                var_dump("No topics");
+                                echo "</pre>";
+                            }
+                        } else {
+                            echo "<pre>";
+                            var_dump("No text message");
+                            echo "</pre>";
+                        }
+                        ?>
+
+                        <?php
+                        if (!empty($merged_topic_array)) {
+                        ?>
+                            <ul>
+                                <?php
+                                foreach ($merged_topic_array as $topic) {
+                                    $topic_id = $topic['topic_id'];
+                                ?>
+                                    <li>
+                                        <input type="checkbox" name="topic[]" id="topic<?php echo $topic_id; ?>" value="<?php echo $topic_id; ?>" class="checkbox"
+                                            <?php if ($topic['is_active'] == 1) { ?> checked <?php } ?>>
+                                        <label for="topic<?php echo $topic_id; ?>"><?php echo $topic['topic_name']; ?></label>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                            <?php
+
+                        } else {
+                            if (!empty($selected_topics)) {
+                                $topics = get_all_topics();
+                                $topic_names = [];
+                                foreach ($topics as $topic) {
+                                    if (in_array($topic['topic_id'], $selected_topics)) {
+                                        $topic_names[] = $topic['topic_name'];
+                                    }
+                                }
+                            ?>
+                                <p><strong>Selected Topics:</strong> <?= join(", ", $topic_names) ?></p>
+                            <?php } else { ?>
+                                <p>No topics selected.</p>
+                        <?php }
+                        }
+                        ?>
                     </div>
 
                     <div class="admin-preview-content">
-                        <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
-                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                        <?php
+                        if (!isset($isAlreadyExist) || $isAlreadyExist == false) {
+                        ?>
+                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                            <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
+                        <?php
+                        } else {
+                        ?>
+                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
+                            <p>But the file <strong><?php echo $newFile ?></strong> already exists in the <strong>images</strong> folder for <?php echo $element_name; ?>.</p>
+                            <p>Which one do you want to use — the existing file or the new upload?</p>
+                            <ul class="images-list">
+                                <li class="images-list-item">
+                                    <label for="selected_image" class="images-list-item">
+                                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for selected icon-file" width="70">
+                                        <p>new upload</p>
+                                        <input type="radio" name="image" id="selected_image" value="new upload" onclick="handleRadioButtonText()">
+                                    </label>
+
+                                </li>
+                                <li class="images-list-item">
+                                    <label for="existing_image" class="images-list-item">
+                                        <img src="<?= "./images/" . htmlspecialchars($newFile) ?>" alt="The preview for existing icon-file" width="70">
+                                        <p>existing file</p>
+                                        <input type="radio" name="image" id="existing_image" value="existing image" onclick="handleRadioButtonText()">
+                                    </label>
+
+                                </li>
+                            </ul>
+                            <p id="image-inform-text"></p>
+                        <?php
+                        }
+                        ?>
                     </div>
 
-                    <div class="admin-form-buttons">
-                            <form method="POST" action="upload-to-database.php">
-                                <input type="hidden" name="form_type" value="add-language">
-                                <input type="hidden" name="add-language" value="<?= $language_name ?>">
-                                <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
-                                <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
 
-                                <?php foreach ($selected_topics as $topic_id): ?>
-                                    <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
-                                <?php endforeach; ?>
-                                <button class="upload-to-database-button" type="submit">Upload to database</button>
-                            </form>
+                    <!-- Section to preview language's questions. Validation: is array with questions empty or not. If it is empty: do not show this section-->
+                    <?php
+                    if (!empty($all_existing_questions)) {
+                        // echo "<pre>";
+                        // var_dump($all_existing_questions);
+                        // echo "</pre>";
+                    ?>
+                        <div class="admin-preview-content">
+                            <p><strong>Below is a list of all questions currently stored in the database for the <?php echo $element_name ?>.</strong></p>
+                            <p>Questions without checkmarks were previously deactivated.</p>
+                            <p>You can modify this selection before saving — check or uncheck the questions as needed:</p>
+                            <ul class="question-list">
+                                <?php
+                                foreach ($all_existing_questions as $question) {
+                                    $all_answers = get_all_answers($question['question_id']);
+                                    // echo "<pre>";
+                                    // var_dump($all_answers);
+                                    // echo "</pre>";
+                                ?>
+                                    <li class="question-list-item checkbox-group">
+
+                                        <div class="question-list-item-checkbox">
+                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>"
+                                                class="checkbox checkbox-parent" onchange="handleCheckboxUncheck(this)"
+                                                <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
+                                        </div>
+
+                                        <div class="question-list-item-wrapper">
+                                            <div class="question-list-item-text">
+                                                <p><strong>Question text:</strong></p>
+                                                <label for="question<?php echo $question['question_id']; ?>"><?php echo $question['question']; ?></label>
+                                            </div>
+
+                                            <div class="question-list-item-snippet">
+                                                <p><strong>Question code snippet:</strong></p>
+                                                <p class="question-list-item-snippet-paragragh"><?php echo $question['form_content']; ?></p>
+                                            </div>
+
+                                            <div class="question-list-item-answer">
+                                                <p><strong>Answers:</strong></p>
+                                                <ul class="answer-list">
+                                                    <?php
+                                                    foreach ($all_answers as $answer) {
+                                                    ?>
+                                                        <li class="answer-list-item">
+                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>"
+                                                                class="checkbox checkbox-child"
+                                                                <?php if ($answer['is_active'] == 1) { ?> checked <?php } ?>>
+                                                            <label for="answer<?php echo $answer['id']; ?>">
+                                                                <?php echo $answer['input_name']; ?>
+                                                                :
+                                                                <?php echo $answer['answer_value']; ?>
+                                                            </label>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+
+                        </div>
+                    <?php
+                    }
+                    ?>
+
+
+
+                    <div class="admin-form-buttons">
+                        <form method="POST" action="upload-to-database.php">
+                            <input type="hidden" name="form_type" value="add-language">
+                            <input type="hidden" name="add-language" value="<?= $language_name ?>">
+                            <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
+                            <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
+
+                            <?php foreach ($selected_topics as $topic_id): ?>
+                                <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
+                            <?php endforeach; ?>
+                            <button class="upload-to-database-button" type="submit">Upload to database</button>
+                        </form>
 
                         <form method="GET" action="admin-add-language.php">
                             <button class="upload-to-database-button" type="submit">Cancel</button>
@@ -178,7 +387,7 @@ if (isset($_FILES["svg-file"])) {
                                 if (in_array($language['language_id'], $selected_languages)) {
                                     $language_names[] = $language['language_name'];
                                 }
-                            } 
+                            }
                         ?>
 
                             <p><strong>Selected languages: </strong> <?= implode(", ", $language_names) ?></p>
@@ -204,7 +413,7 @@ if (isset($_FILES["svg-file"])) {
                             <?php endforeach; ?>
                             <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
-                        
+
                         <form method="GET" action="admin-add-topic.php">
                             <button class="upload-to-database-button" type="submit">Cancel</button>
                         </form>
@@ -275,7 +484,7 @@ if (isset($_FILES["svg-file"])) {
     </section>
 
     <!-- Scripts for this page -->
-    <script src="./js/upload-icon.js"></script>
+    <script src="./js/scripts.js"></script>
 </body>
 
 </html>

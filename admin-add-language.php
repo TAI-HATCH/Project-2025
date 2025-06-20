@@ -3,43 +3,6 @@
 include "admin-log.php";
 include_once "sql_query.php";
 
-// Check whether the form was sent using the method=post and whether the request contains a file with the "name"="svg-file":
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
-
-    echo var_dump($_POST['topic']); // Prints the content of the array "topic" in the top of the page
-    $language_name = $_POST['add-language'] ?? null; // If there is no input, return "null"
-    $selected_topics = $_POST['topic'] ?? []; // If nothing in the array, return an empty array "[]"
-
-    if (!empty($language_name)) {
-        $stmt = $conn->prepare("INSERT INTO 
-                                    languages (language_name) 
-                                VALUES 
-                                    (:language_name)");
-        $stmt->bindParam(":language_name", $language_name, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $language_id = $conn->lastInsertId();
-
-        if (!empty($selected_topics)) { // Select content from checkbox
-            $stmt = $conn->prepare("INSERT INTO 
-                                        languages_topic (language_id, topic_id) 
-                                    VALUES 
-                                        (:language_id, :topic_id)");
-
-            $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
-            $stmt->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
-
-            foreach ($selected_topics as $topic_id) {
-                $stmt->execute();
-            }
-        }
-
-        // header("Location: admin-upload-success.php");
-    } else {
-        echo "Language name is required.";
-    }
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -63,18 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
     <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
+    <!-- The form will be redirected to the page admin-preview.php after submit button click: -->
     <form method="post" enctype="multipart/form-data" action="admin-preview.php"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
         <input type="hidden" name="form_type" value="add-language">
 
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon('add-language')" onblur="innerTextToParagragh('add-language')">
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon('add-language')" onblur="innerTextToParagragh('add-language')" oninput="activateButton()">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-language')">
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-language')" oninput="activateButton()">
                 <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
@@ -111,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
             </div>
         </section>
-        <button type="submit" class="upload-to-database-button">Preview and upload</button>
+        <button type="submit" id="submitBtn" class="upload-to-database-button" disabled onclick="validateForm(event)">Preview and upload</button>
 
     </form>
     <!-- Scripts for this page -->
-    <script src="./js/upload-icon.js"></script>
+    <script src="./js/scripts.js"></script>
 
 </body>
 

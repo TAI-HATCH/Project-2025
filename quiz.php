@@ -48,7 +48,7 @@ if (isset($_GET['language-topic'])) {
 
         $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify the current question from the "questions"-array
 
-        $answers = get_answers($question["question_id"]); //Call the function get_answer from sql_query.php
+        $answers = get_answers($question["question_id"]); // Call the function get_answer from sql_query.php
         // echo var_dump($answers);
     } //else if ($action == "check") {
 
@@ -127,7 +127,16 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         <a class="button" href="#" id="check">Check answer</a> <!--Checks if answer is correct or wrong-->
         <a class="button" href="?action=previous">Back</a> <!--Link to the previous question-->
         <a class="button" href="?action=next">Next</a> <!--Link to the next question-->
+        <a class="button" href="#" id="show-hint">Show hint</a>
         <!-- <a class="button" href="?action=clear">Clear session</a> Clear the session`s variables-->
+    </div>
+
+    <div id="hint-container" class="quiz-hint">
+        <p id="hint-text" class="quiz-hint-text">
+            <?php echo $question["hint"]; ?>
+            <button id="close-hint" aria-label="Close hint" class="close-button">&times;
+            </button>
+        </p>
     </div>
 
     <script>
@@ -194,7 +203,7 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
         ?>
 
         // Processing the Check answer button:
-        
+
         document.getElementById("check").addEventListener("click", function(event) {
             // event.preventDefault(); //Prevent the reloading of the page when user clicks on Check answer button
 
@@ -280,12 +289,65 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             ?>
         })
 
+
         //Function to hide placeholder:
         function hidePlaceholder(e) {
             this.removeAttribute("placeholder");
             this.classList.remove("wrong");
             this.classList.remove("correct");
         }
+
+        // Show / hide hint text
+
+        document.getElementById("show-hint").addEventListener("click", function(event) {
+            event.preventDefault();
+            const hint = document.querySelector('.quiz-hint-text');
+
+            if (hint.classList.contains('visible')) {
+                // Currently visible → start slide out
+                hint.classList.remove('visible');
+                hint.classList.add('hidden');
+            } else {
+                // Currently hidden or no class → show with fade in
+                hint.classList.remove('hidden');
+                hint.classList.add('visible');
+            }
+        });
+
+        // After slide out animation ends, remove 'hidden' class to fully hide element
+        document.querySelector('.quiz-hint-text').addEventListener('animationend', function(e) {
+            if (e.animationName === 'fadeOutSlideDown') {
+                this.classList.remove('hidden');
+                // Now the element is fully hidden (opacity:0 + visibility:hidden from base CSS)
+            }
+        });
+
+        // Handle closing hint button
+
+        document.getElementById("close-hint").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const hint = document.querySelector('.quiz-hint-text');
+
+            if (hint.classList.contains('visible')) {
+                hint.classList.remove('visible');
+                hint.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            const hint = document.querySelector('.quiz-hint-text');
+            const isClickInside = hint.contains(event.target);
+            const showHintBtn = document.getElementById("show-hint");
+
+            // Also exclude clicking the show-hint button itself from closing
+            const clickedShowButton = showHintBtn.contains(event.target);
+
+            if (!isClickInside && !clickedShowButton && hint.classList.contains('visible')) {
+                hint.classList.remove('visible');
+                hint.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 

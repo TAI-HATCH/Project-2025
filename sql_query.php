@@ -128,7 +128,7 @@ function get_questions($topic_id)
 
     //https://www.w3schools.com/php/php_mysql_prepared_statements.asp
     $stmt = $conn->prepare("SELECT 
-                                question_id, question, form_content, is_active 
+                                question_id, question, form_content, is_active, hint
                             FROM 
                                 $table_name 
                             WHERE 

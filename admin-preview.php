@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
     switch ($form_type) {
         case 'add-language':
-            // echo "<pre>";F
+            // echo "<pre>";
             // var_dump($form_type);
             // echo "</pre>";
 
@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $isUnique = false;
                     $isActive = $language_set['is_active'];
                     $lang_id = $language_set['language_id'];
+                    session_start();
+                    $_SESSION['language_id'] = $lang_id;
 
                     break;
                 }
@@ -73,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 //Validation: if this language active or not:
                 if ($isActive == 1) {
                     $text_message = "The programming language $inputed_name can not be added to the database, because it already exists.";
-                    session_start();
+                    // session_start();
                     $_SESSION['text-message'] = $text_message;
                     header("Location: error.php"); // redirection to the error-page
                     exit;
@@ -254,6 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                         <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for selected icon-file" width="70">
                                         <p>new upload</p>
                                         <input type="radio" name="image" id="selected_image" value="new upload" onclick="handleRadioButtonText()">
+                                        <?php $server_file_action = "upload-new" ?>
                                     </label>
 
                                 </li>
@@ -356,7 +359,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                             <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name); ?>">
                             <input type="hidden" name="new-icon-file-name" value="<?= $newFile; ?>">
                             <input type="hidden" name="sql-action" value="<?php echo $sql_action; ?>">
-                            <input type="hidden" name="server-file-action" value="<?php echo $server_file_action; ?>">
+                            <input type="hidden" name="server-file-action">
 
                             <!-- Validation: is there merged topics-array or not? -->
                             <?php

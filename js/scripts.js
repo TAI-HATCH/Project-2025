@@ -100,6 +100,8 @@ function handleRadioButtonText() {
   const tagForText = document.getElementById("image-inform-text");
   const radioBtns = document.querySelectorAll("input[name='image']");
   let text = "";
+  let valueForHiddeninput = "";
+  let hiddenInputElementForFileAction = document.querySelector("input[name='server-file-action']");
 
   radioBtns.forEach((btn) => {
     btn.addEventListener("change", (event) => {
@@ -109,11 +111,16 @@ function handleRadioButtonText() {
           text =
             "<strong>Please note</strong>: The existing file will be deleted. The file you uploaded will be saved in its place.";
           tagForText.innerHTML = text;
+          valueForHiddeninput = "upload-new";
+          hiddenInputElementForFileAction.value = valueForHiddeninput;
+
         } else if (event.target.value === "existing image") {
           // console.log('existing');
           text =
             "<strong>Please note</strong>: The file you uploaded will be deleted. The existing file will remain.";
           tagForText.innerHTML = text;
+          valueForHiddeninput = "keep-existing";
+          hiddenInputElementForFileAction.value = valueForHiddeninput;
         }
       }
     });
@@ -125,6 +132,7 @@ function handleCheckboxUncheck(element) {
   const checkBoxChild = checkBoxGroup.querySelectorAll(".checkbox-child");
   if (!element.checked) {
     checkBoxChild.forEach((child) => {
+      console.log(child);
       child.checked = false;
     });
   }
@@ -140,7 +148,83 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function handlePlaceholder(element) {
   const inputElements = element.querySelectorAll("input");
-  inputElements.forEach(element => {
+  inputElements.forEach((element) => {
     element.placeholder = element.name;
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const divHiddenInputTopic = document.getElementById("form-input-hidden-topics");
+  if (!divHiddenInputTopic) return;
+  let allCheckBoxTopic = document.querySelectorAll("input[name='topic[]']");
+  if (allCheckBoxTopic.length > 0) {
+    allCheckBoxTopic.forEach((item) => {
+      item.addEventListener("click", () => {
+        refreshFormDivTopics(divHiddenInputTopic);
+      });
+    });
+    let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
+    if (checkedTopics.length > 0) {
+      addHiddenInputElements(checkedTopics, "topic[]", divHiddenInputTopic);
+    }
+    
+  }
+  
+  const divHiddenInputQuestion = document.getElementById("form-input-hidden-questions");
+  let allCheckBoxQuestion = document.querySelectorAll("input[name='question[]']");
+  if (allCheckBoxQuestion.length > 0) {
+    allCheckBoxQuestion.forEach((item) => {
+      item.addEventListener("change", () => {
+        refreshFormDivQuestions(divHiddenInputQuestion);
+      });
+    });
+    let checkedQuestions = document.querySelectorAll("input[name='question[]']:checked");
+    if (checkedQuestions.length > 0) {
+      addHiddenInputElements(checkedQuestions, "question[]", divHiddenInputQuestion);
+    }
+   
+  }
+  
+  const divHiddenInputAnswer = document.getElementById("form-input-hidden-answers");
+  let allCheckBoxAnswer = document.querySelectorAll("input[name='answer[]']");
+  if (allCheckBoxAnswer.length > 0) {
+    allCheckBoxAnswer.forEach((item) => {
+      item.addEventListener("change", () => {
+        refreshFormDivAnswers(divHiddenInputAnswer);
+      });
+    });
+    let checkedAnswers = document.querySelectorAll("input[name='answer[]']:checked");
+    if (checkedAnswers.length > 0) {
+      addHiddenInputElements(checkedAnswers, "answer[]", divHiddenInputAnswer);
+    }
+  }
+});
+
+
+function refreshFormDivTopics(element) {
+  let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
+  addHiddenInputElements(checkedTopics, "topic[]", element);
+}
+
+function refreshFormDivQuestions(element) {
+  let checkedQuestions = document.querySelectorAll("input[name='question[]']:checked");
+  addHiddenInputElements(checkedQuestions, "question[]", element);
+  addHiddenInputElements(document.querySelectorAll("input[name='answer[]']:checked"), "answer[]", document.getElementById("form-input-hidden-answers"));
+}
+
+function refreshFormDivAnswers(element) {
+  // console.log("Element to change:", element);
+  let checkedAnswers = document.querySelectorAll("input[name='answer[]']:checked");
+  addHiddenInputElements(checkedAnswers, "answer[]", element);
+}
+
+function addHiddenInputElements(arrayOfElements, inputName, targetDiv) {
+  targetDiv.innerHTML = "";
+  arrayOfElements.forEach((item) => {
+    const hiddenInputItem = document.createElement("input");
+    hiddenInputItem.name = inputName;
+    hiddenInputItem.type = "hidden";
+    hiddenInputItem.value = item.defaultValue;
+    targetDiv.appendChild(hiddenInputItem);
   });
 }

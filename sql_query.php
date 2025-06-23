@@ -360,7 +360,7 @@ function generateNewFileName($element_name)
     //Get the extension of the selected file by admin:
     $fileExtension = pathinfo($_FILES["svg-file"]["name"], PATHINFO_EXTENSION);
     //create a new NAME for the file according to the defined rules for uploading to the server without extension:
-    $newFileName = str_replace(" ", "-", strtolower($element_name)) . "-icon";
+    $newFileName = str_replace(" ", "-", trim(strtolower($element_name))) . "-icon";
     //create the full  NAME for the file with extension:
     $newFile = $newFileName . '.' . $fileExtension;
     return $newFile;

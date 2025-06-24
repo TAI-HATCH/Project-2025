@@ -42,6 +42,24 @@ function get_all_languages() // Function to get an array of ALL programming lang
     return $all_languages;
 }
 
+function get_all_existing_topics() // Function to get an array of ALL topics from the DB even not active
+{
+    global $conn;
+
+    //Send request to the DB to the table Topics without any parameters
+    // because we need to get all the records from the tabel:
+
+    $stmt = $conn->prepare("SELECT 
+                                topic_id, topic_name, is_active 
+                            FROM 
+                                topics");
+    $stmt->execute(); // Run the thing
+
+    $all_existing_topics = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the languages that we just fetched and put it into an array
+
+    return $all_existing_topics;
+}
+
 function get_selected_language_name($language_id)
 {
     global $conn;
@@ -119,6 +137,29 @@ function get_all_existing_topics_for_language($language_id) //Function to get an
     return $all_topics;
 }
 
+function get_all_existing_language_topics_for_topic($topic_id) //Function to get an array of languages topics from the DB with the specified topic id:
+    {
+        global $conn; //give access to the variable $conn defining in the connection.php
+        $table_name = "languages_topic"; // Create a variable with the table name
+        $stmt = $conn->prepare("SELECT 
+                                        L.language_name, $table_name.is_active, $table_name.language_id, $table_name.id  
+                                    FROM 
+                                        $table_name, 
+                                        `languages` AS L,
+                                         `topics` AS T 
+                                    WHERE 
+                                        L.language_id = $table_name.language_id 
+                                    AND 
+                                        T.topic_id = $table_name.topic_id 
+                                    AND 
+                                        $table_name.topic_id = :topic_id;"); // Go into db, take hold of topics for the specific language-id
+        $stmt->bindParam(':topic_id', $topic_id); // Binding together (reflecting) :language_id and $language_id
+        $stmt->execute(); // Run the thing
+    
+        $all_languages_topics = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the data that we just fetched and put it into an array
+        return $all_languages_topics;
+    }
+
 function get_questions($topic_id)
 {
 
@@ -147,6 +188,45 @@ function get_all_existing_questions_for_language($language_id)
 
     $table_name = "questions"; // Create a variable with the table name
     $all_related_topics = get_all_existing_topics_for_language($language_id);
+    // echo "<pre>";
+    // echo 'All related topics:';
+    // var_dump($all_related_topics);
+    // echo "</pre>";
+    $all_questions = [];
+
+    global $conn; //give access to the variable $conn defining in the connection.php
+
+    foreach ($all_related_topics as $topic) {
+
+        // echo "<pre>";
+        // var_dump($topic['id']);
+        // echo "</pre>";
+
+        //https://www.w3schools.com/php/php_mysql_prepared_statements.asp
+        $stmt = $conn->prepare("SELECT question_id, languages_topic_id, question, form_content, is_active
+                                FROM 
+                                    $table_name 
+                                WHERE 
+                                    languages_topic_id = :languages_topic_id"); // Go into db, take hold of questions for the specific language-topic
+        $stmt->bindParam(':languages_topic_id', $topic['id']); // Binding together (reflecting) :topic_id and $topic_id
+        $stmt->execute(); // Run the thing
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC); // Take all the data the we just fetched and put in into an array 
+
+        $all_questions = array_merge($all_questions, $results);
+    }
+
+    // echo "<pre>";
+    // var_dump($all_questions);
+    // echo "</pre>";
+    return $all_questions;
+}
+
+function get_all_existing_questions_for_topic($topic_id)
+{
+
+    $table_name = "questions"; // Create a variable with the table name
+    $all_related_topics = get_all_existing_language_topics_for_topic($topic_id);
     // echo "<pre>";
     // echo 'All related topics:';
     // var_dump($all_related_topics);

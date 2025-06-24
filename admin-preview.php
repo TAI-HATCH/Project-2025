@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             // var_dump($form_type);
             // echo "</pre>";
 
-            //Validation: Is there a language in the DB table "languages" with the specified name?:
+            //Validation: Is there a language in the DB table "languages" with the entered name?:
             $all_languages = get_all_languages(); //Get an array of ALL prog.languages with is_active
             $inputed_name = trim(strtolower($_POST['add-language']));
             $isUnique = true;
@@ -58,14 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     break;
                 }
             }
-
             // echo "<pre>";
             // echo "The value of isUnique: ";
             // var_dump($isUnique);
             // echo "The value of isActive: ";
             // var_dump($isActive);
             // echo "</pre>";
-
 
             if ($isUnique == false) { //It means that the mentioned programming language already exists in the DB
                 // echo "<pre>";
@@ -90,6 +88,71 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     // echo "</pre>";
                     handleTempIconFile($temp_file_name);
                 }
+                // echo "<pre>";
+                // var_dump($text_message);
+                // echo "</pre>";
+            } else {
+                // echo "<pre>";
+                // var_dump("You want to add a new language");
+                // echo "</pre>";
+                handleTempIconFile($temp_file_name);
+            }
+
+            break; //This break is for case add-language
+
+        case 'add-topic':
+            // echo "<pre>";
+            // var_dump($form_type);
+            // echo "</pre>";
+
+            //Validation: Is there a topic in the DB table "topics" with the entered name?:
+            $all_existing_topics = get_all_existing_topics(); //Get an array of ALL topics with is_active
+            $inputed_name = trim(strtolower($_POST['add-topic']));
+            $isUnique = true;
+            $isActive = null;
+            $topic_id = null;
+            foreach ($all_existing_topics as $topic_set) {
+                if (trim(strtolower($topic_set['topic_name'])) === $inputed_name) {
+                    $isUnique = false;
+                    $isActive = $topic_set['is_active'];
+                    $topic_id = $topic_set['topic_id'];
+                    // session_start();
+                    $_SESSION['topic_id'] = $topic_id;
+
+                    break;
+                }
+            }
+
+            // echo "<pre>";
+            // echo "The value of isUnique: ";
+            // var_dump($isUnique);
+            // echo "The value of isActive: ";
+            // var_dump($isActive);
+            // echo "</pre>";
+
+
+            if ($isUnique == false) { //It means that the mentioned topic already exists in the DB
+                echo "<pre>";
+                var_dump("You want to add an existing topic in the DB");
+                echo "</pre>";
+
+                //Validation: if this topic active or not:
+                if ($isActive == 1) {
+                    $text_message = "The topic '$inputed_name' can not be added to the database, because it already exists.";
+                    // session_start();
+                    $_SESSION['text-message'] = $text_message;
+                    header("Location: error.php"); // redirection to the error-page
+                    exit;
+                } else {
+                    $sql_action = 'sql-update';
+                    $text_message = "The topic '$inputed_name' was previously deactivated. Do you want to restore it along with all its related questions?";
+                    $all_existing_questions = get_all_existing_questions_for_topic($topic_id);
+                    echo "<pre>";
+                    var_dump($text_message);
+                    var_dump($all_existing_questions);
+                    echo "</pre>";
+                    handleTempIconFile($temp_file_name);
+                }
 
 
                 // echo "<pre>";
@@ -103,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             }
 
 
-            break; //This break is for case add-language
+            break; //This break is for case add-topic 
 
         default: //This default is for switch form_type
             echo "<pre>";
@@ -379,7 +442,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                             <!-- Validation: is there questions-array or not? -->
                             <?php
                             if (!empty($all_existing_questions)) {
-                                ?>
+                            ?>
                                 <div id="form-input-hidden-questions">
                                     <!-- The content will be generated using a JS script -->
                                 </div>
@@ -387,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                     <!-- The content will be generated using a JS script -->
                                 </div>
 
-                                <?php
+                            <?php
                             }
                             ?>
 

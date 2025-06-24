@@ -3,43 +3,6 @@
 include "admin-log.php";
 include_once "sql_query.php";
 
-// Check whether the form was sent using the method=post and whether the request contains a file with the "name"="svg-file":
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
-
-    echo var_dump($_POST['language']); // Prints the content of the array "language" in the top of the page
-    $topic_name = $_POST['add-topic'] ?? null; // If nothing is added in the form, return null 
-    $selected_languages = $_POST['language'] ?? []; // If nothing in the array, return an empty array "[]"
-
-    if (!empty($topic_name)) {
-        $stmt = $conn->prepare("INSERT INTO 
-                                    topics (topic_name) 
-                                VALUES 
-                                    (:topic_name)");
-        $stmt->bindParam(":topic_name", $topic_name, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $topic_id = $conn->lastInsertId();
-
-        if (!empty($selected_languages)) { // Select content from the checkbox
-            $stmt = $conn->prepare("INSERT INTO 
-                                        languages_topic (language_id, topic_id) 
-                                    VALUES 
-                                        (:language_id, :topic_id)");
-
-            $stmt->bindParam(':language_id', $language_id, PDO::PARAM_INT);
-            $stmt->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
-
-            foreach ($selected_languages as $language_id) {
-                $stmt->execute();
-            }
-        }
-
-        // header("Location: admin-upload-success.php");
-    } else {
-        echo "Topic name is required.";
-    }
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -63,18 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
     <?php include 'admin-header.php' ?>
 
     <?php include 'admin-banner.php' ?>
+    <!-- The form will be redirected to the page admin-preview.php after submit button click: -->
     <form method="post" enctype="multipart/form-data" action="admin-preview.php"> <!-- attribute: enctype="multipart/form-data" specifies which content-type to use when submitting the form -->
         <input type="hidden" name="form_type" value="add-topic">
         
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-topic">Add topic</label>
-                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" placeholder="Type the topic to add here." required onchange="createNameForSvgIcon('add-topic')" onblur="innerTextToParagragh('add-topic')">
+                <input class="admin-add-content-input-field" type="text" id="add-topic" name="add-topic" 
+                placeholder="Type the topic to add here." 
+                required onchange="createNameForSvgIcon('add-topic')" 
+                onblur="innerTextToParagragh('add-topic')"  
+                oninput="activateButton('add-topic')">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-topic')">
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" 
+                onchange="handleFileUpload('add-topic')" 
+                oninput="activateButton('add-topic')">
                 <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
@@ -111,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["svg-file"])) {
 
             </div>
         </section>
-
-        <button type="submit" class="upload-to-database-button">Upload to database</button>
+        <button type="submit"  id="submitBtn" class="upload-to-database-button" 
+        disabled onclick="validateForm(event, 'add-topic')">Upload to database</button>
+    
     </form>
-
     <!-- Scripts for this page -->
     <script src="./js/scripts.js"></script>
 

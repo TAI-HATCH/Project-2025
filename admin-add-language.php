@@ -33,12 +33,18 @@ include_once "sql_query.php";
         <section class="root-content">
             <div class="admin-add-content">
                 <label class="admin-add-content-label" for="add-language">Add programming language</label>
-                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" placeholder="Type the language to add here." required onchange="createNameForSvgIcon('add-language')" onblur="innerTextToParagragh('add-language')" oninput="activateButton()">
+                <input class="admin-add-content-input-field" type="text" id="add-language" name="add-language" 
+                placeholder="Type the language to add here." 
+                required onchange="createNameForSvgIcon('add-language')" 
+                onblur="innerTextToParagragh('add-language')" 
+                oninput="activateButton('add-language')">
             </div>
 
             <div class="admin-add-upload-svg">
                 <label class="upload-svg-button-label" for="svg-file">Select an svg-file for uploading it to the server:</label>
-                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" onchange="handleFileUpload('add-language')" oninput="activateButton()">
+                <input type="file" id="svg-file" name="svg-file" class="upload-svg-button" 
+                onchange="handleFileUpload('add-language')" 
+                oninput="activateButton('add-language')">
                 <p class="upload-svg-info-text" id="upload-svg-info-text"></p>
             </div>
 
@@ -75,7 +81,8 @@ include_once "sql_query.php";
 
             </div>
         </section>
-        <button type="submit" id="submitBtn" class="upload-to-database-button" disabled onclick="validateForm(event)">Preview and upload</button>
+        <button type="submit" id="submitBtn" class="upload-to-database-button" 
+        disabled onclick="validateForm(event, 'add-language')">Preview and upload</button>
 
     </form>
     <!-- Scripts for this page -->

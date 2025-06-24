@@ -67,29 +67,28 @@ function innerTextToParagragh(element_id) {
   svgInfoTextElement.innerHTML = infoText; // input text in the p element
 }
 
-function activateButton() {
-  const inputLanguage = document.getElementById("add-language");
+function activateButton(element_name) {
+  const inputName = document.getElementById(element_name);
   const inputFile = document.getElementById("svg-file");
   const buttonToActivate = document.getElementById("submitBtn");
 
-  if (inputLanguage.value.trim() !== "" || inputFile.value.trim() !== "") {
+  if (inputName.value.trim() !== "" || inputFile.value.trim() !== "") {
     buttonToActivate.disabled = false;
   } else {
     buttonToActivate.disabled = true;
   }
 }
 
-function validateForm(event) {
-  const inputLanguage = document.getElementById("add-language");
+function validateForm(event, element_name) {
+  const inputName = document.getElementById(element_name);
   const inputFile = document.getElementById("svg-file");
   const buttonToActivate = document.getElementById("submitBtn");
 
-  if (inputLanguage.value.trim() === "") {
+  if (inputName.value.trim() === "") {
     buttonToActivate.disabled = true;
     alert("Enter the name");
     event.preventDefault();
-  }
-  if (inputFile.value.trim() === "") {
+  } else if (inputFile.value.trim() === "") {
     buttonToActivate.disabled = true;
     alert("Upload the file");
     event.preventDefault();

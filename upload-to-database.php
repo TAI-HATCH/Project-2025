@@ -24,7 +24,7 @@ $fileAction = $_POST['server-file-action'] ?? null;
 //specify the directory where the file is going to be placed:
 $target_dir = "images/";
 
-if (isset($fileAction)) {
+if (!empty($fileAction)) {
     switch ($fileAction) {
         case 'keep-existing':
             if (file_exists('temp-uploads/' . $tempFileName)) {

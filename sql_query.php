@@ -369,7 +369,7 @@ function generateNewFileName($element_name)
 function generateTempFileName()
 {
     //Set the unique name to the file just to store it as temporary file before uploading to the server:
-    $temp_file_name = uniqid() . "-" . $_FILES["svg-file"]["name"];
+    $temp_file_name = uniqid() . "-" . str_replace(" ", "-", trim(strtolower($_FILES["svg-file"]["name"])));
     return $temp_file_name;
 }
 

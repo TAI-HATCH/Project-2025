@@ -100,7 +100,9 @@ function handleRadioButtonText() {
   const radioBtns = document.querySelectorAll("input[name='image']");
   let text = "";
   let valueForHiddeninput = "";
-  let hiddenInputElementForFileAction = document.querySelector("input[name='server-file-action']");
+  let hiddenInputElementForFileAction = document.querySelector(
+    "input[name='server-file-action']"
+  );
 
   radioBtns.forEach((btn) => {
     btn.addEventListener("change", (event) => {
@@ -112,7 +114,6 @@ function handleRadioButtonText() {
           tagForText.innerHTML = text;
           valueForHiddeninput = "upload-new";
           hiddenInputElementForFileAction.value = valueForHiddeninput;
-
         } else if (event.target.value === "existing image") {
           // console.log('existing');
           text =
@@ -153,38 +154,81 @@ function handlePlaceholder(element) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const divHiddenInputTopic = document.getElementById("form-input-hidden-topics");
-  if (!divHiddenInputTopic) return;
-  let allCheckBoxTopic = document.querySelectorAll("input[name='topic[]']");
-  if (allCheckBoxTopic.length > 0) {
-    allCheckBoxTopic.forEach((item) => {
-      item.addEventListener("click", () => {
-        refreshFormDivTopics(divHiddenInputTopic);
+  const divHiddenInputTopic = document.getElementById(
+    "form-input-hidden-topics"
+  );
+  const divHiddenInputLanguage = document.getElementById(
+    "form-input-hidden-languages"
+  );
+  // if (!divHiddenInputTopic) return;
+
+  if (divHiddenInputTopic) {
+    let allCheckBoxTopic = document.querySelectorAll("input[name='topic[]']");
+    if (allCheckBoxTopic.length > 0) {
+      allCheckBoxTopic.forEach((item) => {
+        item.addEventListener("click", () => {
+          refreshFormDivTopics(divHiddenInputTopic);
+        });
       });
-    });
-    let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
-    if (checkedTopics.length > 0) {
-      addHiddenInputElements(checkedTopics, "topic[]", divHiddenInputTopic);
+      let checkedTopics = document.querySelectorAll(
+        "input[name='topic[]']:checked"
+      );
+      if (checkedTopics.length > 0) {
+        addHiddenInputElements(checkedTopics, "topic[]", divHiddenInputTopic);
+      }
     }
-    
+  } else if (divHiddenInputLanguage) {
+    let allCheckBoxLanguage = document.querySelectorAll(
+      "input[name='language[]']"
+    );
+    if (allCheckBoxLanguage.length > 0) {
+      allCheckBoxLanguage.forEach((item) => {
+        item.addEventListener("click", () => {
+          refreshFormDivLanguages(divHiddenInputLanguage);
+        });
+      });
+      let checkedLanguages = document.querySelectorAll(
+        "input[name='language[]']:checked"
+      );
+      if (checkedLanguages.length > 0) {
+        addHiddenInputElements(
+          checkedLanguages,
+          "language[]",
+          divHiddenInputLanguage
+        );
+      }
+    }
+  } else {
+    return;
   }
-  
-  const divHiddenInputQuestion = document.getElementById("form-input-hidden-questions");
-  let allCheckBoxQuestion = document.querySelectorAll("input[name='question[]']");
+
+  const divHiddenInputQuestion = document.getElementById(
+    "form-input-hidden-questions"
+  );
+  let allCheckBoxQuestion = document.querySelectorAll(
+    "input[name='question[]']"
+  );
   if (allCheckBoxQuestion.length > 0) {
     allCheckBoxQuestion.forEach((item) => {
       item.addEventListener("change", () => {
         refreshFormDivQuestions(divHiddenInputQuestion);
       });
     });
-    let checkedQuestions = document.querySelectorAll("input[name='question[]']:checked");
+    let checkedQuestions = document.querySelectorAll(
+      "input[name='question[]']:checked"
+    );
     if (checkedQuestions.length > 0) {
-      addHiddenInputElements(checkedQuestions, "question[]", divHiddenInputQuestion);
+      addHiddenInputElements(
+        checkedQuestions,
+        "question[]",
+        divHiddenInputQuestion
+      );
     }
-   
   }
-  
-  const divHiddenInputAnswer = document.getElementById("form-input-hidden-answers");
+
+  const divHiddenInputAnswer = document.getElementById(
+    "form-input-hidden-answers"
+  );
   let allCheckBoxAnswer = document.querySelectorAll("input[name='answer[]']");
   if (allCheckBoxAnswer.length > 0) {
     allCheckBoxAnswer.forEach((item) => {
@@ -192,28 +236,46 @@ window.addEventListener("DOMContentLoaded", () => {
         refreshFormDivAnswers(divHiddenInputAnswer);
       });
     });
-    let checkedAnswers = document.querySelectorAll("input[name='answer[]']:checked");
+    let checkedAnswers = document.querySelectorAll(
+      "input[name='answer[]']:checked"
+    );
     if (checkedAnswers.length > 0) {
       addHiddenInputElements(checkedAnswers, "answer[]", divHiddenInputAnswer);
     }
   }
 });
 
-
 function refreshFormDivTopics(element) {
-  let checkedTopics = document.querySelectorAll("input[name='topic[]']:checked");
+  let checkedTopics = document.querySelectorAll(
+    "input[name='topic[]']:checked"
+  );
   addHiddenInputElements(checkedTopics, "topic[]", element);
 }
 
+function refreshFormDivLanguages(element) {
+  let checkedLanguages = document.querySelectorAll(
+    "input[name='language[]']:checked"
+  );
+  addHiddenInputElements(checkedLanguages, "language[]", element);
+}
+
 function refreshFormDivQuestions(element) {
-  let checkedQuestions = document.querySelectorAll("input[name='question[]']:checked");
+  let checkedQuestions = document.querySelectorAll(
+    "input[name='question[]']:checked"
+  );
   addHiddenInputElements(checkedQuestions, "question[]", element);
-  addHiddenInputElements(document.querySelectorAll("input[name='answer[]']:checked"), "answer[]", document.getElementById("form-input-hidden-answers"));
+  addHiddenInputElements(
+    document.querySelectorAll("input[name='answer[]']:checked"),
+    "answer[]",
+    document.getElementById("form-input-hidden-answers")
+  );
 }
 
 function refreshFormDivAnswers(element) {
   // console.log("Element to change:", element);
-  let checkedAnswers = document.querySelectorAll("input[name='answer[]']:checked");
+  let checkedAnswers = document.querySelectorAll(
+    "input[name='answer[]']:checked"
+  );
   addHiddenInputElements(checkedAnswers, "answer[]", element);
 }
 

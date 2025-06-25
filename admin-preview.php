@@ -132,9 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 
             if ($isUnique == false) { //It means that the mentioned topic already exists in the DB
-                echo "<pre>";
-                var_dump("You want to add an existing topic in the DB");
-                echo "</pre>";
+                // echo "<pre>";
+                // var_dump("You want to add an existing topic in the DB");
+                // echo "</pre>";
 
                 //Validation: if this topic active or not:
                 if ($isActive == 1) {
@@ -146,11 +146,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 } else {
                     $sql_action = 'sql-update';
                     $text_message = "The topic '$inputed_name' was previously deactivated. Do you want to restore it along with all its related questions?";
+                    $all_existing_languages_for_topic = get_all_existing_language_topics_for_topic($topic_id);
                     $all_existing_questions = get_all_existing_questions_for_topic($topic_id);
-                    echo "<pre>";
-                    var_dump($text_message);
-                    var_dump($all_existing_questions);
-                    echo "</pre>";
+                    // echo "<pre>";
+                    // var_dump($text_message);
+                    // var_dump($all_existing_questions);
+                    // echo "</pre>";
                     handleTempIconFile($temp_file_name);
                 }
 
@@ -301,118 +302,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     </div>
 
                     <!-- Block for processing the selected icon-file -->
-                    <div class="admin-preview-content">
-                        <?php
-                        if (!isset($isAlreadyExist) || $isAlreadyExist == false) { //The situation, when there is no icon-file with this name in the server:
-                        ?>
-                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
-                            <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
-                        <?php
-                        } else { //The situation, when there is ALREADY icon-file with this name in the server:
-                        ?>
-                            <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
-                            <p>But the file <strong><?php echo $newFile ?></strong> already exists in the <strong>images</strong> folder for <?php echo $element_name; ?>.</p>
-                            <p>Which one do you want to use — the existing file or the new upload?</p>
-                            <ul class="images-list">
-                                <li class="images-list-item">
-                                    <label for="selected_image" class="images-list-item">
-                                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for selected icon-file" width="70">
-                                        <p>new upload</p>
-                                        <input type="radio" name="image" id="selected_image" value="new upload" onclick="handleRadioButtonText()">
-                                        <?php $server_file_action = "upload-new" ?>
-                                    </label>
-
-                                </li>
-                                <li class="images-list-item">
-                                    <label for="existing_image" class="images-list-item">
-                                        <img src="<?= "./images/" . htmlspecialchars($newFile) ?>" alt="The preview for existing icon-file" width="70">
-                                        <p>existing file</p>
-                                        <input type="radio" name="image" id="existing_image" value="existing image" onclick="handleRadioButtonText()">
-                                        <?php $server_file_action = "keep-existing" ?>
-                                    </label>
-
-                                </li>
-                            </ul>
-                            <p id="image-inform-text"></p>
-                        <?php
-                        }
-                        ?>
-                    </div>
-
+                    <?php include 'handling-icon-file-to-preview.php'; ?>
 
                     <!-- Section to preview language's questions. Validation: is array with questions empty or not. If it is empty: do not show this section-->
-                    <?php
-                    if (!empty($all_existing_questions)) {
-                        // echo "<pre>";
-                        // var_dump($all_existing_questions);
-                        // echo "</pre>";
-                    ?>
-                        <div class="admin-preview-content">
-                            <p><strong>Below is a list of all questions currently stored in the database for the <?php echo $element_name ?>.</strong></p>
-                            <p>Questions without checkmarks were previously deactivated.</p>
-                            <p>You can modify this selection before saving — check or uncheck the questions as needed:</p>
-                            <ul class="question-list">
-                                <?php
-                                foreach ($all_existing_questions as $question) {
-                                    $all_answers = get_all_answers($question['question_id']);
-                                    // echo "<pre>";
-                                    // var_dump($all_answers);
-                                    // echo "</pre>";
-                                ?>
-                                    <li class="question-list-item checkbox-group">
-
-                                        <div class="question-list-item-checkbox">
-                                            <input type="checkbox" name="question[]" id="question<?php echo $question['question_id']; ?>" value="<?php echo $question['question_id']; ?>"
-                                                class="checkbox checkbox-parent" onchange="handleCheckboxUncheck(this)"
-                                                <?php if ($question['is_active'] == 1) { ?> checked <?php } ?>>
-                                        </div>
-
-                                        <div class="question-list-item-wrapper">
-                                            <div class="question-list-item-text">
-                                                <p><strong>Question text:</strong></p>
-                                                <label for="question<?php echo $question['question_id']; ?>"><?php echo $question['question']; ?></label>
-                                            </div>
-
-                                            <div class="question-list-item-snippet">
-                                                <p><strong>Question code snippet:</strong></p>
-                                                <p class="question-list-item-snippet-paragragh"><?php echo $question['form_content']; ?></p>
-                                            </div>
-
-                                            <div class="question-list-item-answer">
-                                                <p><strong>Answers:</strong></p>
-                                                <ul class="answer-list">
-                                                    <?php
-                                                    foreach ($all_answers as $answer) {
-                                                    ?>
-                                                        <li class="answer-list-item">
-                                                            <input type="checkbox" name="answer[]" id="answer<?php echo $answer['id']; ?>" value="<?php echo $answer['id']; ?>"
-                                                                class="checkbox checkbox-child"
-                                                                <?php if ($answer['is_active'] == 1) { ?> checked <?php } ?>>
-                                                            <label for="answer<?php echo $answer['id']; ?>">
-                                                                <?php echo $answer['input_name']; ?>
-                                                                :
-                                                                <?php echo $answer['answer_value']; ?>
-                                                            </label>
-                                                        </li>
-                                                    <?php
-                                                    }
-                                                    ?>
-
-                                                </ul>
-
-                                            </div>
-                                        </div>
-                                    </li>
-                                <?php
-                                }
-                                ?>
-                            </ul>
-
-                        </div>
-                    <?php
-                    }
-                    ?>
-
+                    <?php include 'handling-questions-to-preview.php'; ?>
 
 
                     <div class="admin-form-buttons">
@@ -436,8 +329,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                                 foreach ($selected_topics as $topic_id): ?>
                                     <input type="hidden" name="topic[]" value="<?= $topic_id ?>">
                             <?php endforeach;
-                            }
-                            ?>
+                            } ?>
 
                             <!-- Validation: is there questions-array or not? -->
                             <?php
@@ -475,30 +367,104 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                     $selected_languages = $_POST['language'] ?? []; ?>
 
                     <h1>Preview add topic</h1>
+
+                    <!-- Block for processing the selected languages -->
                     <div class="admin-preview-content">
                         <p><strong>Topic name: </strong><?= $topic_name ?></p>
-                        <?php
 
-                        if (!empty($selected_languages)) {
-                            $languages = get_languages();
-                            $language_names = [];
-                            foreach ($languages as $language) {
-                                if (in_array($language['language_id'], $selected_languages)) {
-                                    $language_names[] = $language['language_name'];
+                        <?php
+                        if (isset($text_message)) { //It means that admin typed the topic's name, that already exists in the DB and it is unactive (is_active = 0)
+                        ?>
+                            <p><strong><?php echo $text_message ?></strong></p>
+
+                            <?php
+                            if (!empty($all_existing_languages_for_topic) && !empty($selected_languages)) {
+                            ?>
+                                <p><strong>Below is a list of all languages currently stored in the database for the <?php echo $element_name ?>.</strong></p>
+                                <p>Languages that are already active or were selected on the previous page are marked with checkmarks.</p>
+                                <p>Languages without checkmarks were previously deactivated.</p>
+                                <p>You can modify this selection before saving — check or uncheck the Languages as needed:</p>
+                        <?php
+                                $all_languages = get_languages();
+                                $temp_languages_array = []; // the array to store all necessary information about selected languages (name, id and is_active)
+                                foreach ($all_languages as $language) {
+                                    if (in_array($language['language_id'], $selected_languages)) {
+                                        $language_item = ['language_name' => $language['language_name'], 'is_active' => $language['is_active'], 'language_id' => $language['language_id']];
+                                        array_push($temp_languages_array, $language_item);
+                                    }
                                 }
+
+                                $merged_language_array = []; // array to merge all already existing languages and selected languages
+                                $all_ids = [];
+                                foreach ([$all_existing_languages_for_topic, $temp_languages_array] as $language_array) {
+                                    foreach ($language_array as $language) {
+                                        if (!in_array($language['language_id'], $all_ids)) {
+                                            $merged_language_array[] = $language;
+                                            $all_ids[] = $language['language_id'];
+                                        }
+                                    }
+                                }
+
+                                // echo "<pre>";
+                                // echo "Merged array:";
+                                // var_dump($merged_language_array);
+                                // echo "</pre>";
+                            } else {
+                                echo "<pre>";
+                                var_dump("No languages");
+                                echo "</pre>";
                             }
+                        } else {
+                            echo "<pre>";
+                            var_dump("No text message");
+                            echo "</pre>";
+                        }
                         ?>
 
-                            <p><strong>Selected languages: </strong> <?= implode(", ", $language_names) ?></p>
-                        <?php } else { ?>
-                            <p><strong>No languages selected.</strong></p>
-                        <?php } ?>
+                        <?php
+                        if (!empty($merged_language_array)) { // If there is at least one item (language) in the merged languages array, then we output this block:
+                        ?>
+                            <ul>
+                                <?php
+                                foreach ($merged_language_array as $language) {
+                                    $language_id = $language['language_id'];
+                                ?>
+                                    <li>
+                                        <input type="checkbox" name="language[]" id="language<?php echo $language_id; ?>" value="<?php echo $language_id; ?>" class="checkbox"
+                                            <?php if ($language['is_active'] == 1) { ?> checked <?php } ?>>
+                                        <label for="language<?php echo $language_id; ?>"><?php echo $language['language_name']; ?></label>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                            <?php
+
+                        } else {
+                            if (!empty($selected_languages)) {
+                                $languages = get_languages();
+                                $language_names = [];
+                                foreach ($languages as $language) {
+                                    if (in_array($language['language_id'], $selected_languages)) {
+                                        $language_names[] = $language['language_name'];
+                                    }
+                                }
+                            ?>
+
+                                <p><strong>Selected languages: </strong> <?= implode(", ", $language_names) ?></p>
+                            <?php } else { ?>
+                                <p><strong>No languages selected.</strong></p>
+                        <?php }
+                        }
+                        ?>
                     </div>
 
-                    <div class="admin-preview-content">
-                        <p><strong>The name of icon-file to upload is:</strong> <?= $newFile ?></p>
-                        <img src="<?= "./temp-uploads/" . htmlspecialchars($temp_file_name) ?>" alt="The preview for icon-file" width="70">
-                    </div>
+                    <!-- Block for processing the selected icon-file -->
+                    <?php include 'handling-icon-file-to-preview.php'; ?>
+
+                    <!-- Section to preview topic's questions. Validation: is array with questions empty or not. If it is empty: do not show this section-->
+                    <?php include 'handling-questions-to-preview.php'; ?>
+
 
                     <div class="admin-form-buttons">
                         <form method="POST" action="upload-to-database.php">
@@ -506,10 +472,37 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                             <input type="hidden" name="add-topic" value="<?= $topic_name ?>">
                             <input type="hidden" name="temp-icon-file" value="<?= htmlspecialchars($temp_file_name) ?>">
                             <input type="hidden" name="new-icon-file-name" value="<?= $newFile ?>">
+                            <input type="hidden" name="sql-action" value="<?php echo $sql_action; ?>">
+                            <input type="hidden" name="server-file-action">
 
-                            <?php foreach ($selected_languages as $language_id): ?>
-                                <input type="hidden" name="language[]" value="<?= $language_id ?>">
-                            <?php endforeach; ?>
+                            <!-- Validation: is there merged topics-array or not? -->
+                            <?php
+                            if (!empty($merged_language_array)) {
+                            ?>
+                                <div id="form-input-hidden-languages">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+                                <?php
+                            } else {
+                                foreach ($selected_languages as $language_id): ?>
+                                    <input type="hidden" name="language[]" value="<?= $language_id ?>">
+                            <?php endforeach;
+                            } ?>
+
+                            <!-- Validation: is there questions-array or not? -->
+                            <?php
+                            if (!empty($all_existing_questions)) {
+                            ?>
+                                <div id="form-input-hidden-questions">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+                                <div id="form-input-hidden-answers">
+                                    <!-- The content will be generated using a JS script -->
+                                </div>
+
+                            <?php
+                            } ?>
+
                             <button class="upload-to-database-button" type="submit">Upload to database</button>
                         </form>
 

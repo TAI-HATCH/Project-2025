@@ -9,11 +9,12 @@ if (!empty($all_existing_questions)) {
         <p>Questions without checkmarks were previously deactivated.</p>
         <p>You can modify this selection before saving — check or uncheck the questions as needed:</p>
         <ul class="question-list">
+            
             <?php
             foreach ($all_existing_questions as $question) {
                 $all_answers = get_all_answers($question['question_id']);
                 // echo "<pre>";
-                // var_dump($all_answers);
+                // var_dump($question);
                 // echo "</pre>";
             ?>
                 <li class="question-list-item checkbox-group">

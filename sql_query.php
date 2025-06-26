@@ -312,8 +312,6 @@ function get_selected_topic_info($language_topic_id)
                                 `languages` AS L, 
                                 `topics` AS T 
                             WHERE
-                                $table_name.is_active = 1
-                            AND 
                                 L.language_id = $table_name.language_id 
                             AND 
                                 T.topic_id = $table_name.topic_id 

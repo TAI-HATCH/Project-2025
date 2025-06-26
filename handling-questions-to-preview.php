@@ -15,6 +15,7 @@ if (!empty($all_existing_questions)) {
                 $languages_topic_id = $question['languages_topic_id'];
                 $language_set = get_selected_topic_info($languages_topic_id);
                 // echo "<pre>";
+                // var_dump($languages_topic_id);
                 // var_dump($language_set);
                 // echo "</pre>";
                 $lang_name = $language_set[0]['language_name'];

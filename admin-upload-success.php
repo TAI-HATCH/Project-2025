@@ -7,7 +7,7 @@ if (!isset($_SESSION['is_admin'])) {
     exit;
 }
 
-if ($_SESSION['text-message']) {
+if (isset($_SESSION['text-message'])) {
     $textMessage = $_SESSION['text-message'];
     // echo $textMessage;
     unset($_SESSION['text-message']);
@@ -55,8 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     <section class="root-content">
         <div class="admin-upload-success">
-        <p>Upload successful.</p>
-        <p class="info-text-small"><?= $textMessage?></p>
-        <a class="button" href="admin-start.php">To admin start page</a>
+            <p>Upload successful.</p>
+            <?php
+            if (isset($textMessage)) {
+            ?>
+                <p class="info-text-small"><?= $textMessage ?></p>
+            <?php
+            }
+            ?>
+
+            <a class="button" href="admin-start.php">To admin start page</a>
         </div>
     </section>

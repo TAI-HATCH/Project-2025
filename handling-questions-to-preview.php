@@ -12,10 +12,16 @@ if (!empty($all_existing_questions)) {
             
             <?php
             foreach ($all_existing_questions as $question) {
-                $all_answers = get_all_answers($question['question_id']);
+                $languages_topic_id = $question['languages_topic_id'];
+                $language_set = get_selected_topic_info($languages_topic_id);
                 // echo "<pre>";
-                // var_dump($question);
+                // var_dump($language_set);
                 // echo "</pre>";
+                $lang_name = $language_set[0]['language_name'];
+                // echo "<pre>";
+                // var_dump($lang_name);
+                // echo "</pre>";
+                $all_answers = get_all_answers($question['question_id']);
             ?>
                 <li class="question-list-item checkbox-group">
 
@@ -27,6 +33,7 @@ if (!empty($all_existing_questions)) {
 
                     <div class="question-list-item-wrapper">
                         <div class="question-list-item-text">
+                            <h3>Question for programming language <?php echo $lang_name?>:</h3>
                             <p><strong>Question text:</strong></p>
                             <label for="question<?php echo $question['question_id']; ?>"><?php echo $question['question']; ?></label>
                         </div>

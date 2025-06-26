@@ -19,7 +19,7 @@ $selected_languages = $_POST['language'] ?? []; ?>
             <p><strong>Below is a list of all languages currently stored in the database for the <?php echo $element_name ?>.</strong></p>
             <p>Languages that are already active or were selected on the previous page are marked with checkmarks.</p>
             <p>Languages without checkmarks were previously deactivated.</p>
-            <p>You can modify this selection before saving — check or uncheck the Languages as needed:</p>
+            <p>You can modify this selection before saving — check or uncheck the languages as needed:</p>
     <?php
             $all_languages = get_languages();
             $temp_languages_array = []; // the array to store all necessary information about selected languages (name, id and is_active)

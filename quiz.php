@@ -297,10 +297,10 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             this.classList.remove("correct");
         }
 
-        // Show / hide hint text
+        // HINT
 
         document.getElementById("show-hint").addEventListener("click", function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevents the default behavior of the button (like jumping to a link.).
             const hint = document.querySelector('.quiz-hint-text');
 
             if (hint.classList.contains('visible')) {
@@ -314,15 +314,14 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             }
         });
 
-        // After slide out animation ends, remove 'hidden' class to fully hide element
-        document.querySelector('.quiz-hint-text').addEventListener('animationend', function(e) {
+        // Run CSS animation
+        document.querySelector('.quiz-hint-text').addEventListener('animationend', function(e) { // Listen for when an animation finishes on the .quiz-hint-text element.
             if (e.animationName === 'fadeOutSlideDown') {
                 this.classList.remove('hidden');
-                // Now the element is fully hidden (opacity:0 + visibility:hidden from base CSS)
             }
         });
 
-        // Handle closing hint button
+        // Handle closing hint button via x
 
         document.getElementById("close-hint").addEventListener("click", function(event) {
             event.preventDefault();
@@ -335,18 +334,12 @@ $question = $_SESSION["questions"][$_SESSION["current_question"]]; // Identify t
             }
         });
 
+        // Handle closing hint button via click anywhere
+
         document.addEventListener("click", function(event) {
             const hint = document.querySelector('.quiz-hint-text');
             const isClickInside = hint.contains(event.target);
             const showHintBtn = document.getElementById("show-hint");
-
-            // Also exclude clicking the show-hint button itself from closing
-            const clickedShowButton = showHintBtn.contains(event.target);
-
-            if (!isClickInside && !clickedShowButton && hint.classList.contains('visible')) {
-                hint.classList.remove('visible');
-                hint.classList.add('hidden');
-            }
         });
     </script>
 </body>

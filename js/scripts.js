@@ -3,16 +3,14 @@
 // Function to form the name for svg-icon based on the language's name:
 function createNameForSvgIcon(element_id) {
   let inputElement = document.getElementById(element_id); // define the input field
-  let normalizedInputValue = inputElement.value
-    .toLowerCase()
-    .replaceAll(" ", "-"); //Normalize the name: convert to lowercase and remove all spaces
+  let normalizedInputValue = inputElement.value.trim().toLowerCase().replaceAll(" ", "-"); //Normalize the name: convert to lowercase and remove all spaces
   let newName = `${normalizedInputValue}-icon.svg`; // Add the ending to the file name and extension
   return newName;
 }
 
 //Function to handle upload button:
 function handleFileUpload(element_id) {
-  console.log("The parameter from the page:", element_id);
+  // console.log("The parameter from the page:", element_id);
   checkFileType(); // call the function to check whether the admin upload svg-type file or not
   let inputElement = document.getElementById(element_id); // define the input field
   let inputElementValue = inputElement.value; // define the value of input field

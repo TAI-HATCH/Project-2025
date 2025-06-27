@@ -8,6 +8,7 @@
   --dark-color: #000000;
   --highlight-color: #ffffff;
   --code-font: "Source Sans 3", sans-serif;
+  --main-font: "Nunito Sans", sans-serif;
 }
 
 * {
@@ -28,7 +29,7 @@ a:hover {
 body {
   min-height: 100vh; /* Set the height of the body on all viewport */
   padding: 3rem calc(100% * 0.07); /* set the right and left paddings as 7% of the screen width  */
-  font-family: "Nunito Sans", sans-serif;
+  font-family: var(--main-font);
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 100;
@@ -895,9 +896,90 @@ a {
 }
 
 /* ERROR PAGE */
-.error-info-text{
+.error-info-text {
   font-size: 2rem;
   margin-bottom: 2rem;
+}
+
+/* EDIT PAGES */
+.dropdown-section {
+  width: 90%;
+  background-color: rgba(224, 232, 234, 0.7);
+  border-radius: 0.9rem;
+  padding: 2rem 1.5rem;
+  text-align: left;
+}
+.dropdown-btn {
+  background-color: var(--btn-color);
+  color: var(--dark-color);
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  text-align: left;
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+  font-weight: 100;
+  border-radius: 0.9rem;
+  border: var(--btn-color);
+  cursor: pointer;
+  position: relative;
+}
+.dropdown-btn:hover,
+.dropdown-btn:focus {
+  background-color: var(--brand-secondary-color);
+}
+.dropdown-btn::after{
+  position: absolute;
+  content: "";
+  width: 1.5rem;
+  height: 1.5rem;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url('../images/dropdown-select.svg');
+  /* background-size: 1rem; */
+  background-repeat: no-repeat;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  align-items:end;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dropdown-wrapper:hover .dropdown-content {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: flex-end; */
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  background-color: var(--btn-color);
+  border-radius: 0.9rem;
+  border: 0.05rem solid transparent;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  margin-bottom: 0.03rem;
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: rgba(125, 188, 224, 1);
+  border-color: var(--highlight-color);
 }
 
 /* RESPONSIVE STYLE */

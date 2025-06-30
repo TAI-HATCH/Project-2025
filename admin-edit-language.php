@@ -27,22 +27,29 @@ include_once "sql_query.php";
 
     <?php include 'admin-banner.php' ?>
     <section class="root-content">
-
-    <p>There is a page to edit language</p>
-    <div class="dropdown-section">
-    <div class="dropdown-wrapper">
-        <button onclick="handlingDropdownBtn()" class="dropdown-btn">Select programming language to edit:</button>
-        <div class="dropdown-content" id="dropdown-content">
-            <a href="#">JavaScript</a>
-            <a href="#">Python</a>
-            <a href="#">SQL</a>
+        <!-- <form action="" method="post"> -->
+        <div class="dropdown-section">
+            <div class="dropdown-wrapper">
+                <button onclick="handlingDropdownMenu()" class="dropdown-btn" id="input-element">Select programming language to edit:</button>
+                <ul class="dropdown-content" id="dropdown-content">
+                    <?php
+                    $languages = get_languages(); // Fetch all languages, function found in sql_query.php
+                    foreach ($languages as $language) :
+                        $language_icon_name = str_replace(" ", "-", strtolower($language['language_name']));
+                    ?>
+                        <li class="dropdown-content-item" onclick="selectionHandling(event)">
+                            <img src="./images/<?php echo $language_icon_name ?>-icon.svg" alt="<?php echo $language['language_name']; ?>" height="20">
+                            <a href="#"><?php echo $language['language_name'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
-    </div>
-    </div>
-
+        <!-- </form> -->
     </section>
 
-
+    <!-- Scripts for this page -->
+    <script src="./js/scripts.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,10 @@
 // Function to form the name for svg-icon based on the language's name:
 function createNameForSvgIcon(element_id) {
   let inputElement = document.getElementById(element_id); // define the input field
-  let normalizedInputValue = inputElement.value.trim().toLowerCase().replaceAll(" ", "-"); //Normalize the name: convert to lowercase and remove all spaces
+  let normalizedInputValue = inputElement.value
+    .trim()
+    .toLowerCase()
+    .replaceAll(" ", "-"); //Normalize the name: convert to lowercase and remove all spaces
   let newName = `${normalizedInputValue}-icon.svg`; // Add the ending to the file name and extension
   return newName;
 }
@@ -286,4 +289,36 @@ function addHiddenInputElements(arrayOfElements, inputName, targetDiv) {
     hiddenInputItem.value = item.defaultValue;
     targetDiv.appendChild(hiddenInputItem);
   });
+}
+
+function handlingDropdownMenu() {
+  document
+    .getElementById("dropdown-content")
+    .classList.toggle("show-dropdown-menu");
+}
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".dropdown-btn")) {
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show-dropdown-menu")) {
+        openDropdown.classList.remove("show-dropdown-menu");
+      }
+    }
+  }
+};
+
+function selectionHandling(event) {
+  let selectionItem = event.target.closest(".dropdown-content-item");
+  // console.log(selectionItem);
+  if (!selectionItem) return;
+  const valueElement = selectionItem.querySelector("a");
+  if (valueElement) {
+    const textValue = valueElement.textContent.trim();
+    let inputElement = document.getElementById("input-element");
+    // console.log(textValue);
+    inputElement.textContent = textValue;
+  }
 }

@@ -45,6 +45,10 @@ include_once "sql_query.php";
                 </ul>
             </div>
         </div>
+
+        <?php include("admin-btns-section.php"); ?>
+
+
         <!-- </form> -->
     </section>
 

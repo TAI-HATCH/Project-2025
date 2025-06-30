@@ -908,6 +908,7 @@ a {
   border-radius: 0.9rem;
   padding: 2rem 1.5rem;
   text-align: left;
+  margin-bottom: 10rem;
 }
 .dropdown-btn {
   background-color: var(--btn-color);
@@ -922,12 +923,12 @@ a {
   border: var(--btn-color);
   cursor: pointer;
   position: relative;
+  transition: background-color 0.4s ease;
 }
-.dropdown-btn:hover,
-.dropdown-btn:focus {
+.dropdown-btn:hover {
   background-color: var(--brand-secondary-color);
 }
-.dropdown-btn::after{
+.dropdown-btn::after {
   position: absolute;
   content: "";
   width: 1.5rem;
@@ -935,7 +936,7 @@ a {
   right: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
-  background-image: url('../images/dropdown-select.svg');
+  background-image: url("../images/dropdown-select.svg");
   background-repeat: no-repeat;
 }
 
@@ -943,7 +944,7 @@ a {
   position: relative;
   display: inline-block;
   width: 90%;
-  align-items:end;
+  align-items: end;
 }
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -955,14 +956,14 @@ a {
   align-items: flex-end;
 }
 
-.dropdown-content-item{
+.dropdown-content-item {
   display: flex;
   flex-direction: row;
   gap: 1rem;
   cursor: pointer;
 }
 
-.show-dropdown-menu{
+.show-dropdown-menu {
   display: flex;
 }
 
@@ -977,18 +978,60 @@ a {
   font-size: 1.5rem;
   padding: 0.5rem 1.5rem;
   text-decoration: none;
+  transition: background-color 0.4s ease;
 }
-.dropdown-content li a{
+.dropdown-content li a {
   color: var(--dark-color);
   font-size: 1.5rem;
   margin-bottom: 0;
 }
-.dropdown-content li img{
+.dropdown-content li img {
   align-self: center;
 }
 .dropdown-content li:hover {
   background-color: rgba(125, 188, 224, 1);
   border-color: var(--highlight-color);
+}
+
+.btns-section {
+  padding-left: 3rem;
+}
+.btns-section p {
+  font-size: 1.5rem;
+  font-weight: 100;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.btns-section-list {
+  display: flex;
+  flex-direction: row;
+  gap: 2.75rem;
+}
+
+.btn-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+.btn-item * {
+  cursor: pointer;
+}
+
+.btn-item button {
+  margin: 0;
+  padding: 0;
+  font-family: var(--main-font);
+  font-size: 1.5rem;
+  font-weight: 100;
+  border: none;
+  background-color: transparent;
+}
+
+.btn-item:hover {
+  filter: blur(1px);
 }
 
 /* RESPONSIVE STYLE */

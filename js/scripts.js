@@ -320,5 +320,18 @@ function selectionHandling(event) {
     let inputElement = document.getElementById("input-element");
     // console.log(textValue);
     inputElement.textContent = textValue;
+    let btnElement = document.getElementById('input-element');
+    // console.log(btnElement);
+    btnElement.value = textValue;
   }
+}
+
+function handlingEditAction() {
+  const itemValue = document.getElementById('input-element').value;
+  console.log(`You want to edit item ${itemValue}!`);
+}
+
+function handlingDeleteAction() {
+  const itemValue = document.getElementById('input-element').value;
+  console.log(`You want to delete item ${itemValue}!`);
 }
